@@ -145,17 +145,17 @@ a { color: inherit; }
 .hero-meta dd { margin: 2px 0 0; font-size: .92rem; }
 
 .reel { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
-.reel .frame:nth-child(2) { margin-top: 48px; }
-.reel .frame:nth-child(3) { margin-top: 18px; }
-.reel .frame { animation: fade .9s var(--ease) both; }
-.reel .frame:nth-child(1) { animation-delay: .2s; }
-.reel .frame:nth-child(2) { animation-delay: .32s; }
-.reel .frame:nth-child(3) { animation-delay: .44s; }
+.reel > :nth-child(2) { margin-top: 48px; }
+.reel > :nth-child(3) { margin-top: 18px; }
+.reel > * { animation: fade .9s var(--ease) both; }
+.reel > :nth-child(1) { animation-delay: .2s; }
+.reel > :nth-child(2) { animation-delay: .32s; }
+.reel > :nth-child(3) { animation-delay: .44s; }
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "reel" "meta"; }
   .hero-copy { gap: 18px; }
-  .reel .frame:nth-child(2) { margin-top: 24px; }
-  .reel .frame:nth-child(3) { margin-top: 8px; }
+  .reel > :nth-child(2) { margin-top: 24px; }
+  .reel > :nth-child(3) { margin-top: 8px; }
 }
 
 /* ---------- Frame (shared by hero reel + cards) ---------- */
@@ -447,3 +447,23 @@ a { color: inherit; }
 }
 .preview-play { z-index: 2; background: rgba(11,12,14,.55); font-size: .8rem; }
 .preview-play .btn { text-decoration: none; }
+
+/* Hover preview video fades in over the cover */
+.frame-media .hover-vid { z-index: 2; opacity: 0; transition: opacity .3s; }
+.frame-media .hover-vid.on { opacity: 1; }
+
+/* Hero reel labels sit under each frame so hook text on covers stays visible */
+.reel-item { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.reel-label { margin: 0; font-size: .82rem; font-weight: 600; line-height: 1.3; }
+.reel-label span { display: block; font-family: var(--f-mono); font-size: .6rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+.frame.has-img .frame-media::after { display: none; }
+@media (max-width: 480px) { .reel-label { font-size: .72rem; } .reel-label span { font-size: .52rem; } }
+
+/* Real covers: keep overlays off the artwork */
+.frame.has-img .tc, .frame.has-img .marks { display: none; }
+.frame.has-img .play { left: auto; top: auto; right: 10px; bottom: 10px; translate: none; width: 36px; height: 36px; }
+.frame.has-img .play::before { border-left-width: 10px; border-top-width: 6px; border-bottom-width: 6px; margin-left: 3px; }
+@media (hover: hover) {
+  .frame.has-img .play { opacity: 0; transition: opacity .25s, background .25s, border-color .25s; }
+  .frame.has-img:hover .play, .frame.has-img:focus-visible .play { opacity: 1; }
+}

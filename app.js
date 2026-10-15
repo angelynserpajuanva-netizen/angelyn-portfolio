@@ -1,4 +1,4 @@
-/* Rendering + interactions. Content lives in js/data.js. */
+/* Rendering + interactions. Content lives in data.js. */
 (function () {
   "use strict";
   var D = window.PORTFOLIO;
@@ -58,9 +58,9 @@
     var ready = hasVideo(p) || has(thumb);
     var hasImg = has(thumb) || (p.video && p.video.type === "file" && hasVideo(p));
     var media = "";
-    if (p.video && p.video.type === "file" && hasVideo(p)) {
-      media = '<video muted loop playsinline preload="metadata" ' + (thumb ? 'poster="' + esc(thumb) + '" ' : "") +
-        'src="' + esc(p.video.src) + '#t=0.1"></video>';
+    var isFile = p.video && p.video.type === "file" && hasVideo(p);
+    if (isFile && !thumb) {
+      media = '<video muted playsinline preload="metadata" src="' + esc(p.video.src) + '#t=0.5"></video>';
     } else if (thumb) {
       media = '<img loading="lazy" alt="" src="' + esc(thumb) + '" onerror="var f=this.closest(\'.frame\');if(f)f.classList.remove(\'has-img\');this.remove()">';
     }
@@ -70,7 +70,7 @@
       '<div class="slot-note"><b>' + (draft ? "Video slot" : "Coming soon") + "</b>" +
       (draft ? "<span>Add link in data.js</span>" : "") + "</div>";
     return (
-      '<button type="button" class="frame' + (ready ? "" : " slot") + (hasImg ? " has-img" : "") + '" data-id="' + esc(p.id) + '" style="--ar:' + ratio(p) + '" ' +
+      '<button type="button" class="frame' + (ready ? "" : " slot") + (hasImg ? " has-img" : "") + '"' + (isFile ? ' data-preview="' + esc(p.video.src) + '"' : "") + ' data-id="' + esc(p.id) + '" style="--ar:' + ratio(p) + '" ' +
       'aria-label="Open ' + esc(slotLabel(p, i)) + '">' +
         '<div class="frame-media">' + cover + media + note +
           '<div class="marks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>' +
@@ -97,7 +97,9 @@
   var featured = projects.filter(function (p) { return p.featured; }).slice(0, 3);
   if (featured.length < 3) featured = featured.concat(projects.filter(function (p) { return !p.featured; })).slice(0, 3);
   $("#hero-reel").innerHTML = featured.map(function (p) {
-    return frameHTML(p, projects.indexOf(p), { caption: true });
+    var i = projects.indexOf(p);
+    return '<div class="reel-item">' + frameHTML(p, i, { caption: false }) +
+      '<p class="reel-label"><span>' + esc(p.category) + "</span>" + esc(p.shortTitle || slotLabel(p, i)) + "</p></div>";
   }).join("");
 
   /* ---------- Filters + grid ---------- */
@@ -142,12 +144,24 @@
   });
   renderFilters(); renderGrid(false);
 
+  // Silent hover preview on devices with a mouse. The video only loads on first hover.
+  var canHover = window.matchMedia && window.matchMedia("(hover: hover)").matches;
   function bindHoverPreview(root) {
-    if (reduceMotion) return;
-    root.querySelectorAll(".frame video").forEach(function (v) {
-      var f = v.closest(".frame");
-      f.addEventListener("mouseenter", function () { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); });
-      f.addEventListener("mouseleave", function () { v.pause(); });
+    if (reduceMotion || !canHover) return;
+    root.querySelectorAll(".frame[data-preview]").forEach(function (f) {
+      var v = null;
+      f.addEventListener("mouseenter", function () {
+        if (!v) {
+          v = document.createElement("video");
+          v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto";
+          v.src = f.getAttribute("data-preview");
+          v.className = "hover-vid";
+          f.querySelector(".frame-media").appendChild(v);
+        }
+        v.classList.add("on");
+        var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+      });
+      f.addEventListener("mouseleave", function () { if (v) { v.pause(); v.classList.remove("on"); } });
     });
   }
   bindHoverPreview($("#hero-reel"));
@@ -176,7 +190,7 @@
     }
     if (hasVideo(p)) {
       if (v.type === "file") {
-        inner = '<video controls playsinline preload="metadata"' + (has(p.thumbnail) ? ' poster="' + esc(p.thumbnail) + '"' : "") + ' src="' + esc(v.src) + '"></video>';
+        inner = '<video controls autoplay playsinline preload="auto"' + (has(p.thumbnail) ? ' poster="' + esc(p.thumbnail) + '"' : "") + ' src="' + esc(v.src) + '"></video>';
       } else if (v.type === "drive" && driveId(v.src)) {
         inner = '<iframe src="https://drive.google.com/file/d/' + driveId(v.src) + '/preview" allow="autoplay; fullscreen" allowfullscreen loading="lazy" title="' + esc(slotLabel(p, 0)) + '"></iframe>';
       } else if (v.type === "youtube" && youtubeId(v.src)) {
@@ -246,7 +260,7 @@
       return "<div><dt>" + caseLabels[k] + "</dt><dd>" + esc(v) + "</dd></div>";
     }).join("");
     var vids = (p.caseStudy.videos || [p.id]).map(function (id) { return projects.filter(function (x) { return x.id === id; })[0]; }).filter(Boolean);
-    return '<article class="case"><div class="case-media' + (vids.length > 1 ? " multi" : "") + '">' + vids.map(function (v) { return frameHTML(v, projects.indexOf(v), { caption: true }); }).join("") + "</div>" +
+    return '<article class="case"><div class="case-media' + (vids.length > 1 ? " multi" : "") + '">' + vids.map(function (v) { return frameHTML(v, projects.indexOf(v), { caption: false }); }).join("") + "</div>" +
       '<div class="case-body"><p class="eyebrow">' + esc(p.category) + '</p><h3 class="case-title">' + esc(slotLabel(p, i)) + "</h3>" +
       (has(p.summary) ? '<p class="muted" style="margin:0;max-width:60ch">' + esc(p.summary) + "</p>" : "") +
       '<dl class="case-fields">' + fields + "</dl></div></article>";
@@ -312,7 +326,7 @@
   }
 
   // Subtle hero parallax
-  var reelFrames = document.querySelectorAll("#hero-reel .frame");
+  var reelFrames = document.querySelectorAll("#hero-reel .reel-item");
   function parallax() {
     if (reduceMotion || window.innerWidth < 900) { reelFrames.forEach(function (f) { f.style.transform = ""; }); return; }
     var y = Math.min(window.scrollY, 900);
