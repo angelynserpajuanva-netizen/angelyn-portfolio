@@ -49,7 +49,7 @@ window.PORTFOLIO = {
   },
 
   /* ---------- Photo ---------- */
-  photo: { src: "images/angelyn.webp", alt: "Portrait of Angelyn Serpa Juan" },
+  photo: { src: "angelyn.webp", alt: "Portrait of Angelyn Serpa Juan" },
 
   /* ---------- Video projects ----------
      HOW TO ADD OR CHANGE A VIDEO
