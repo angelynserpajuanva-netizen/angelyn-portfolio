@@ -72,15 +72,15 @@ window.PORTFOLIO = {
       "aspect": "9:16",
       "featured": true,
       "video": {
-        "type": "drive",
-        "src": "https://drive.google.com/file/d/1MnJRkbELeo08trdvZrm91lwoyX3fawlZ/view"
+        "type": "file",
+        "src": "bag-ugc.mp4"
       },
-      "thumbnail": "",
+      "thumbnail": "bag-ugc.jpg",
       "summary": "A premium-looking AI commercial for a real fashion handbag, with consistent product appearance, deliberate pacing, captions and sound design.",
       "audience": "Fashion and e-commerce shoppers",
       "objective": "Turn a real fashion product into a premium commercial an e-commerce brand could run.",
       "concept": "",
-      "hook": "The right bag doesn't just complete your outfit. It changes the whole look.",
+      "hook": "Your outfit isn’t the problem… but something’s missing.",
       "production": "AI video generation, with Claude used to refine prompts and creative and editing direction.",
       "tools": [
         "AI video generation",
@@ -184,10 +184,10 @@ window.PORTFOLIO = {
       "aspect": "9:16",
       "featured": false,
       "video": {
-        "type": "drive",
-        "src": "https://drive.google.com/file/d/1wYJcEpRUqSZ93FwoyxhaNNM5MYSnlDRP/view"
+        "type": "file",
+        "src": "creatine-explainer.mp4"
       },
-      "thumbnail": "",
+      "thumbnail": "creatine-explainer.jpg",
       "summary": "An educational animation where expressive muscle characters, an exhausted ATP worker and creatine as the backup energy helper explain how creatine works.",
       "audience": "Fitness and supplement buyers",
       "objective": "Make a supplement topic entertaining and easy to follow with memorable characters.",
@@ -205,20 +205,20 @@ window.PORTFOLIO = {
     },
     {
       "id": "nineone",
-      "title": "NineOne Car Rental",
+      "title": "NineOne Car Rental: Christmas Homecoming",
       "category": "Client Work",
       "aspect": "9:16",
       "featured": false,
       "video": {
-        "type": "drive",
-        "src": "https://drive.google.com/file/d/1Xgk2_RtAlmSRLoV6V_92m6snSTw_HbDr/view"
+        "type": "file",
+        "src": "nineone.mp4"
       },
-      "thumbnail": "",
-      "summary": "Promotional video for NineOne Car Rental Services.",
-      "audience": "Customers looking for a rental car",
+      "thumbnail": "nineone.jpg",
+      "summary": "A Christmas campaign for NineOne Car Rental Services about making the trip home for the holidays.",
+      "audience": "Families traveling home for the holidays",
       "objective": "Promote the fleet and rental availability.",
       "concept": "",
-      "hook": "",
+      "hook": "This Christmas, make your way home.",
       "production": "",
       "tools": [],
       "editing": "",
@@ -229,30 +229,31 @@ window.PORTFOLIO = {
           "nineone-ofw"
         ],
         "brief": "Keep a car rental business visible on social media with vehicle ads, rental offers, availability updates and seasonal promotions.",
-        "audience": "Local renters, plus a dedicated version for Overseas Filipino Workers (OFWs) and their families.",
+        "audience": "Families heading home for Christmas, plus a Taglish version for Overseas Filipino Workers (OFWs) landing in the Philippines.",
         "storyboard": "",
         "visualDirection": "",
         "consistency": "",
         "finalDeliverable": ""
-      }
+      },
+      "shortTitle": "NineOne Christmas"
     },
     {
       "id": "nineone-ofw",
-      "shortTitle": "NineOne: OFW Campaign",
-      "title": "NineOne Car Rental: OFW Campaign",
+      "shortTitle": "NineOne OFW",
+      "title": "NineOne Car Rental: OFW Airport Pickup",
       "category": "Client Work",
       "aspect": "9:16",
       "featured": false,
       "video": {
-        "type": "drive",
-        "src": "https://drive.google.com/file/d/1FV9igZpPY9WhvHmrQMRqbEocz3_P_Ql_/view"
+        "type": "file",
+        "src": "nineone-ofw.mp4"
       },
-      "thumbnail": "",
-      "summary": "A NineOne Car Rental video aimed at Overseas Filipino Workers.",
+      "thumbnail": "nineone-ofw.jpg",
+      "summary": "A Taglish airport-homecoming ad for OFWs arriving in the Philippines who need a ride home.",
       "audience": "Overseas Filipino Workers (OFWs) and their families",
       "objective": "",
       "concept": "",
-      "hook": "",
+      "hook": "Ready na umuwi sa Pinas? May ride ka na ba? (Ready to come home? Got a ride yet?)",
       "production": "",
       "tools": [],
       "editing": "",
@@ -331,15 +332,15 @@ window.PORTFOLIO = {
       "aspect": "9:16",
       "featured": false,
       "video": {
-        "type": "drive",
-        "src": "https://drive.google.com/file/d/1xsj8XcdTNQteEqSMr2jfXzdXAzvihr75/view"
+        "type": "file",
+        "src": "ugc-skincare.mp4"
       },
-      "thumbnail": "",
+      "thumbnail": "ugc-skincare.jpg",
       "summary": "A creator-style skincare ad made with AI, in the casual first-person UGC format.",
       "audience": "Skincare shoppers on social media",
       "objective": "Feel like a real customer recommendation rather than a polished commercial.",
       "concept": "",
-      "hook": "",
+      "hook": "Okay, I finally understand the hype.",
       "production": "",
       "tools": [],
       "editing": "",
@@ -352,15 +353,15 @@ window.PORTFOLIO = {
       "aspect": "9:16",
       "featured": false,
       "video": {
-        "type": "drive",
-        "src": "https://drive.google.com/file/d/1xjHDkRBDttJs0rk1dJbcLAoHFxkT-76x/view"
+        "type": "file",
+        "src": "viva-blend.mp4"
       },
-      "thumbnail": "",
-      "summary": "A creator-style ad for Viva Blend made with AI.",
-      "audience": "",
+      "thumbnail": "viva-blend.jpg",
+      "summary": "A day-in-the-life UGC ad for Viva Blend, built around a rushed morning that still ends with breakfast.",
+      "audience": "Busy people who tend to skip breakfast",
       "objective": "",
       "concept": "",
-      "hook": "",
+      "hook": "Woke up late. Still made breakfast.",
       "production": "",
       "tools": [],
       "editing": "",
@@ -432,24 +433,25 @@ window.PORTFOLIO = {
     },
     {
       "id": "acoustic-singing",
-      "title": "Acoustic Performance",
+      "title": "The Light You Left On: AI Music Performance",
       "category": "AI Animation & Characters",
       "aspect": "9:16",
       "featured": false,
       "video": {
-        "type": "drive",
-        "src": "https://drive.google.com/file/d/17xRdxGpIvklDMcqZdAo9dFlhzqNGlzyB/view"
+        "type": "file",
+        "src": "acoustic-singing.mp4"
       },
-      "thumbnail": "",
-      "summary": "An AI-generated acoustic singing performance.",
+      "thumbnail": "acoustic-singing.jpg",
+      "summary": "An AI-generated acoustic performance of “The Light You Left On,” credited on screen to Noah Reed.",
       "audience": "",
       "objective": "",
       "concept": "",
-      "hook": "",
+      "hook": "I leave the porch light on…",
       "production": "",
       "tools": [],
       "editing": "",
-      "deliverables": ""
+      "deliverables": "",
+      "shortTitle": "The Light You Left On"
     }
   ],
 
