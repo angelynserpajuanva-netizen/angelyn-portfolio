@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Angelyn Serpa Juan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Angelyn Serpa Juan — AI Video Creator and Graphic Designer. AI video ads, product commercials and social creatives.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<!--PAGE-START-->
+<a class="skip" href="#work">Skip to work</a>
+
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" data-bind="name">Angelyn Serpa Juan</a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <nav id="nav-links" class="nav-links" aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#tools">Tools</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="rec" aria-hidden="true"></span><span data-bind="title"></span></p>
+        <h1 class="hero-title" id="hero-title"></h1>
+        <p class="hero-intro" data-bind="intro"></p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#work">Explore My Work</a>
+          <a class="btn btn-ghost" href="#contact">Let's Work Together</a>
+        </div>
+      </div>
+      <div class="reel" id="hero-reel" aria-label="Featured work"></div>
+      <dl class="hero-meta">
+        <div><dt>Based in</dt><dd data-bind="location"></dd></div>
+        <div><dt>Availability</dt><dd data-bind="availability"></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="section" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="work-h" class="h2">Selected Work</h2>
+        <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section class="section section-alt" id="cases" aria-labelledby="cases-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="cases-h" class="h2">Case Studies</h2></div>
+      <div id="case-list" class="case-list"></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience" aria-labelledby="exp-h">
+    <div class="wrap exp-grid">
+      <div class="exp-intro">
+        <h2 id="exp-h" class="h2">Experience</h2>
+        <p class="muted">From building enterprise interfaces to producing AI video ads. Select a role for details.</p>
+        <div class="certs">
+          <p class="label">Certifications</p>
+          <ul id="certs"></ul>
+        </div>
+      </div>
+      <div class="tl-wrap" id="tl-wrap">
+        <span class="tl-track" aria-hidden="true"><span class="tl-progress" id="tl-progress"></span></span>
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section section-alt" id="about" aria-labelledby="about-h">
+    <div class="wrap about-grid">
+      <figure class="about-photo" id="about-photo"></figure>
+      <div class="about-text">
+        <h2 id="about-h" class="h2">About</h2>
+        <div class="about-body" id="about-body"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section class="section" id="tools" aria-labelledby="tools-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="tools-h" class="h2">Tools &amp; Workflow</h2></div>
+      <ul class="tools" id="tools-list"></ul>
+      <ol class="workflow" id="workflow"></ol>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 id="contact-h" class="contact-title">Have a product to launch?<br><span class="accent">Let's make the ad.</span></h2>
+        <p class="muted">Open to freelance and part-time work on AI video ads, product commercials and social creatives.</p>
+      </div>
+      <div class="contact-card">
+        <p class="label">Email</p>
+        <div class="email-row">
+          <a id="email-link" class="email" href="#"></a>
+          <button class="btn btn-small" id="copy-email" type="button">Copy</button>
+        </div>
+        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+        <div id="phone-row" class="phone-row" hidden>
+          <p class="label">WhatsApp &amp; Telegram</p>
+          <div class="email-row">
+            <span id="phone" class="email phone"></span>
+            <button class="btn btn-small" id="copy-phone" type="button">Copy</button>
+          </div>
+          <div class="msg-links" id="msg-links"></div>
+          <p class="copy-status" id="copy-status-phone" role="status" aria-live="polite"></p>
+        </div>
+        <p class="label">Elsewhere</p>
+        <ul class="links" id="links"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span data-bind="name"></span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<p class="draft-note" id="draft-note" hidden>Preview · empty video slots are waiting for your files</p>
+
+<!-- PROJECT DIALOG -->
+<dialog class="modal" id="modal" aria-labelledby="modal-title">
+  <div class="modal-inner">
+    <button class="modal-close" id="modal-close" type="button">← Back to work</button>
+    <div class="modal-grid">
+      <div class="modal-media" id="modal-media"></div>
+      <div class="modal-info">
+        <p class="eyebrow" id="modal-cat"></p>
+        <h3 class="modal-title" id="modal-title"></h3>
+        <p id="modal-summary" class="modal-summary"></p>
+        <dl class="details" id="modal-details"></dl>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<!--PAGE-END-->
+</body>
+</html>
