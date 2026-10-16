@@ -21,6 +21,7 @@
     <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
     <nav id="nav-links" class="nav-links" aria-label="Main">
       <a href="#work">Work</a>
+      <a href="#storyboard">Storyboard</a>
       <a href="#experience">Experience</a>
       <a href="#about">About</a>
       <a href="#tools">Tools</a>
@@ -42,13 +43,21 @@
           <a class="btn btn-ghost" href="#contact">Let's Work Together</a>
         </div>
       </div>
-      <div class="reel" id="hero-reel" aria-label="Featured work"></div>
+      <div class="stage">
+        <div class="showreel" id="showreel"></div>
+        <div class="reel" id="hero-reel" aria-label="Featured work"></div>
+      </div>
       <dl class="hero-meta">
         <div><dt>Based in</dt><dd data-bind="location"></dd></div>
         <div><dt>Availability</dt><dd data-bind="availability"></dd></div>
       </dl>
     </div>
   </section>
+
+  <!-- SERVICES MARQUEE -->
+  <div class="marquee" id="marquee" aria-label="Services">
+    <div class="marquee-track" id="marquee-track"></div>
+  </div>
 
   <!-- WORK -->
   <section class="section" id="work" aria-labelledby="work-h">
@@ -66,6 +75,97 @@
     <div class="wrap">
       <div class="section-head"><h2 id="cases-h" class="h2">Case Studies</h2></div>
       <div id="case-list" class="case-list"></div>
+    </div>
+  </section>
+
+  <!-- STORYBOARD REQUEST -->
+  <section class="section" id="storyboard" aria-labelledby="sb-h">
+    <div class="wrap sb-grid">
+      <div class="sb-intro">
+        <h2 id="sb-h" class="h2">Get a Free<br><span class="accent">Storyboard</span></h2>
+        <p class="muted">Tell me about your product. You'll see a hook and a scene-by-scene storyboard draft right away, and I'll get your brief by email so I can follow up with a refined version.</p>
+        <ol class="sb-steps">
+          <li><b>Fill in the brief</b><span>About 2 minutes</span></li>
+          <li><b>See your draft instantly</b><span>3 hook options and a storyboard</span></li>
+          <li><b>I follow up by email</b><span>With a refined concept for your brand</span></li>
+        </ol>
+      </div>
+
+      <form class="sb-form" id="sb-form" novalidate>
+        <input type="text" name="_honey" id="sb-honey" class="sb-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field-row">
+          <div class="field">
+            <label for="sb-name">Your name</label>
+            <input id="sb-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="sb-email">Email</label>
+            <input id="sb-email" name="email" type="email" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="sb-brand">Brand or product name</label>
+          <input id="sb-brand" name="brand" type="text" placeholder="e.g. GlowLab Vitamin C Serum" required>
+        </div>
+        <div class="field">
+          <label for="sb-problem">What problem does it solve?</label>
+          <input id="sb-problem" name="problem" type="text" placeholder="e.g. dull, tired-looking skin" required>
+        </div>
+        <div class="field">
+          <label for="sb-audience">Target audience</label>
+          <input id="sb-audience" name="audience" type="text" placeholder="e.g. busy women 25 to 40 who want simple skincare" required>
+        </div>
+        <div class="field">
+          <label for="sb-benefit">Main benefit or offer <span class="opt">optional</span></label>
+          <input id="sb-benefit" name="benefit" type="text" placeholder="e.g. Brighter skin in 2 weeks, or 20% off your first order">
+        </div>
+
+        <fieldset class="field">
+          <legend>Video style</legend>
+          <div class="chips" id="sb-styles"></div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Voice and sound</legend>
+          <div class="chips" id="sb-audio"></div>
+        </fieldset>
+
+        <div class="field-row">
+          <fieldset class="field">
+            <legend>Duration</legend>
+            <div class="chips" id="sb-durations"></div>
+          </fieldset>
+          <div class="field">
+            <label for="sb-platform">Platform</label>
+            <select id="sb-platform" name="platform">
+              <option>TikTok / Instagram Reels</option>
+              <option>YouTube Shorts</option>
+              <option>Facebook / Instagram feed</option>
+              <option>YouTube (landscape)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="sb-goal">Goal</label>
+          <select id="sb-goal" name="goal">
+            <option>Drive sales</option>
+            <option>Launch a new product</option>
+            <option>Build brand awareness</option>
+            <option>Get leads or bookings</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="sb-notes">Anything else? <span class="opt">optional</span></label>
+          <textarea id="sb-notes" name="notes" rows="3" placeholder="Brand colors, references you like, must-have shots, deadline"></textarea>
+        </div>
+        <p class="sb-error" id="sb-error" role="alert"></p>
+        <button class="btn btn-primary sb-submit" type="submit" id="sb-submit">Generate my storyboard</button>
+        <p class="sb-fine">Your brief goes straight to Angelyn by email.</p>
+      </form>
+    </div>
+
+    <div class="wrap">
+      <div class="sb-result" id="sb-result" hidden tabindex="-1"></div>
     </div>
   </section>
 
@@ -164,6 +264,8 @@
 
 <script src="data.js"></script>
 <script src="app.js"></script>
+<script src="storyboard.js"></script>
+<script src="cinema.js"></script>
 <!--PAGE-END-->
 </body>
 </html>

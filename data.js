@@ -48,6 +48,29 @@ window.PORTFOLIO = {
     ]
   },
 
+  /* ---------- Showreel (hero) ----------
+     A short muted montage that loops in the hero. */
+  showreel: {
+    src: "showreel.mp4",
+    poster: "showreel.jpg",
+    label: "Showreel 2026"
+  },
+
+  /* ---------- Services (scrolling strip under the hero) ---------- */
+  services: [
+    "AI Video Ads",
+    "Product Commercials",
+    "UGC-Style Ads",
+    "VSL Ads",
+    "AI Animation",
+    "AI Talking Heads",
+    "AI Voiceovers",
+    "Scripts & Storyboards",
+    "Social Media Reels",
+    "Explainer Videos",
+    "Brand Graphics & Posters"
+  ],
+
   /* ---------- Photo ---------- */
   photo: { src: "angelyn.webp", alt: "Portrait of Angelyn Serpa Juan" },
 
@@ -61,6 +84,7 @@ window.PORTFOLIO = {
      aspect:     "9:16", "16:9", "1:1" or "4:5".
      featured:   true = shown in the hero (keep it to 3).
      shortTitle: optional shorter name used on the cover card.
+     marquee:    optional hook line shown in the scrolling hook strip.
      audience / objective were inferred from each file name and format. Correct them
      if they're wrong. Any field left "" is hidden on the site.
   ------------------------------------------------------------------- */
@@ -90,7 +114,8 @@ window.PORTFOLIO = {
       ],
       "editing": "Final assembly, captions and sound design in CapCut. Background music generated with Gemini.",
       "deliverables": "",
-      "shortTitle": "CARRIE Handbag"
+      "shortTitle": "CARRIE Handbag",
+      "marquee": "Your outfit isn’t the problem"
     },
     {
       "id": "clay-cartoon",
@@ -127,7 +152,8 @@ window.PORTFOLIO = {
         "visualDirection": "Clay-style characters and scenes made with AI image and video generation. ChatGPT supported the concept and script.",
         "consistency": "Reference images kept the characters consistent from scene to scene.",
         "finalDeliverable": "Edited in CapCut with voiceover, music, sound effects, captions and transitions, then submitted as a sample."
-      }
+      },
+      "marquee": "I thought he was just getting old"
     },
     {
       "id": "cozy-clouds",
@@ -153,7 +179,8 @@ window.PORTFOLIO = {
       ],
       "editing": "Story assembled and edited in CapCut.",
       "deliverables": "",
-      "shortTitle": "Cozy Cloud"
+      "shortTitle": "Cozy Cloud",
+      "marquee": "Bad mood. Bad weather."
     },
     {
       "id": "uhp-sample",
@@ -201,7 +228,8 @@ window.PORTFOLIO = {
       ],
       "editing": "Captions, sound design and final edit in CapCut.",
       "deliverables": "",
-      "shortTitle": "Creatine Animation"
+      "shortTitle": "Creatine Animation",
+      "marquee": "Your muscles have a secret battery"
     },
     {
       "id": "nineone",
@@ -235,7 +263,8 @@ window.PORTFOLIO = {
         "consistency": "",
         "finalDeliverable": ""
       },
-      "shortTitle": "NineOne Christmas"
+      "shortTitle": "NineOne Christmas",
+      "marquee": "This Christmas, make your way home"
     },
     {
       "id": "nineone-ofw",
@@ -257,7 +286,8 @@ window.PORTFOLIO = {
       "production": "",
       "tools": [],
       "editing": "",
-      "deliverables": ""
+      "deliverables": "",
+      "marquee": "Ready na umuwi sa Pinas?"
     },
     {
       "id": "dtc-supplement-vsl",
@@ -279,7 +309,8 @@ window.PORTFOLIO = {
       "production": "",
       "tools": [],
       "editing": "",
-      "deliverables": ""
+      "deliverables": "",
+      "marquee": "Your brain at 11:47 PM"
     },
     {
       "id": "dtc-ad",
@@ -323,7 +354,8 @@ window.PORTFOLIO = {
       "production": "",
       "tools": [],
       "editing": "",
-      "deliverables": ""
+      "deliverables": "",
+      "marquee": "Some love stories deserve the world"
     },
     {
       "id": "ugc-skincare",
@@ -344,7 +376,8 @@ window.PORTFOLIO = {
       "production": "",
       "tools": [],
       "editing": "",
-      "deliverables": ""
+      "deliverables": "",
+      "marquee": "Okay, I finally understand the hype"
     },
     {
       "id": "viva-blend",
@@ -365,7 +398,8 @@ window.PORTFOLIO = {
       "production": "",
       "tools": [],
       "editing": "",
-      "deliverables": ""
+      "deliverables": "",
+      "marquee": "Woke up late. Still made breakfast."
     },
     {
       "id": "real-estate",
@@ -386,7 +420,8 @@ window.PORTFOLIO = {
       "production": "",
       "tools": [],
       "editing": "",
-      "deliverables": ""
+      "deliverables": "",
+      "marquee": "Come inside"
     },
     {
       "id": "oopsie-ep2",
@@ -429,7 +464,8 @@ window.PORTFOLIO = {
       "production": "",
       "tools": [],
       "editing": "",
-      "deliverables": ""
+      "deliverables": "",
+      "marquee": "The board meeting has been called to order"
     },
     {
       "id": "acoustic-singing",
@@ -544,11 +580,19 @@ window.PORTFOLIO = {
     { name: "Canva", use: "Graphics, posters, brand visuals" },
     { name: "Canva AI", use: "AI-assisted design" },
     { name: "ChatGPT", use: "Concepts, scripts, prompts" },
-    { name: "Gemini", use: "Research and prompting" },
+    { name: "Gemini", use: "Music" },
     { name: "Claude", use: "Writing and planning" },
-    { name: "AI Studio", use: "AI generation" },
-    { name: "Vibe", use: "AI creative" }
+    { name: "AI Studio", use: "Voiceover" },
+    { name: "Vibe", use: "Image to video" }
   ],
+
+  /* ---------- Storyboard request form ----------
+     Submissions are emailed to you through FormSubmit (free, no account).
+     The FIRST time someone submits, FormSubmit emails you an activation link.
+     Click it once, and every request after that arrives in your inbox. */
+  storyboard: {
+    endpoint: "https://formsubmit.co/ajax/serpajuanangelyn@gmail.com"
+  },
 
   workflow: [
     { step: "Concept", text: "Hook, angle and message for the audience and platform." },

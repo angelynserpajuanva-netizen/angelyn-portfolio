@@ -3,21 +3,24 @@
 A static portfolio site written in plain HTML, CSS and JavaScript. There is no build step and nothing to install, so it can be hosted for free.
 
 ```
-index.html        page structure
-css/styles.css    all styling
-js/data.js        ALL content: projects, videos, career, tools, contact
-js/app.js         rendering and interactions (filters, video dialog, timeline)
-videos/           put MP4 files here (optional)
-thumbs/           put thumbnail images here (optional)
+index.html          page structure
+styles.css          all styling
+data.js             ALL content: projects, videos, services, career, tools, contact
+app.js              gallery, filters, video window, showreel, timeline, About effects
+storyboard.js       "Get a Free Storyboard" form: instant draft + email
+cinema.js           menu highlight, film grain, letterbox opening
+angelyn.webp        your photo
+showreel.mp4/.jpg   hero showreel and its cover
+*.mp4 / *.jpg       one video and one cover image per project
 ```
 
-To change any text or video, edit **js/data.js** only.
+To change any text or video, edit **data.js** only.
 
 ---
 
 ## 1. Add your videos
 
-Each project in `js/data.js` has a `video` field. You have three options.
+Each project in `data.js` has a `video` field. You have three options.
 
 **A. Google Drive (quickest)**
 1. In Drive, right-click the video, then Share → General access → **Anyone with the link** → Copy link.
@@ -52,11 +55,11 @@ Then fill in, for each project: `title`, `category`, `summary`, and whichever of
 
 **Hook covers:** each card shows a title card until a cover image loads. On the live site, Google Drive's automatic thumbnail is used, and it may not show your hook text. To control the cover, take a screenshot of the hook frame from each video, save it in `thumbs/` (e.g. `thumbs/ugc-skincare.jpg`), and set `thumbnail: "thumbs/ugc-skincare.jpg"` on that project.
 
-**Photo:** `images/angelyn.webp`, set in the `photo` field of `js/data.js`.
+**Photo:** `angelyn.webp`, set in the `photo` field of `data.js`.
 
 ## 2. Before you share the site
 
-In `js/data.js`:
+In `data.js`:
 - `draftMode` is now `false`. Set it to `true` to see "To add" labels on missing project details.
 - `showPhone: true` shows your WhatsApp/Telegram number. Set it to `false` to hide it.
 
@@ -102,3 +105,14 @@ The Claude artifact preview is private to your Claude account and is not a publi
 - The email link may not open your mail app; the Copy button works.
 
 None of these limits apply once the folder is hosted on Netlify, Vercel or GitHub Pages. The code is the same; nothing needs to change for deployment.
+
+
+## Storyboard request form
+
+The "Get a Free Storyboard" section shows visitors an instant hook and storyboard draft, and emails their brief to you through FormSubmit (free, no account).
+
+1. After you publish, fill in the form yourself once.
+2. FormSubmit emails serpajuanangelyn@gmail.com a confirmation link. Click **Activate Form**.
+3. From then on, every request arrives in your inbox with the visitor's answers and their generated draft. Hit Reply to answer them directly.
+
+The email address is set in `storyboard.endpoint` in `data.js`.

@@ -4,6 +4,8 @@
   var D = window.PORTFOLIO;
   var draft = !!(D.settings && D.settings.draftMode);
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canHover = window.matchMedia && window.matchMedia("(hover: hover)").matches;
+  var saveData = !!(navigator.connection && navigator.connection.saveData);
   var $ = function (s, r) { return (r || document).querySelector(s); };
 
   function esc(s) {
@@ -97,10 +99,63 @@
   var featured = projects.filter(function (p) { return p.featured; }).slice(0, 3);
   if (featured.length < 3) featured = featured.concat(projects.filter(function (p) { return !p.featured; })).slice(0, 3);
   $("#hero-reel").innerHTML = featured.map(function (p) {
-    var i = projects.indexOf(p);
-    return '<div class="reel-item">' + frameHTML(p, i, { caption: false }) +
-      '<p class="reel-label"><span>' + esc(p.category) + "</span>" + esc(p.shortTitle || slotLabel(p, i)) + "</p></div>";
+    return '<div class="reel-item">' + frameHTML(p, projects.indexOf(p), { caption: false }) + "</div>";
   }).join("");
+
+  /* ---------- Showreel ---------- */
+  var SR = D.showreel || {};
+  var srBox = $("#showreel");
+  if (srBox && SR.src) {
+    srBox.innerHTML =
+      '<video muted loop playsinline preload="auto"' + (SR.poster ? ' poster="' + esc(SR.poster) + '"' : "") + ' src="' + esc(SR.src) + '" aria-hidden="true"></video>' +
+      '<div class="marks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>' +
+      '<p class="sr-top"><span class="rec" aria-hidden="true"></span>' + esc(SR.label || "Showreel") + "</p>" +
+      '<div class="sr-bottom"><button type="button" class="sr-sound" id="sr-sound" aria-pressed="false">' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path class="w1" d="M16.5 8.5a5 5 0 0 1 0 7"/><path class="w2" d="M19 6a8.5 8.5 0 0 1 0 12"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>' +
+      '<span class="sr-sound-label">Sound on</span></button>' +
+      '<button type="button" class="sr-toggle" id="sr-toggle" aria-label="Pause showreel"><span aria-hidden="true"></span></button></div>' +
+      (SR.music ? '<p class="sr-music">\u266A ' + esc(SR.music) + "</p>" : "");
+    var srv = srBox.querySelector("video"), srBtn = $("#sr-toggle"), userPaused = reduceMotion;
+    function srState() {
+      var playing = !srv.paused;
+      srBox.classList.toggle("is-paused", !playing);
+      srBtn.setAttribute("aria-label", playing ? "Pause showreel" : "Play showreel");
+    }
+    function srPlay() { var pr = srv.play(); if (pr && pr.catch) pr.catch(function () { srState(); }); }
+    srv.addEventListener("play", srState); srv.addEventListener("pause", srState);
+    var srSound = $("#sr-sound");
+    srSound.addEventListener("click", function () {
+      var on = srv.muted;
+      srv.muted = !on;
+      if (on) { srv.currentTime = 0; userPaused = false; srPlay(); }
+      srSound.setAttribute("aria-pressed", String(on));
+      srBox.classList.toggle("has-sound", on);
+      srSound.querySelector(".sr-sound-label").textContent = on ? "Sound off" : "Sound on";
+    });
+    srBtn.addEventListener("click", function () {
+      if (srv.paused) { userPaused = false; srPlay(); } else { userPaused = true; srv.pause(); }
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (en) {
+        if (en[0].isIntersecting) { if (!userPaused) srPlay(); } else srv.pause();
+      }, { threshold: 0.25 }).observe(srBox);
+    } else if (!userPaused) srPlay();
+    srState();
+  } else if (srBox) { srBox.hidden = true; }
+
+  /* ---------- Hook marquee ---------- */
+  var mq = $("#marquee-track");
+  if (mq) {
+    var services = D.services || [];
+    if (!services.length) { $("#marquee").hidden = true; }
+    else {
+      var one = services.map(function (s) {
+        return '<a class="mq-item" href="#storyboard">' + esc(s) + "</a>" +
+          '<span class="mq-sep" aria-hidden="true"></span>';
+      }).join("");
+      mq.innerHTML = '<div class="mq-group">' + one + '</div><div class="mq-group" aria-hidden="true" inert>' + one + "</div>";
+    }
+  }
 
   /* ---------- Filters + grid ---------- */
   var cats = [];
@@ -144,26 +199,47 @@
   });
   renderFilters(); renderGrid(false);
 
-  // Silent hover preview on devices with a mouse. The video only loads on first hover.
-  var canHover = window.matchMedia && window.matchMedia("(hover: hover)").matches;
-  function bindHoverPreview(root) {
-    if (reduceMotion || !canHover) return;
-    root.querySelectorAll(".frame[data-preview]").forEach(function (f) {
-      var v = null;
-      f.addEventListener("mouseenter", function () {
-        if (!v) {
-          v = document.createElement("video");
-          v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto";
-          v.src = f.getAttribute("data-preview");
-          v.className = "hover-vid";
-          f.querySelector(".frame-media").appendChild(v);
-        }
-        v.classList.add("on");
-        var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+  // Silent previews. Desktop: play on hover. Phones and tablets: the card in the
+  // middle of the screen plays on its own, like Reels. Videos load only when needed.
+  function previewStart(f) {
+    var v = f._pv;
+    if (!v) {
+      v = document.createElement("video");
+      v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto";
+      v.setAttribute("muted", ""); v.setAttribute("playsinline", "");
+      v.src = f.getAttribute("data-preview");
+      v.className = "hover-vid";
+      f.querySelector(".frame-media").appendChild(v);
+      f._pv = v;
+    }
+    v.classList.add("on");
+    var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+  }
+  function previewStop(f) { if (f._pv) { f._pv.pause(); f._pv.classList.remove("on"); } }
+  var centreIO = null, centreNow = null;
+  if (!reduceMotion && !canHover && !saveData && "IntersectionObserver" in window) {
+    centreIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          if (centreNow && centreNow !== en.target) previewStop(centreNow);
+          centreNow = en.target; previewStart(en.target);
+        } else if (en.target === centreNow) { previewStop(en.target); centreNow = null; }
+        else previewStop(en.target);
       });
-      f.addEventListener("mouseleave", function () { if (v) { v.pause(); v.classList.remove("on"); } });
+    }, { rootMargin: "-42% 0px -42% 0px", threshold: 0 });
+  }
+  function bindHoverPreview(root) {
+    if (reduceMotion) return;
+    root.querySelectorAll(".frame[data-preview]").forEach(function (f) {
+      if (f._bound) return;
+      if (canHover) {
+        f._bound = true;
+        f.addEventListener("mouseenter", function () { previewStart(f); });
+        f.addEventListener("mouseleave", function () { previewStop(f); });
+      } else if (centreIO) { f._bound = true; centreIO.observe(f); }
     });
   }
+  bindHoverPreview($("#grid"));
   bindHoverPreview($("#hero-reel"));
 
   /* ---------- Project dialog ---------- */
@@ -240,8 +316,8 @@
   $("#modal-close").addEventListener("click", closeProject);
   modal.addEventListener("click", function (e) { if (e.target === modal) closeProject(); });
   document.addEventListener("click", function (e) {
-    var f = e.target.closest(".frame[data-id]");
-    if (f) openProject(f.getAttribute("data-id"), f);
+    var f = e.target.closest(".frame[data-id], [data-open-project]");
+    if (f) openProject(f.getAttribute("data-id") || f.getAttribute("data-open-project"), f);
   });
 
   /* ---------- Case studies ---------- */
@@ -259,6 +335,7 @@
       if (!has(v)) return draft ? "<div><dt>" + caseLabels[k] + '</dt><dd><span class="todo">To add</span></dd></div>' : "";
       return "<div><dt>" + caseLabels[k] + "</dt><dd>" + esc(v) + "</dd></div>";
     }).join("");
+  bindHoverPreview($("#case-list"));
     var vids = (p.caseStudy.videos || [p.id]).map(function (id) { return projects.filter(function (x) { return x.id === id; })[0]; }).filter(Boolean);
     return '<article class="case"><div class="case-media' + (vids.length > 1 ? " multi" : "") + '">' + vids.map(function (v) { return frameHTML(v, projects.indexOf(v), { caption: false }); }).join("") + "</div>" +
       '<div class="case-body"><p class="eyebrow">' + esc(p.category) + '</p><h3 class="case-title">' + esc(slotLabel(p, i)) + "</h3>" +
@@ -326,11 +403,11 @@
   }
 
   // Subtle hero parallax
-  var reelFrames = document.querySelectorAll("#hero-reel .reel-item");
+  var reelFrames = document.querySelectorAll("#showreel, #hero-reel");
   function parallax() {
     if (reduceMotion || window.innerWidth < 900) { reelFrames.forEach(function (f) { f.style.transform = ""; }); return; }
     var y = Math.min(window.scrollY, 900);
-    reelFrames.forEach(function (f, i) { f.style.transform = "translateY(" + (y * [-0.04, 0.03, -0.07][i]).toFixed(1) + "px)"; });
+    reelFrames.forEach(function (f, i) { f.style.transform = "translateY(" + (y * [-0.03, 0.05][i]).toFixed(1) + "px)"; });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
@@ -343,6 +420,49 @@
   /* ---------- About, tools, workflow ---------- */
   if (D.photo && has(D.photo.src)) {
     $("#about-photo").innerHTML = '<img src="' + esc(D.photo.src) + '" alt="' + esc(D.photo.alt || "") + '" width="760" height="927" loading="lazy">';
+    // Reveal the photo when it scrolls into view
+    var ap = $("#about-photo");
+    if (!reduceMotion && "IntersectionObserver" in window) {
+      ap.insertAdjacentHTML("beforeend", '<span class="scan" aria-hidden="true"></span>');
+      ap.classList.add("will-reveal");
+      var io = new IntersectionObserver(function (en) {
+        if (!en[0].isIntersecting) return;
+        ap.classList.add("in-view"); io.disconnect();
+        setTimeout(function () { ap.classList.add("floating"); }, 1600);
+      }, { threshold: 0.25 });
+      io.observe(ap);
+    }
+
+    // Desktop: a warm camera light follows the cursor across About, and a
+    // viewfinder with a running REC timecode frames the face on hover.
+    if (!reduceMotion && canHover) {
+      var sec = $("#about");
+      sec.classList.add("has-spot");
+      sec.insertAdjacentHTML("afterbegin", '<div class="about-spot" aria-hidden="true"></div>');
+      sec.addEventListener("pointermove", function (e) {
+        var r = sec.getBoundingClientRect();
+        sec.style.setProperty("--mx", (e.clientX - r.left) + "px");
+        sec.style.setProperty("--my", (e.clientY - r.top) + "px");
+        sec.classList.add("lit");
+      });
+      sec.addEventListener("pointerleave", function () { sec.classList.remove("lit"); });
+
+      ap.insertAdjacentHTML("beforeend",
+        '<div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i>' +
+        '<span class="vf-rec"><b></b>REC <span class="vf-tc">00:00:00:00</span></span>' +
+        '<span class="vf-af">AF</span></div>');
+      var tcEl = ap.querySelector(".vf-tc"), tcTimer = null, tcStart = 0;
+      function pad(n) { return (n < 10 ? "0" : "") + n; }
+      ap.addEventListener("pointerenter", function () {
+        ap.classList.add("framing"); tcStart = performance.now();
+        clearInterval(tcTimer);
+        tcTimer = setInterval(function () {
+          var ms = performance.now() - tcStart, s = Math.floor(ms / 1000);
+          tcEl.textContent = "00:" + pad(Math.floor(s / 60)) + ":" + pad(s % 60) + ":" + pad(Math.floor((ms % 1000) / (1000 / 24)));
+        }, 42);
+      });
+      ap.addEventListener("pointerleave", function () { ap.classList.remove("framing"); clearInterval(tcTimer); });
+    }
   } else { $("#about-photo").hidden = true; }
   $("#about-body").innerHTML = D.about.map(function (t) { return "<p>" + esc(t) + "</p>"; }).join("");
   $("#tools-list").innerHTML = D.tools.map(function (t) {
