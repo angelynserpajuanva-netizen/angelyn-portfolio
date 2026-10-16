@@ -398,7 +398,8 @@
       '<p class="sb-look"><b>Voice and sound: ' + esc(out.audio.label) + ".</b> " + esc(out.audio.direction) + "</p></div>" +
       '<ol class="sb-scenes' + (out.wide ? " wide" : "") + '" id="sb-scene-list">' + scenesHTML(out) + "</ol>" +
       '<div class="sb-actions">' +
-        '<button type="button" class="btn btn-primary" id="sb-copy">Copy storyboard with option ' + ((out.chosen || 0) + 1) + "</button>" +
+        '<button type="button" class="btn btn-primary" id="sb-send">Send option ' + ((out.chosen || 0) + 1) + " to Angelyn</button>" +
+        '<button type="button" class="btn btn-ghost" id="sb-copy">Copy storyboard</button>' +
         '<button type="button" class="btn btn-ghost" id="sb-again">Try another style</button>' +
         '<p class="sb-copy-status" id="sb-copy-status" role="status" aria-live="polite"></p>' +
       "</div>" +
@@ -421,13 +422,19 @@
         x.classList.toggle("top", on); x.setAttribute("aria-pressed", String(on));
       });
       $("#sb-scene-list").innerHTML = scenesHTML(out);
-      $("#sb-copy").textContent = "Copy storyboard with option " + (i + 1);
+      var sb = $("#sb-send");
+      if (sb && !(pending && pending.sending)) {
+        var already = pending && pending.sentChoice === i;
+        sb.disabled = already;
+        sb.textContent = already ? "\u2713 Sent with option " + (i + 1) : (pending && pending.sentChoice > -1 ? "Send option " + (i + 1) + " instead" : "Send option " + (i + 1) + " to Angelyn");
+      }
       var st = $("#sb-copy-status"); if (st) st.textContent = "Option " + (i + 1) + " is now your hook. Scene 1 updated.";
     };
+    $("#sb-send").onclick = function () { sendBrief("click"); };
     $("#sb-copy").onclick = function () {
       var txt = plainText(v, out), st = $("#sb-copy-status");
       try {
-        navigator.clipboard.writeText(txt).then(function () { st.textContent = "Storyboard with option " + ((out.chosen || 0) + 1) + " copied."; },
+        navigator.clipboard.writeText(txt).then(function () { st.textContent = "Storyboard with hook option " + ((out.chosen || 0) + 1) + " copied."; },
           function () { st.textContent = "Copy isn't available here. Select the text to copy it."; });
       } catch (e) { st.textContent = "Copy isn't available here. Select the text to copy it."; }
     };
@@ -526,41 +533,56 @@
       stepTimers.forEach(clearTimeout);
       try {
         var out = aiOut && aiOut.scenes.length >= 3 ? aiOut : generate(v);
-        var alreadySent = key === lastSent;
-        render(v, out, alreadySent ? "Brief already sent to Angelyn." : '<span class="dot"></span>Sending your brief to Angelyn\u2026');
-        if (alreadySent) {
-          setProgress(100, "Done"); endProgress(); busy(false);
-          both("ok", "Your storyboard is ready. This brief was already sent to Angelyn.");
-          return;
-        }
-        setProgress(85, "Sending your brief to Angelyn\u2026");
-        sendBrief(v, out, key);
+        out.chosen = 0;
+        pending = { v: v, out: out, sentChoice: -1, sending: false };
+        render(v, out, "Pick your favorite hook below, then send it to Angelyn.");
+        setProgress(100, "Done"); endProgress(); busy(false);
+        toast("ok", "Your storyboard is ready. Pick your favorite hook, then tap <b>Send to Angelyn</b>.");
       } catch (e2) { fail(e2); }
     });
   }
 
-  function sendBrief(v, out, key) {
-    var payload = {
-      _subject: "Storyboard request: " + v.brand + " (" + STYLES[v.styleKey].label + ", " + v.duration + "s)",
+  // Sends the storyboard with the visitor's chosen hook. mode: "click" (normal) or "leave" (backup on page exit).
+  var pending = null;
+  function payloadFor(v, out) {
+    var n = (out.chosen || 0) + 1;
+    var p = {
+      _subject: "Storyboard request: " + v.brand + " (hook option " + n + ", " + STYLES[v.styleKey].label + ", " + v.duration + "s)",
       _template: "box",
       _replyto: v.email,
       Name: v.name, Email: v.email, Brand: v.brand,
+      "Chosen hook": "Option " + n + ": " + out.hooks[out.chosen || 0],
       Industry: out.industry, "Website / Facebook": v.website || "-",
       Problem: v.problem || "-", Audience: v.audience, "Benefit or offer": v.benefit || "-",
       Style: STYLES[v.styleKey].label, "Voice and sound": AUDIO[v.audioKey].label, Duration: v.duration + " seconds",
       Platform: v.platform, Goal: v.goal, Notes: v.notes || "-",
-      "Generated draft": plainText(v, out)
+      "Chosen storyboard": plainText(v, out)
     };
     var fp = flowPrompts(out);
-    if (fp) payload["Google Flow image prompts"] = fp;
-    var failMsg = "Your storyboard is ready below, but the email didn\u2019t go through. Please email <b>" + esc(OWNER_EMAIL) + "</b> and paste in your storyboard.";
-    function finish() { setProgress(100, "Done"); endProgress(); busy(false); }
-
-    // Inside the Claude preview, outside requests are blocked. The live site sends normally.
-    if (/claude|anthropic/i.test(location.hostname) || location.origin === "null") {
-      finish(); both("ok", "Your storyboard is ready below. (Preview only: on the live site this brief is emailed to Angelyn.)");
+    if (fp) p["Google Flow image prompts"] = fp;
+    return p;
+  }
+  function inPreview() { return /claude|anthropic/i.test(location.hostname) || location.origin === "null"; }
+  function sendBrief(mode) {
+    if (!pending || pending.sending) return;
+    var P = pending, v = P.v, out = P.out, choice = out.chosen || 0;
+    if (P.sentChoice === choice) return;
+    var payload = payloadFor(v, out);
+    if (mode === "leave") {
+      if (inPreview()) return;
+      try { fetch(ENDPOINT, { method: "POST", keepalive: true, headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload) }); P.sentChoice = choice; } catch (e) {}
       return;
     }
+    var sendBtn = $("#sb-send");
+    function setBtn(label, disabled) { if (sendBtn) { sendBtn.innerHTML = label; sendBtn.disabled = !!disabled; } }
+    var failMsg = "Your storyboard is ready, but the email didn\u2019t go through. Please email <b>" + esc(OWNER_EMAIL) + "</b> and paste in your storyboard.";
+    if (inPreview()) {
+      P.sentChoice = choice; setBtn("\u2713 Sent with option " + (choice + 1), true);
+      both("ok", "Preview only: on the live site, your storyboard with option " + (choice + 1) + " is emailed to Angelyn.");
+      return;
+    }
+    P.sending = true;
+    setBtn('<span class="sb-spin" aria-hidden="true"></span>Sending\u2026', true);
     var ctrl = window.AbortController ? new AbortController() : null;
     var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 20000);
     fetch(ENDPOINT, {
@@ -570,19 +592,24 @@
       signal: ctrl ? ctrl.signal : undefined
     }).then(function (res) {
       return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, j: j || {} }; });
-    }).then(function (r) {
-      clearTimeout(timer); finish();
-      var ok = r.ok && (r.j.success === true || r.j.success === "true");
-      var m = String(r.j.message || "");
+    }).then(function (rr) {
+      clearTimeout(timer); P.sending = false;
+      var ok = rr.ok && (rr.j.success === true || rr.j.success === "true");
+      var m = String(rr.j.message || "");
       if (ok) {
-        lastSent = key;
-        both("ok", "Submitted! Your storyboard is ready below, and Angelyn will reply to <b>" + esc(v.email) + "</b>.");
+        P.sentChoice = choice;
+        setBtn("\u2713 Sent with option " + (choice + 1), true);
+        both("ok", "Sent! Angelyn received your storyboard with hook option " + (choice + 1) + " and will reply to <b>" + esc(v.email) + "</b>.");
       } else if (/activat/i.test(m)) {
-        // FormSubmit sends the site owner a one-time activation email first.
-        both("warn", "Your storyboard is ready below. The email form is waiting for one-time activation by the site owner, so please also email <b>" + esc(OWNER_EMAIL) + "</b>.");
-      } else { both("warn", failMsg); }
-    }).catch(function () { clearTimeout(timer); finish(); both("warn", failMsg); });
+        setBtn("Send to Angelyn", false);
+        both("warn", "The email form is waiting for one-time activation by the site owner, so please also email <b>" + esc(OWNER_EMAIL) + "</b>.");
+      } else { setBtn("Try sending again", false); both("warn", failMsg); }
+    }).catch(function () { clearTimeout(timer); P.sending = false; setBtn("Try sending again", false); both("warn", failMsg); });
   }
+  // Backup: if the visitor leaves without tapping Send, send their current choice so no request is lost.
+  window.addEventListener("pagehide", function () { sendBrief("leave"); });
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") sendBrief("leave"); });
+
 
   // Clear the invalid state as people type
   form.addEventListener("input", function (e) {
