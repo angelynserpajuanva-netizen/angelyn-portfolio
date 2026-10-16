@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261016d">
+<link rel="stylesheet" href="styles.css?v=20261016e">
 </head>
 <body>
 <!--PAGE-START-->
@@ -104,19 +104,31 @@
         </div>
         <div class="field">
           <label for="sb-brand">Brand or product name</label>
-          <input id="sb-brand" name="brand" type="text" placeholder="e.g. GlowLab Vitamin C Serum" required>
+          <input id="sb-brand" name="brand" type="text" placeholder="e.g. NineOne Car Rental" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="sb-industry">Industry</label>
+            <select id="sb-industry" name="industry">
+              <option value="auto">Detect from my answers</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="sb-website">Website or Facebook page <span class="opt">optional</span></label>
+            <input id="sb-website" name="website" type="text" inputmode="url" autocomplete="url" placeholder="e.g. facebook.com/yourbrand">
+          </div>
         </div>
         <div class="field">
-          <label for="sb-problem">What problem does it solve?</label>
-          <input id="sb-problem" name="problem" type="text" placeholder="e.g. dull, tired-looking skin" required>
+          <label for="sb-problem">What problem does it solve? <span class="opt">optional</span></label>
+          <input id="sb-problem" name="problem" type="text" placeholder="e.g. long taxi lines at the airport">
         </div>
         <div class="field">
           <label for="sb-audience">Target audience</label>
-          <input id="sb-audience" name="audience" type="text" placeholder="e.g. busy women 25 to 40 who want simple skincare" required>
+          <input id="sb-audience" name="audience" type="text" placeholder="e.g. OFWs and families flying home for the holidays" required>
         </div>
         <div class="field">
           <label for="sb-benefit">Main benefit or offer <span class="opt">optional</span></label>
-          <input id="sb-benefit" name="benefit" type="text" placeholder="e.g. Brighter skin in 2 weeks, or 20% off your first order">
+          <input id="sb-benefit" name="benefit" type="text" placeholder="e.g. Free airport pickup, or 20% off your first booking">
         </div>
 
         <fieldset class="field">
@@ -266,10 +278,11 @@
   </div>
 </dialog>
 
-<script src="data.js?v=20261016d"></script>
-<script src="app.js?v=20261016d"></script>
-<script src="storyboard.js?v=20261016d"></script>
-<script src="cinema.js?v=20261016d"></script>
+<script src="data.js?v=20261016e"></script>
+<script src="app.js?v=20261016e"></script>
+<script src="playbooks.js?v=20261016e"></script>
+<script src="storyboard.js?v=20261016e"></script>
+<script src="cinema.js?v=20261016e"></script>
 <!--PAGE-END-->
 </body>
 </html>

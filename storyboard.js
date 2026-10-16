@@ -79,6 +79,13 @@
     }
   };
   var DURATIONS = [15, 30, 45, 60];
+  (function fillIndustries() {
+    var sel = document.getElementById("sb-industry");
+    if (!sel || !window.SB_PLAYBOOKS) return;
+    window.SB_PLAYBOOKS.forEach(function (pb) {
+      var o = document.createElement("option"); o.value = pb.id; o.textContent = pb.label; sel.appendChild(o);
+    });
+  })();
 
   /* ---------- Voice and sound options ---------- */
   var AUDIO = {
@@ -177,53 +184,80 @@
     }
     return out;
   }
+  var PLAYBOOKS = window.SB_PLAYBOOKS || [];
+  var FALLBACK = window.SB_FALLBACK;
+  // Match the industry from everything the visitor typed, including their website address.
+  function detectIndustry(v) {
+    if (v.industry && v.industry !== "auto") {
+      for (var i = 0; i < PLAYBOOKS.length; i++) if (PLAYBOOKS[i].id === v.industry) return PLAYBOOKS[i];
+    }
+    var site = (v.website || "").toLowerCase().replace(/^https?:\/\//, "").replace(/[\/._-]+/g, " ");
+    var hay = " " + [v.brand, v.problem, v.benefit, v.audience, v.notes, site].join(" ").toLowerCase() + " ";
+    var squashed = hay.replace(/[^a-z0-9]/g, "");
+    var best = null, bestScore = 0;
+    PLAYBOOKS.forEach(function (pb) {
+      var score = 0;
+      pb.keys.forEach(function (k) {
+        if (hay.indexOf(k) > -1) score += k.length > 5 ? 3 : 2;
+        else if (k.length > 5 && squashed.indexOf(k.replace(/[^a-z0-9]/g, "")) > -1) score += 2;
+      });
+      if (score > bestScore) { bestScore = score; best = pb; }
+    });
+    return best || FALLBACK;
+  }
+  var STYLE_NOTE = {
+    pixar: "Rendered as Pixar-style 3D characters.",
+    clay: "Rendered in a handmade clay-animation look.",
+    ugc: "Shot selfie-style on a phone, like a real creator.",
+    dtc: "Clean, bright and product-first, with fast cuts.",
+    podcast: "Framed as a podcast clip, with B-roll cutaways for this moment.",
+    drama: "Played as a grounded, emotional drama scene.",
+    cinematic: "Lit and graded like a premium commercial.",
+    explainer: "Animated with simple diagrams and a friendly mascot."
+  };
   function generate(v) {
     var S = STYLES[v.styleKey];
+    var PB = detectIndustry(v);
+    var pain = lc(v.problem) || PB.pain;
+    var offer = v.benefit || PB.offer;
+    var hero = PB.hero;
     var vars = {
-      brand: v.brand, problem: lc(v.problem), audience: lc(v.audience),
-      subject: S.subject, Subject: cap(S.subject),
-      benefit: v.benefit
+      brand: v.brand, hero: hero, Hero: cap(hero), pain: pain, Pain: cap(pain),
+      offer: offer, audience: lc(v.audience) || "your customers"
     };
-    var hooks = [
-      fill(S.hook, vars),
-      fill("Still dealing with {problem}?", vars),
-      fill("POV: you finally found the fix for {problem}.", vars)
-    ];
-    var ctaText = fill(CTA[v.goal] || CTA["Drive sales"], vars);
-    var B = {
-      hook: { shot: "Close-up", icon: "face", title: "Hook",
-        visual: "{Subject} reacts straight to camera. Quick push-in so the first frame stops the scroll.",
-        text: hooks[0], audio: "Hook line in the first 2 seconds, with a sound hit on the first cut." },
-      problem: { shot: "Medium shot", icon: "face", title: "Problem",
-        visual: "{Subject} runs into {problem} in an everyday moment the audience recognizes.",
-        text: "Sound familiar?", audio: "Voiceover names the problem in the viewer's own words." },
-      turn: { shot: "Reaction / insert", icon: "spark", title: "Turning point",
-        visual: "Frustration peaks, then a beat of curiosity as {brand} comes into frame.",
-        text: "There's an easier way.", audio: "Music shifts with a short riser." },
-      reveal: { shot: "Product hero shot", icon: "product", title: "Product reveal",
-        visual: "{brand} revealed in a clean hero shot, matched to your product photos so it stays accurate.",
-        text: v.brand, audio: "Voiceover introduces {brand} in one line." },
-      demo: { shot: "Hands-on demo", icon: "hand", title: "How it works",
-        visual: "{Subject} uses {brand}. Show it working in 2–3 quick cuts.",
-        text: "Here's how it works", audio: "Quick sound effect on each cut." },
-      benefit: { shot: "Medium close-up", icon: "smile", title: "Result",
-        visual: "The payoff: {subject}, happier now that {problem} is handled.",
-        text: v.benefit || "The difference is real", audio: "Voiceover lands the main benefit." },
-      proof: { shot: "Reaction montage", icon: "people", title: "Made for you",
-        visual: "Short montage of people like {audience} using {brand} in their routine.",
-        text: "Made for " + vars.audience, audio: "Music lifts toward the ending." },
-      cta: { shot: "End card", icon: "cta", title: "Call to action",
-        visual: "{brand} logo and product on screen" + (v.benefit ? ", with the offer clearly shown." : "."),
-        text: ctaText, audio: "Voiceover call to action and a short logo sting." }
+    var hooks = PB.hooks.map(function (h) { return fill(h, vars); });
+    var CTA_BY_GOAL = {
+      "Drive sales": PB.cta,
+      "Get leads or bookings": PB.cta,
+      "Launch a new product": "New from {brand}. " + PB.cta.replace(/ \{brand\}| with \{brand\}| at \{brand\}/, ""),
+      "Build brand awareness": "Follow {brand} for more"
     };
+    var ctaText = fill(CTA_BY_GOAL[v.goal] || PB.cta, vars);
     var A = AUDIO[v.audioKey] || AUDIO.voiceover;
+    var ICON = { hook: "face", problem: "face", turn: "spark", reveal: "product", demo: "hand", benefit: "smile", proof: "people", cta: "cta" };
+    var TITLE = { hook: "Hook", problem: "Problem", turn: "Turning point", reveal: "Reveal", demo: "How it works", benefit: "Result", proof: "Social proof", cta: "Call to action" };
     var keys = beatsFor(v.duration), tcs = timecodes(keys.length, v.duration);
     var scenes = keys.map(function (k, i) {
-      var b = B[k];
-      return { n: i + 1, tc: tcs[i], title: b.title, shot: b.shot, icon: b.icon,
-        visual: fill(b.visual, vars), text: fill(b.text, vars), audio: fill(A.lines[k] || b.audio, vars) };
+      var b = PB.scenes[k];
+      var visual = fill(b.visual, vars);
+      if (k === "hook" || k === "problem") visual += " " + (STYLE_NOTE[v.styleKey] || "");
+      var text = k === "hook" ? hooks[0] : k === "cta" ? ctaText : fill(b.text || "", vars);
+      var line = fill(b.vo || "", vars);
+      if (k === "hook") line = hooks[0];
+      if (k === "cta") line = fill(b.vo || ctaText, vars);
+      var audio;
+      if (v.audioKey === "music") audio = (A.lines[k] || "Music only. The on-screen text carries the message.");
+      else if (v.audioKey === "talking") audio = "AI talking head: \u201c" + line + "\u201d";
+      else if (v.audioKey === "mixed") audio = (k === "hook" || k === "cta" ? "AI talking head: \u201c" : "Voiceover: \u201c") + line + "\u201d (over the music bed)";
+      else audio = "Voiceover: \u201c" + line + "\u201d";
+      return { n: i + 1, tc: tcs[i], title: TITLE[k], shot: b.shot, icon: ICON[k], visual: visual.trim(), text: text, audio: audio };
     });
-    return { style: S, audio: A, hooks: hooks, scenes: scenes, wide: /landscape/i.test(v.platform) };
+    return {
+      style: S, audio: A, hooks: hooks, scenes: scenes, wide: /landscape/i.test(v.platform),
+      industry: PB.label, concept: { title: PB.concept.title, logline: fill(PB.concept.logline, vars) },
+      patterns: PB.patterns.map(function (p) { return fill(p, vars); }),
+      pain: pain, offer: offer
+    };
   }
 
   /* ---------- Frame drawings (simple storyboard sketches) ---------- */
@@ -249,9 +283,16 @@
   function plainText(v, out) {
     var lines = [
       "STORYBOARD DRAFT: " + v.brand,
+      "Industry: " + out.industry + (v.industry === "auto" ? " (auto-detected)" : ""),
       "Style: " + out.style.label + " | Sound: " + out.audio.label + " | " + v.duration + "s | " + v.platform + " | Goal: " + v.goal,
       "Audience: " + v.audience,
-      "Problem: " + v.problem + (v.benefit ? " | Benefit/offer: " + v.benefit : ""),
+      "Problem: " + (v.problem || "(not given; used: " + out.pain + ")") + " | Benefit/offer: " + (v.benefit || "(not given)"),
+      "Website / Facebook: " + (v.website || "(not given)"),
+      "",
+      "CONCEPT: " + out.concept.title + ". " + out.concept.logline,
+      "",
+      "WHAT WORKS IN " + out.industry.toUpperCase() + " ADS",
+      "- " + out.patterns.join("\n- "),
       "",
       "HOOK OPTIONS",
       "1. " + out.hooks[0], "2. " + out.hooks[1], "3. " + out.hooks[2],
@@ -274,9 +315,12 @@
     r.innerHTML =
       '<div class="sb-result-head">' +
         '<div><p class="eyebrow">Storyboard draft for</p><h3 class="sb-result-title">' + esc(v.brand) + "</h3>" +
-        '<p class="sb-meta">' + esc(out.style.label) + " · " + esc(out.audio.label) + " · " + v.duration + "s · " + esc(v.platform) + " · " + esc(v.goal) + "</p></div>" +
+        '<p class="sb-meta">' + esc(out.industry) + " · " + esc(out.style.label) + " · " + esc(out.audio.label) + " · " + v.duration + "s · " + esc(v.platform) + " · " + esc(v.goal) + "</p></div>" +
         '<div class="sb-status" id="sb-status" role="status" aria-live="polite">' + sendState + "</div>" +
       "</div>" +
+      '<div class="sb-concept"><div><p class="label">Concept</p><h4>' + esc(out.concept.title) + "</h4><p>" + esc(out.concept.logline) + "</p></div>" +
+        '<div><p class="label">What works in ' + esc(out.industry.toLowerCase()) + " ads</p><ul>" +
+        out.patterns.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + "</ul></div></div>" +
       '<div class="sb-hooks"><p class="label">Hook options</p><ol>' +
         out.hooks.map(function (h, i) { return '<li' + (i === 0 ? ' class="top"' : "") + "><span>" + (i === 0 ? "Recommended" : "Alt " + i) + "</span>" + esc(h) + "</li>"; }).join("") +
       "</ol></div>" +
@@ -294,7 +338,7 @@
         '<button type="button" class="btn btn-ghost" id="sb-again">Try another style</button>' +
         '<p class="sb-copy-status" id="sb-copy-status" role="status" aria-live="polite"></p>' +
       "</div>" +
-      '<p class="sb-note">This is an instant draft built from your answers. Angelyn will review your brief and follow up by email with a refined concept, script and AI-generated frames.</p>';
+      '<p class="sb-note">This is an instant draft built from your answers and proven ' + esc(out.industry.toLowerCase()) + " ad structures. Angelyn will review your brief" + (v.website ? " and <b>" + esc(v.website) + "</b>" : "") + " and follow up by email with a refined concept, script and AI-generated frames.</p>";
     r.hidden = false;
     r.focus({ preventScroll: true });
     r.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
@@ -366,7 +410,7 @@
   function handleSubmit() {
     var err = $("#sb-error"); if (err) err.textContent = "";
     if (formStatus) { formStatus.className = "sb-form-status"; formStatus.textContent = ""; }
-    var fields = ["sb-name", "sb-email", "sb-brand", "sb-problem", "sb-audience"];
+    var fields = ["sb-name", "sb-email", "sb-brand", "sb-audience"];
     var bad = fields.filter(function (id) {
       var el = document.getElementById(id); if (!el) return false;
       var ok = el.value.trim() && (el.type !== "email" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()));
@@ -387,7 +431,8 @@
       brand: clean(val("sb-brand")), problem: clean(val("sb-problem")),
       audience: clean(val("sb-audience")), benefit: clean(val("sb-benefit")),
       styleKey: state.style, duration: state.duration, audioKey: state.audio,
-      platform: val("sb-platform") || "TikTok / Instagram Reels", goal: val("sb-goal") || "Drive sales", notes: val("sb-notes").trim()
+      platform: val("sb-platform") || "TikTok / Instagram Reels", goal: val("sb-goal") || "Drive sales", notes: val("sb-notes").trim(),
+      website: val("sb-website").trim(), industry: val("sb-industry") || "auto"
     };
     var key = JSON.stringify(v);
 
@@ -415,7 +460,8 @@
       _template: "box",
       _replyto: v.email,
       Name: v.name, Email: v.email, Brand: v.brand,
-      Problem: v.problem, Audience: v.audience, "Benefit or offer": v.benefit || "-",
+      Industry: out.industry, "Website / Facebook": v.website || "-",
+      Problem: v.problem || "-", Audience: v.audience, "Benefit or offer": v.benefit || "-",
       Style: STYLES[v.styleKey].label, "Voice and sound": AUDIO[v.audioKey].label, Duration: v.duration + " seconds",
       Platform: v.platform, Goal: v.goal, Notes: v.notes || "-",
       "Generated draft": plainText(v, out)
