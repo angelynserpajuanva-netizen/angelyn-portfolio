@@ -430,7 +430,7 @@
       }
       var st = $("#sb-copy-status"); if (st) st.textContent = "Option " + (i + 1) + " is now your hook. Scene 1 updated.";
     };
-    $("#sb-send").onclick = function () { sendBrief("click"); };
+    $("#sb-send").onclick = function () { sendBrief(); };
     $("#sb-copy").onclick = function () {
       var txt = plainText(v, out), st = $("#sb-copy-status");
       try {
@@ -542,7 +542,7 @@
     });
   }
 
-  // Sends the storyboard with the visitor's chosen hook. mode: "click" (normal) or "leave" (backup on page exit).
+  // Emails the storyboard with the visitor's chosen hook. Only runs when they tap Send.
   var pending = null;
   function payloadFor(v, out) {
     var n = (out.chosen || 0) + 1;
@@ -563,16 +563,11 @@
     return p;
   }
   function inPreview() { return /claude|anthropic/i.test(location.hostname) || location.origin === "null"; }
-  function sendBrief(mode) {
+  function sendBrief() {
     if (!pending || pending.sending) return;
     var P = pending, v = P.v, out = P.out, choice = out.chosen || 0;
     if (P.sentChoice === choice) return;
     var payload = payloadFor(v, out);
-    if (mode === "leave") {
-      if (inPreview()) return;
-      try { fetch(ENDPOINT, { method: "POST", keepalive: true, headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload) }); P.sentChoice = choice; } catch (e) {}
-      return;
-    }
     var sendBtn = $("#sb-send");
     function setBtn(label, disabled) { if (sendBtn) { sendBtn.innerHTML = label; sendBtn.disabled = !!disabled; } }
     var failMsg = "Your storyboard is ready, but the email didn\u2019t go through. Please email <b>" + esc(OWNER_EMAIL) + "</b> and paste in your storyboard.";
@@ -606,9 +601,6 @@
       } else { setBtn("Try sending again", false); both("warn", failMsg); }
     }).catch(function () { clearTimeout(timer); P.sending = false; setBtn("Try sending again", false); both("warn", failMsg); });
   }
-  // Backup: if the visitor leaves without tapping Send, send their current choice so no request is lost.
-  window.addEventListener("pagehide", function () { sendBrief("leave"); });
-  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") sendBrief("leave"); });
 
 
   // Clear the invalid state as people type
