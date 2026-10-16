@@ -290,7 +290,7 @@
     }
     if (hasVideo(p)) {
       if (v.type === "file") {
-        inner = '<video controls autoplay playsinline preload="auto"' + (has(p.thumbnail) ? ' poster="' + esc(p.thumbnail) + '"' : "") + ' src="' + esc(v.src) + '"></video>';
+        inner = '<video controls autoplay playsinline preload="auto" src="' + esc(v.src) + '"></video>';
       } else if (v.type === "drive" && driveId(v.src)) {
         inner = '<iframe src="https://drive.google.com/file/d/' + driveId(v.src) + '/preview" allow="autoplay; fullscreen" allowfullscreen loading="lazy" title="' + esc(slotLabel(p, 0)) + '"></iframe>';
       } else if (v.type === "youtube" && youtubeId(v.src)) {

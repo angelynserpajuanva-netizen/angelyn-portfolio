@@ -380,6 +380,29 @@ window.PORTFOLIO = {
       "marquee": "Okay, I finally understand the hype"
     },
     {
+      "id": "centrum-advance",
+      "title": "Centrum Advance: Healthy Breakfast, Zero Complications",
+      "shortTitle": "Centrum Advance",
+      "category": "UGC-Style Ads",
+      "aspect": "9:16",
+      "featured": false,
+      "video": {
+        "type": "file",
+        "src": "centrum-advance.mp4"
+      },
+      "thumbnail": "centrum-advance.jpg",
+      "summary": "A talking-head wellness ad that opens with an easy banana-berry smoothie recipe, then introduces Centrum Advance multivitamins as the way to cover the nutritional gaps one breakfast can't.",
+      "audience": "Health-conscious adults looking for a simple daily routine",
+      "objective": "Build trust with a useful tip first, then introduce the product as a natural next step.",
+      "concept": "Value first, product second: a quick breakfast recipe earns attention before the multivitamin appears.",
+      "hook": "Healthy breakfast. Zero complications. “Here's something interesting. A healthy breakfast doesn't have to be complicated.”",
+      "production": "An AI talking-head presenter, a recipe demo with ingredient labels (banana, berries, plain yogurt, milk), blending and pouring shots, and product hero shots of Centrum Advance.",
+      "tools": [],
+      "editing": "Word-by-word captions with highlighted keywords, animated on-screen titles (“Vitamins + Protein + Calcium”, “Variety Matters”), and an end card: “Your daily routine, made simple.”",
+      "deliverables": "66-second vertical (9:16) ad for TikTok, Reels and Shorts.",
+      "marquee": ""
+    },
+    {
       "id": "viva-blend",
       "title": "Viva Blend UGC Ad",
       "category": "UGC-Style Ads",
