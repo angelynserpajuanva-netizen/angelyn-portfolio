@@ -341,8 +341,10 @@
       "WHAT WORKS IN " + out.industry.toUpperCase() + " ADS",
       "- " + out.patterns.join("\n- "),
       "",
-      "HOOK OPTIONS",
-      "1. " + out.hooks[0], "2. " + out.hooks[1], "3. " + out.hooks[2],
+      "CHOSEN HOOK: " + out.hooks[out.chosen || 0],
+      "",
+      "OTHER HOOK OPTIONS",
+      out.hooks.map(function (h, i) { return (i === (out.chosen || 0) ? null : (i + 1) + ". " + h); }).filter(Boolean).join("\n"),
       "",
       "VISUAL DIRECTION: " + out.style.look,
       "VOICE AND SOUND (" + out.audio.label + "): " + out.audio.direction,
@@ -365,6 +367,15 @@
     return withP.map(function (s) { return "SCENE " + s.n + " (" + s.title + "):\n" + s.flowPrompt; }).join("\n\n");
   }
 
+  function scenesHTML(out) {
+    return out.scenes.map(function (s) {
+      return '<li class="sb-scene">' + frameHTML(s, out) +
+        '<div class="sb-scene-body"><p class="sb-scene-n">Scene ' + s.n + " · " + esc(s.title) + "</p>" +
+        "<dl><div><dt>Visual</dt><dd>" + esc(s.visual) + "</dd></div>" +
+        "<div><dt>On screen</dt><dd>" + esc(s.text) + "</dd></div>" +
+        "<div><dt>Audio</dt><dd>" + esc(s.audio) + "</dd></div></dl></div></li>";
+    }).join("");
+  }
   function render(v, out, sendState) {
     var r = $("#sb-result");
     r.innerHTML =
@@ -377,20 +388,17 @@
         '<div><p class="label">What works in ' + esc(out.industry.toLowerCase()) + " ads</p><ul>" +
         out.patterns.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + "</ul></div></div>" +
       (out.brandNotes ? '<p class="sb-brandnotes"><b>From your website.</b> ' + esc(out.brandNotes) + "</p>" : "") +
-      '<div class="sb-hooks"><p class="label">Hook options</p><ol>' +
-        out.hooks.map(function (h, i) { return '<li' + (i === 0 ? ' class="top"' : "") + "><span>" + (i === 0 ? "Recommended" : "Alt " + i) + "</span>" + esc(h) + "</li>"; }).join("") +
+      '<div class="sb-hooks"><p class="label">Hook options <em>Pick one to use in your storyboard</em></p><ol id="sb-hook-list">' +
+        out.hooks.map(function (h, i) {
+          return '<li><button type="button" class="sb-hook' + (i === (out.chosen || 0) ? " top" : "") + '" aria-pressed="' + (i === (out.chosen || 0)) + '" data-i="' + i + '">' +
+            "<span>" + (i === 0 ? "Recommended" : "Option " + (i + 1)) + '<b class="sb-hook-check" aria-hidden="true">\u2713 Selected</b></span>' + esc(h) + "</button></li>";
+        }).join("") +
       "</ol></div>" +
       '<div class="sb-looks"><p class="sb-look"><b>Visual direction.</b> ' + esc(out.style.look) + "</p>" +
       '<p class="sb-look"><b>Voice and sound: ' + esc(out.audio.label) + ".</b> " + esc(out.audio.direction) + "</p></div>" +
-      '<ol class="sb-scenes' + (out.wide ? " wide" : "") + '">' + out.scenes.map(function (s) {
-        return '<li class="sb-scene">' + frameHTML(s, out) +
-          '<div class="sb-scene-body"><p class="sb-scene-n">Scene ' + s.n + " · " + esc(s.title) + "</p>" +
-          "<dl><div><dt>Visual</dt><dd>" + esc(s.visual) + "</dd></div>" +
-          "<div><dt>On screen</dt><dd>" + esc(s.text) + "</dd></div>" +
-          "<div><dt>Audio</dt><dd>" + esc(s.audio) + "</dd></div></dl></div></li>";
-      }).join("") + "</ol>" +
+      '<ol class="sb-scenes' + (out.wide ? " wide" : "") + '" id="sb-scene-list">' + scenesHTML(out) + "</ol>" +
       '<div class="sb-actions">' +
-        '<button type="button" class="btn btn-ghost" id="sb-copy">Copy storyboard</button>' +
+        '<button type="button" class="btn btn-primary" id="sb-copy">Copy storyboard with option ' + ((out.chosen || 0) + 1) + "</button>" +
         '<button type="button" class="btn btn-ghost" id="sb-again">Try another style</button>' +
         '<p class="sb-copy-status" id="sb-copy-status" role="status" aria-live="polite"></p>' +
       "</div>" +
@@ -399,10 +407,27 @@
     r.focus({ preventScroll: true });
     r.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
 
+    // Choosing a hook rewrites scene 1 and becomes what gets copied.
+    $("#sb-hook-list").onclick = function (e) {
+      var b = e.target.closest(".sb-hook"); if (!b) return;
+      var i = +b.getAttribute("data-i");
+      out.chosen = i;
+      if (out.scenes[0]) {
+        out.scenes[0].text = out.hooks[i];
+        out.scenes[0].audio = audioFor(v, "hook", out.hooks[i]);
+      }
+      Array.prototype.forEach.call(document.querySelectorAll("#sb-hook-list .sb-hook"), function (x) {
+        var on = +x.getAttribute("data-i") === i;
+        x.classList.toggle("top", on); x.setAttribute("aria-pressed", String(on));
+      });
+      $("#sb-scene-list").innerHTML = scenesHTML(out);
+      $("#sb-copy").textContent = "Copy storyboard with option " + (i + 1);
+      var st = $("#sb-copy-status"); if (st) st.textContent = "Option " + (i + 1) + " is now your hook. Scene 1 updated.";
+    };
     $("#sb-copy").onclick = function () {
       var txt = plainText(v, out), st = $("#sb-copy-status");
       try {
-        navigator.clipboard.writeText(txt).then(function () { st.textContent = "Storyboard copied."; },
+        navigator.clipboard.writeText(txt).then(function () { st.textContent = "Storyboard with option " + ((out.chosen || 0) + 1) + " copied."; },
           function () { st.textContent = "Copy isn't available here. Select the text to copy it."; });
       } catch (e) { st.textContent = "Copy isn't available here. Select the text to copy it."; }
     };
