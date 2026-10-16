@@ -767,3 +767,20 @@ section[id] { scroll-margin-top: 72px; }
 .sb-status { border-radius: 12px; align-items: flex-start; line-height: 1.45; }
 .sb-status .ok, .sb-status .warn { flex: none; }
 .sb-status .warn { color: #f5c26b; font-weight: 700; }
+
+/* ---------- Sticky services strip (stays under the menu while scrolling) ---------- */
+.marquee {
+  position: sticky; top: calc(env(safe-area-inset-top, 0px) + 64px); z-index: 40;
+  padding-block: 10px; border-top: 0; border-bottom: 1px solid var(--line);
+  background: rgba(11, 12, 14, .88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.mq-item { font-size: clamp(1.05rem, 1.6vw, 1.45rem); padding: 0 clamp(14px, 1.8vw, 24px); }
+.mq-group .mq-item:nth-of-type(even) { -webkit-text-stroke-width: 1px; }
+.mq-sep { width: 7px; height: 7px; }
+.marquee-track { animation-duration: 60s; }
+section[id] { scroll-margin-top: 118px; }
+@media (max-width: 600px) {
+  .marquee { padding-block: 8px; }
+  .mq-item { font-size: 1rem; padding: 0 14px; }
+  section[id] { scroll-margin-top: 108px; }
+}

@@ -10,7 +10,7 @@
   var links = Array.prototype.slice.call(document.querySelectorAll('#nav-links a[href^="#"]'));
   var targets = links.map(function (l) { return document.getElementById(l.getAttribute("href").slice(1)); });
   function markActive() {
-    var look = window.scrollY + window.innerHeight * 0.35, active = -1;
+    var look = window.scrollY + Math.max(140, window.innerHeight * 0.35), active = -1;
     targets.forEach(function (t, i) { if (t && !t.hidden && t.getBoundingClientRect().top + window.scrollY <= look) active = i; });
     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) active = targets.length - 1;
     links.forEach(function (l, i) {
