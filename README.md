@@ -112,7 +112,7 @@ None of these limits apply once the folder is hosted on Netlify, Vercel or GitHu
 The "Get a Free Storyboard" section shows visitors an instant hook and storyboard draft, and emails their brief to you through FormSubmit (free, no account).
 
 1. After you publish, fill in the form yourself once.
-2. FormSubmit emails serpajuanangelyn@gmail.com a confirmation link. Click **Activate Form**.
+2. FormSubmit emails angelynserpajuan.va@gmail.com a confirmation link. Click **Activate Form**.
 3. From then on, every request arrives in your inbox with the visitor's answers and their generated draft. Hit Reply to answer them directly.
 
 The email address is set in `storyboard.endpoint` in `data.js`.

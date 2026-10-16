@@ -591,7 +591,7 @@ window.PORTFOLIO = {
      The FIRST time someone submits, FormSubmit emails you an activation link.
      Click it once, and every request after that arrives in your inbox. */
   storyboard: {
-    endpoint: "https://formsubmit.co/ajax/serpajuanangelyn@gmail.com"
+    endpoint: "https://formsubmit.co/ajax/angelynserpajuan.va@gmail.com"
   },
 
   workflow: [

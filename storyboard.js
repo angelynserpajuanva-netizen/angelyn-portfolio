@@ -6,7 +6,8 @@
   var CFG = D.storyboard || {};
   // Built-in fallback so the form still emails even if an older data.js is live.
   var OWNER_EMAIL = (D.contact && D.contact.email) || "serpajuanangelyn@gmail.com";
-  var ENDPOINT = CFG.endpoint || ("https://formsubmit.co/ajax/" + OWNER_EMAIL);
+  // Storyboard requests are delivered to this inbox (separate from the public contact email).
+  var ENDPOINT = CFG.endpoint || "https://formsubmit.co/ajax/angelynserpajuan.va@gmail.com";
   var form = document.getElementById("sb-form");
   if (!form) return;
   var $ = function (s, r) { return (r || document).querySelector(s); };
