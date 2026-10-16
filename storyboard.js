@@ -352,10 +352,15 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     try { handleSubmit(); }
-    catch (err) {
-      busy(false); if (progress) progress.hidden = true;
-      toast("warn", "Something went wrong. Please email <b>" + esc(OWNER_EMAIL) + "</b> directly.");
-    }
+    catch (err) { fail(err); }
+  });
+  function fail(err) {
+    busy(false); if (progress) progress.hidden = true;
+    toast("warn", "Something went wrong (" + esc(err && err.message || err) + "). Please email <b>" + esc(OWNER_EMAIL) + "</b> directly.");
+  }
+  // Last-resort report for any other script error while using the form
+  window.addEventListener("error", function (ev) {
+    if (form.contains(document.activeElement) || (btn && btn.disabled)) fail(ev.message);
   });
 
   function handleSubmit() {
@@ -375,7 +380,6 @@
       document.getElementById(bad[0]).focus();
       return;
     }
-    if ($("#sb-honey") && $("#sb-honey").value) return; // spam bot
 
     var val = function (id) { var el = document.getElementById(id); return el ? el.value : ""; };
     var v = {
@@ -391,7 +395,7 @@
     setProgress(15, "Writing your hooks\u2026");
     setTimeout(function () { setProgress(45, "Building your storyboard\u2026"); }, 350);
 
-    setTimeout(function () {
+    setTimeout(function () { try {
       var out = generate(v);
       var alreadySent = key === lastSent;
       render(v, out, alreadySent ? "Brief already sent to Angelyn." : '<span class="dot"></span>Sending your brief to Angelyn\u2026');
@@ -402,7 +406,7 @@
       }
       setProgress(70, "Sending your brief to Angelyn\u2026");
       sendBrief(v, out, key);
-    }, 800);
+    } catch (e2) { fail(e2); } }, 800);
   }
 
   function sendBrief(v, out, key) {
