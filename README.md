@@ -116,3 +116,17 @@ The "Get a Free Storyboard" section shows visitors an instant hook and storyboar
 3. From then on, every request arrives in your inbox with the visitor's answers and their generated draft. Hit Reply to answer them directly.
 
 The email address is set in `storyboard.endpoint` in `data.js`.
+
+
+## AI storyboards (Gemini)
+
+The storyboard form can write a custom storyboard with Google's Gemini API. It reads the client's public website when one is given, and it emails you a ready-to-paste Google Flow image prompt for every scene. If the AI isn't set up, is busy, or is out of free quota, the form automatically uses the built-in industry playbooks instead.
+
+Setup (one time):
+1. Go to https://aistudio.google.com/app/apikey, sign in, and click **Create API key**. Copy it.
+2. In Vercel, open the project, then **Settings > Environment Variables**.
+3. Add a variable named `GEMINI_API_KEY` and paste the key as the value. Tick Production, Preview and Development.
+4. Go to **Deployments**, click the menu on the latest deployment, and choose **Redeploy**.
+
+Keep the key secret. Never paste it into any file in GitHub.
+The code lives in `api/storyboard.js`. To try a different model, add a `GEMINI_MODEL` variable in Vercel.

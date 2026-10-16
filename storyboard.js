@@ -215,6 +215,56 @@
     cinematic: "Lit and graded like a premium commercial.",
     explainer: "Animated with simple diagrams and a friendly mascot."
   };
+  function audioFor(v, k, line) {
+    var A = AUDIO[v.audioKey] || AUDIO.voiceover;
+    if (v.audioKey === "music") return (A.lines[k] || "Music only. On-screen text") + (line ? " Caption: \u201c" + line + "\u201d" : "");
+    if (v.audioKey === "talking") return "AI talking head: \u201c" + line + "\u201d";
+    if (v.audioKey === "mixed") return (k === "hook" || k === "cta" ? "AI talking head: \u201c" : "Voiceover: \u201c") + line + "\u201d (over the music bed)";
+    return "Voiceover: \u201c" + line + "\u201d";
+  }
+  var ICON_BY_BEAT = { hook: "face", problem: "face", turn: "spark", reveal: "product", demo: "hand", benefit: "smile", proof: "people", cta: "cta" };
+
+  // Build the on-page storyboard from the AI's answer (same shape as generate()).
+  function fromAI(v, d) {
+    var S = STYLES[v.styleKey], A = AUDIO[v.audioKey] || AUDIO.voiceover;
+    var keys = beatsFor(v.duration), tcs = timecodes(keys.length, v.duration);
+    var str = function (x, n) { return String(x == null ? "" : x).replace(/\s+/g, " ").trim().slice(0, n || 400); };
+    var hooks = (d.hooks || []).map(function (h) { return str(h, 160); }).filter(Boolean).slice(0, 3);
+    while (hooks.length < 3) hooks.push(hooks[0] || v.brand);
+    var scenes = keys.map(function (k, i) {
+      var sc = (d.scenes || [])[i] || {};
+      return { n: i + 1, tc: tcs[i], title: str(sc.title, 40) || cap(k), shot: str(sc.shot, 40) || "Shot",
+        icon: ICON_BY_BEAT[k], visual: str(sc.visual, 400), text: str(sc.text, 90) || str(sc.line, 90),
+        audio: audioFor(v, k, str(sc.line, 220)), flowPrompt: str(sc.flowPrompt, 900) };
+    }).filter(function (s) { return s.visual; });
+    return {
+      style: S, audio: A, hooks: hooks, scenes: scenes, wide: /landscape/i.test(v.platform),
+      industry: str(d.industry, 40) || "Custom",
+      concept: { title: str(d.concept && d.concept.title, 60) || "Custom concept", logline: str(d.concept && d.concept.logline, 300) },
+      patterns: (d.patterns || []).map(function (p) { return str(p, 200); }).filter(Boolean).slice(0, 3),
+      brandNotes: str(d.brandNotes, 400), ai: true,
+      pain: v.problem || "", offer: v.benefit || ""
+    };
+  }
+
+  // Ask the site's AI function for a custom storyboard. Resolves to null if it isn't available.
+  function askAI(v) {
+    if (/claude|anthropic/i.test(location.hostname) || location.origin === "null" || location.protocol === "file:") return Promise.resolve(null);
+    var PB = detectIndustry(v), S = STYLES[v.styleKey], A = AUDIO[v.audioKey] || AUDIO.voiceover;
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var t = setTimeout(function () { if (ctrl) ctrl.abort(); }, 40000);
+    return fetch("/api/storyboard", {
+      method: "POST", headers: { "Content-Type": "application/json" }, signal: ctrl ? ctrl.signal : undefined,
+      body: JSON.stringify({
+        brand: v.brand, industry: v.industry, industryLabel: PB.id === "general" ? "" : PB.label, website: v.website,
+        problem: v.problem, audience: v.audience, benefit: v.benefit, styleLabel: S.label, audioLabel: A.label,
+        duration: v.duration, platform: v.platform, goal: v.goal, notes: v.notes, beats: beatsFor(v.duration)
+      })
+    }).then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (j) { clearTimeout(t); return j && j.ok && j.data ? fromAI(v, j.data) : null; })
+      .catch(function () { clearTimeout(t); return null; });
+  }
+
   function generate(v) {
     var S = STYLES[v.styleKey];
     var PB = detectIndustry(v);
@@ -245,11 +295,7 @@
       var line = fill(b.vo || "", vars);
       if (k === "hook") line = hooks[0];
       if (k === "cta") line = fill(b.vo || ctaText, vars);
-      var audio;
-      if (v.audioKey === "music") audio = (A.lines[k] || "Music only. The on-screen text carries the message.");
-      else if (v.audioKey === "talking") audio = "AI talking head: \u201c" + line + "\u201d";
-      else if (v.audioKey === "mixed") audio = (k === "hook" || k === "cta" ? "AI talking head: \u201c" : "Voiceover: \u201c") + line + "\u201d (over the music bed)";
-      else audio = "Voiceover: \u201c" + line + "\u201d";
+      var audio = audioFor(v, k, line);
       return { n: i + 1, tc: tcs[i], title: TITLE[k], shot: b.shot, icon: ICON[k], visual: visual.trim(), text: text, audio: audio };
     });
     return {
@@ -286,7 +332,7 @@
       "Industry: " + out.industry + (v.industry === "auto" ? " (auto-detected)" : ""),
       "Style: " + out.style.label + " | Sound: " + out.audio.label + " | " + v.duration + "s | " + v.platform + " | Goal: " + v.goal,
       "Audience: " + v.audience,
-      "Problem: " + (v.problem || "(not given; used: " + out.pain + ")") + " | Benefit/offer: " + (v.benefit || "(not given)"),
+      "Problem: " + (v.problem || (out.pain ? "(not given; used: " + out.pain + ")" : "(not given)")) + " | Benefit/offer: " + (v.benefit || "(not given)"),
       "Website / Facebook: " + (v.website || "(not given)"),
       "",
       "CONCEPT: " + out.concept.title + ". " + out.concept.logline,
@@ -301,6 +347,8 @@
       "VOICE AND SOUND (" + out.audio.label + "): " + out.audio.direction,
       ""
     ];
+    if (out.brandNotes) lines.splice(8, 0, "FROM THE WEBSITE: " + out.brandNotes, "");
+    lines.splice(1, 0, "Written by: " + (out.ai ? "Gemini (custom)" : "built-in playbook"));
     out.scenes.forEach(function (s) {
       lines.push("SCENE " + s.n + " (" + s.tc + ") " + s.title.toUpperCase() + " | " + s.shot);
       lines.push("  Visual: " + s.visual);
@@ -308,6 +356,12 @@
       lines.push("  Audio: " + s.audio);
     });
     return lines.join("\n");
+  }
+  // Google Flow prompts go only to Angelyn's email, as her working notes.
+  function flowPrompts(out) {
+    var withP = out.scenes.filter(function (s) { return s.flowPrompt; });
+    if (!withP.length) return "";
+    return withP.map(function (s) { return "SCENE " + s.n + " (" + s.title + "):\n" + s.flowPrompt; }).join("\n\n");
   }
 
   function render(v, out, sendState) {
@@ -321,6 +375,7 @@
       '<div class="sb-concept"><div><p class="label">Concept</p><h4>' + esc(out.concept.title) + "</h4><p>" + esc(out.concept.logline) + "</p></div>" +
         '<div><p class="label">What works in ' + esc(out.industry.toLowerCase()) + " ads</p><ul>" +
         out.patterns.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + "</ul></div></div>" +
+      (out.brandNotes ? '<p class="sb-brandnotes"><b>From your website.</b> ' + esc(out.brandNotes) + "</p>" : "") +
       '<div class="sb-hooks"><p class="label">Hook options</p><ol>' +
         out.hooks.map(function (h, i) { return '<li' + (i === 0 ? ' class="top"' : "") + "><span>" + (i === 0 ? "Recommended" : "Alt " + i) + "</span>" + esc(h) + "</li>"; }).join("") +
       "</ol></div>" +
@@ -338,7 +393,7 @@
         '<button type="button" class="btn btn-ghost" id="sb-again">Try another style</button>' +
         '<p class="sb-copy-status" id="sb-copy-status" role="status" aria-live="polite"></p>' +
       "</div>" +
-      '<p class="sb-note">This is an instant draft built from your answers and proven ' + esc(out.industry.toLowerCase()) + " ad structures. Angelyn will review your brief" + (v.website ? " and <b>" + esc(v.website) + "</b>" : "") + " and follow up by email with a refined concept, script and AI-generated frames.</p>";
+      '<p class="sb-note">This is an instant draft ' + (out.ai ? "written by AI for your brand" : "built from your answers and proven " + esc(out.industry.toLowerCase()) + " ad structures") + ". Angelyn will review your brief" + (v.website ? " and <b>" + esc(v.website) + "</b>" : "") + " and follow up by email with a refined concept, script and AI-generated frames.</p>";
     r.hidden = false;
     r.focus({ preventScroll: true });
     r.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
@@ -437,21 +492,25 @@
     var key = JSON.stringify(v);
 
     busy(true);
-    setProgress(15, "Writing your hooks\u2026");
-    setTimeout(function () { setProgress(45, "Building your storyboard\u2026"); }, 350);
+    setProgress(12, v.website ? "Reading your website\u2026" : "Studying your industry\u2026");
+    var steps = [[2500, 30, "Researching what works in your industry\u2026"], [6000, 48, "Writing your hooks\u2026"], [11000, 62, "Building your scenes\u2026"], [18000, 70, "Almost there\u2026"]];
+    var stepTimers = steps.map(function (st) { return setTimeout(function () { setProgress(st[1], st[2]); }, st[0]); });
 
-    setTimeout(function () { try {
-      var out = generate(v);
-      var alreadySent = key === lastSent;
-      render(v, out, alreadySent ? "Brief already sent to Angelyn." : '<span class="dot"></span>Sending your brief to Angelyn\u2026');
-      if (alreadySent) {
-        setProgress(100, "Done"); endProgress(); busy(false);
-        both("ok", "Your storyboard is ready. This brief was already sent to Angelyn.");
-        return;
-      }
-      setProgress(70, "Sending your brief to Angelyn\u2026");
-      sendBrief(v, out, key);
-    } catch (e2) { fail(e2); } }, 800);
+    askAI(v).then(function (aiOut) {
+      stepTimers.forEach(clearTimeout);
+      try {
+        var out = aiOut && aiOut.scenes.length >= 3 ? aiOut : generate(v);
+        var alreadySent = key === lastSent;
+        render(v, out, alreadySent ? "Brief already sent to Angelyn." : '<span class="dot"></span>Sending your brief to Angelyn\u2026');
+        if (alreadySent) {
+          setProgress(100, "Done"); endProgress(); busy(false);
+          both("ok", "Your storyboard is ready. This brief was already sent to Angelyn.");
+          return;
+        }
+        setProgress(85, "Sending your brief to Angelyn\u2026");
+        sendBrief(v, out, key);
+      } catch (e2) { fail(e2); }
+    });
   }
 
   function sendBrief(v, out, key) {
@@ -466,6 +525,8 @@
       Platform: v.platform, Goal: v.goal, Notes: v.notes || "-",
       "Generated draft": plainText(v, out)
     };
+    var fp = flowPrompts(out);
+    if (fp) payload["Google Flow image prompts"] = fp;
     var failMsg = "Your storyboard is ready below, but the email didn\u2019t go through. Please email <b>" + esc(OWNER_EMAIL) + "</b> and paste in your storyboard.";
     function finish() { setProgress(100, "Done"); endProgress(); busy(false); }
 
