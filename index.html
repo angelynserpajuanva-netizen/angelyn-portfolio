@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=20261016b">
 </head>
 <body>
 <!--PAGE-START-->
@@ -160,6 +160,11 @@
         </div>
         <p class="sb-error" id="sb-error" role="alert"></p>
         <button class="btn btn-primary sb-submit" type="submit" id="sb-submit">Generate my storyboard</button>
+        <div class="sb-progress" id="sb-progress" hidden>
+          <div class="sb-progress-track"><div class="sb-progress-fill"></div></div>
+          <p class="sb-progress-text" aria-live="polite"></p>
+        </div>
+        <p class="sb-form-status" id="sb-form-status" aria-live="polite"></p>
         <p class="sb-fine">Your brief goes straight to Angelyn by email.</p>
       </form>
     </div>
@@ -262,10 +267,10 @@
   </div>
 </dialog>
 
-<script src="data.js"></script>
-<script src="app.js"></script>
-<script src="storyboard.js"></script>
-<script src="cinema.js"></script>
+<script src="data.js?v=20261016b"></script>
+<script src="app.js?v=20261016b"></script>
+<script src="storyboard.js?v=20261016b"></script>
+<script src="cinema.js?v=20261016b"></script>
 <!--PAGE-END-->
 </body>
 </html>

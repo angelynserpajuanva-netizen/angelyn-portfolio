@@ -91,8 +91,32 @@
     if (P[k] != null) el.textContent = P[k];
   });
   $("#hero-title").innerHTML = P.headline.map(function (l) {
-    return '<span class="line"><span>' + esc(l) + "</span></span>";
+    return '<span class="line"><span><span class="t">' + esc(l) + "</span></span></span>";
   }).join("");
+
+  // On laptops and desktops, size the headline so its widest line reaches the
+  // showreel. This keeps the gap between them small whichever font loads.
+  var heroTitle = $("#hero-title");
+  function fitHero() {
+    heroTitle.style.fontSize = "";
+    if (window.innerWidth < 901) return;
+    var size = parseFloat(getComputedStyle(heroTitle).fontSize);
+    for (var k = 0; k < 5; k++) {
+      var widest = 0;
+      heroTitle.querySelectorAll(".t").forEach(function (t) {
+        Array.prototype.forEach.call(t.getClientRects(), function (r) { widest = Math.max(widest, r.width); });
+      });
+      var col = heroTitle.clientWidth;
+      if (!widest || !col) return;
+      var next = Math.max(48, Math.min(124, size * (col / widest) * 0.985));
+      if (Math.abs(next - size) < 1) break;
+      size = next; heroTitle.style.fontSize = size + "px";
+    }
+  }
+  fitHero();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHero);
+  window.addEventListener("load", fitHero);
+  var fitT; window.addEventListener("resize", function () { clearTimeout(fitT); fitT = setTimeout(fitHero, 120); });
 
   /* ---------- Hero reel ---------- */
   var projects = D.projects;

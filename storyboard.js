@@ -4,6 +4,9 @@
   "use strict";
   var D = window.PORTFOLIO || {};
   var CFG = D.storyboard || {};
+  // Built-in fallback so the form still emails even if an older data.js is live.
+  var OWNER_EMAIL = (D.contact && D.contact.email) || "serpajuanangelyn@gmail.com";
+  var ENDPOINT = CFG.endpoint || ("https://formsubmit.co/ajax/" + OWNER_EMAIL);
   var form = document.getElementById("sb-form");
   if (!form) return;
   var $ = function (s, r) { return (r || document).querySelector(s); };
@@ -309,38 +312,100 @@
     };
   }
 
+  /* ---------- Loading bar + confirmation toast ---------- */
+  var btn = $("#sb-submit"), btnLabel = btn ? btn.textContent : "";
+  var progress = document.getElementById("sb-progress");
+  var formStatus = document.getElementById("sb-form-status");
+  function setProgress(pct, text) {
+    if (!progress) return;
+    progress.hidden = false;
+    progress.querySelector(".sb-progress-fill").style.width = pct + "%";
+    progress.querySelector(".sb-progress-text").textContent = text;
+  }
+  function endProgress() { if (progress) setTimeout(function () { progress.hidden = true; }, 900); }
+  function busy(on) {
+    if (!btn) return;
+    btn.disabled = on; btn.classList.toggle("is-busy", on);
+    btn.innerHTML = on ? '<span class="sb-spin" aria-hidden="true"></span>Generating\u2026' : esc(btnLabel);
+  }
+  var toastEl = null, toastT = null;
+  function toast(kind, html) {
+    if (!toastEl) {
+      toastEl = document.createElement("div");
+      toastEl.className = "sb-toast"; toastEl.setAttribute("role", "status"); toastEl.setAttribute("aria-live", "polite");
+      document.body.appendChild(toastEl);
+    }
+    toastEl.className = "sb-toast show " + kind;
+    toastEl.innerHTML = '<span class="sb-toast-icon" aria-hidden="true">' + (kind === "ok" ? "\u2713" : "!") + "</span><p>" + html + '</p><button type="button" class="sb-toast-x" aria-label="Close">\u00d7</button>';
+    toastEl.querySelector(".sb-toast-x").onclick = function () { toastEl.classList.remove("show"); };
+    clearTimeout(toastT);
+    toastT = setTimeout(function () { toastEl.classList.remove("show"); }, kind === "ok" ? 7000 : 12000);
+  }
+  function both(kind, html) {
+    var s = $("#sb-status"); if (s) s.innerHTML = (kind === "ok" ? '<span class="ok">\u2713</span>' : '<span class="warn">!</span>') + "<span>" + html + "</span>";
+    if (formStatus) { formStatus.className = "sb-form-status " + kind; formStatus.innerHTML = html; }
+    toast(kind, html);
+  }
+
   /* ---------- Submit ---------- */
   var lastSent = "";
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var err = $("#sb-error"); err.textContent = "";
+    try { handleSubmit(); }
+    catch (err) {
+      busy(false); if (progress) progress.hidden = true;
+      toast("warn", "Something went wrong. Please email <b>" + esc(OWNER_EMAIL) + "</b> directly.");
+    }
+  });
+
+  function handleSubmit() {
+    var err = $("#sb-error"); if (err) err.textContent = "";
+    if (formStatus) { formStatus.className = "sb-form-status"; formStatus.textContent = ""; }
     var fields = ["sb-name", "sb-email", "sb-brand", "sb-problem", "sb-audience"];
     var bad = fields.filter(function (id) {
-      var el = document.getElementById(id), ok = el.value.trim() && (el.type !== "email" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()));
+      var el = document.getElementById(id); if (!el) return false;
+      var ok = el.value.trim() && (el.type !== "email" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()));
       el.setAttribute("aria-invalid", ok ? "false" : "true");
       return !ok;
     });
     if (bad.length) {
-      err.textContent = bad.indexOf("sb-email") > -1 && bad.length === 1 ? "Please enter a valid email address." : "Please fill in the highlighted fields.";
+      var msg = bad.indexOf("sb-email") > -1 && bad.length === 1 ? "Please enter a valid email address." : "Please fill in the highlighted fields.";
+      if (err) err.textContent = msg;
+      toast("warn", msg);
       document.getElementById(bad[0]).focus();
       return;
     }
-    if ($("#sb-honey").value) return; // spam bot
+    if ($("#sb-honey") && $("#sb-honey").value) return; // spam bot
 
+    var val = function (id) { var el = document.getElementById(id); return el ? el.value : ""; };
     var v = {
-      name: clean($("#sb-name").value), email: $("#sb-email").value.trim(),
-      brand: clean($("#sb-brand").value), problem: clean($("#sb-problem").value),
-      audience: clean($("#sb-audience").value), benefit: clean($("#sb-benefit").value),
+      name: clean(val("sb-name")), email: val("sb-email").trim(),
+      brand: clean(val("sb-brand")), problem: clean(val("sb-problem")),
+      audience: clean(val("sb-audience")), benefit: clean(val("sb-benefit")),
       styleKey: state.style, duration: state.duration, audioKey: state.audio,
-      platform: $("#sb-platform").value, goal: $("#sb-goal").value, notes: $("#sb-notes").value.trim()
+      platform: val("sb-platform") || "TikTok / Instagram Reels", goal: val("sb-goal") || "Drive sales", notes: val("sb-notes").trim()
     };
-    var out = generate(v);
     var key = JSON.stringify(v);
-    var alreadySent = key === lastSent;
-    render(v, out, alreadySent ? "Brief already sent to Angelyn." : '<span class="dot"></span>Sending your brief to Angelyn…');
-    if (alreadySent) return;
 
-    var btn = $("#sb-submit"); btn.disabled = true;
+    busy(true);
+    setProgress(15, "Writing your hooks\u2026");
+    setTimeout(function () { setProgress(45, "Building your storyboard\u2026"); }, 350);
+
+    setTimeout(function () {
+      var out = generate(v);
+      var alreadySent = key === lastSent;
+      render(v, out, alreadySent ? "Brief already sent to Angelyn." : '<span class="dot"></span>Sending your brief to Angelyn\u2026');
+      if (alreadySent) {
+        setProgress(100, "Done"); endProgress(); busy(false);
+        both("ok", "Your storyboard is ready. This brief was already sent to Angelyn.");
+        return;
+      }
+      setProgress(70, "Sending your brief to Angelyn\u2026");
+      sendBrief(v, out, key);
+    }, 800);
+  }
+
+  function sendBrief(v, out, key) {
     var payload = {
       _subject: "Storyboard request: " + v.brand + " (" + STYLES[v.styleKey].label + ", " + v.duration + "s)",
       _template: "box",
@@ -351,28 +416,36 @@
       Platform: v.platform, Goal: v.goal, Notes: v.notes || "-",
       "Generated draft": plainText(v, out)
     };
-    var status = function (html) { var s = $("#sb-status"); if (s) s.innerHTML = html; };
-    var failMsg = 'Your draft is ready, but the email didn’t go through. Please email <b>' + esc((D.contact || {}).email || "") + "</b> and paste in your storyboard.";
-    if (!CFG.endpoint) { status(failMsg); btn.disabled = false; return; }
+    var failMsg = "Your storyboard is ready below, but the email didn\u2019t go through. Please email <b>" + esc(OWNER_EMAIL) + "</b> and paste in your storyboard.";
+    function finish() { setProgress(100, "Done"); endProgress(); busy(false); }
+
     // Inside the Claude preview, outside requests are blocked. The live site sends normally.
     if (/claude|anthropic/i.test(location.hostname) || location.origin === "null") {
-      status("Preview only: on your live site this brief is emailed to Angelyn.");
-      btn.disabled = false; return;
+      finish(); both("ok", "Your storyboard is ready below. (Preview only: on the live site this brief is emailed to Angelyn.)");
+      return;
     }
-    fetch(CFG.endpoint, {
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 20000);
+    fetch(ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(payload)
-    }).then(function (res) { return res.json().then(function (j) { return { ok: res.ok, j: j }; }); })
-      .then(function (r) {
-        if (r.ok && (r.j.success === true || r.j.success === "true")) {
-          lastSent = key;
-          status('<span class="ok">✓</span> Sent. Angelyn will reply to ' + esc(v.email) + ".");
-        } else { status(failMsg); }
-      })
-      .catch(function () { status(failMsg); })
-      .then(function () { btn.disabled = false; });
-  });
+      body: JSON.stringify(payload),
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, j: j || {} }; });
+    }).then(function (r) {
+      clearTimeout(timer); finish();
+      var ok = r.ok && (r.j.success === true || r.j.success === "true");
+      var m = String(r.j.message || "");
+      if (ok) {
+        lastSent = key;
+        both("ok", "Submitted! Your storyboard is ready below, and Angelyn will reply to <b>" + esc(v.email) + "</b>.");
+      } else if (/activat/i.test(m)) {
+        // FormSubmit sends the site owner a one-time activation email first.
+        both("warn", "Your storyboard is ready below. The email form is waiting for one-time activation by the site owner, so please also email <b>" + esc(OWNER_EMAIL) + "</b>.");
+      } else { both("warn", failMsg); }
+    }).catch(function () { clearTimeout(timer); finish(); both("warn", failMsg); });
+  }
 
   // Clear the invalid state as people type
   form.addEventListener("input", function (e) {
