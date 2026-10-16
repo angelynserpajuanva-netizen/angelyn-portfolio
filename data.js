@@ -447,28 +447,6 @@ window.PORTFOLIO = {
       "marquee": "Come inside"
     },
     {
-      "id": "oopsie-ep2",
-      "shortTitle": "Oopsie Ep. 2",
-      "title": "Oopsie, Episode 2: Nursery Rhymes",
-      "category": "AI Animation & Characters",
-      "aspect": "16:9",
-      "featured": false,
-      "video": {
-        "type": "file",
-        "src": "oopsie-ep2.mp4"
-      },
-      "thumbnail": "oopsie-ep2.jpg",
-      "summary": "Episode two of an AI-animated nursery rhyme series.",
-      "audience": "Young children and their parents",
-      "objective": "",
-      "concept": "",
-      "hook": "Oh no! Catch that bubble!",
-      "production": "",
-      "tools": [],
-      "editing": "",
-      "deliverables": ""
-    },
-    {
       "id": "talking-babies",
       "title": "Talking Babies",
       "category": "AI Animation & Characters",
@@ -511,6 +489,28 @@ window.PORTFOLIO = {
       "editing": "",
       "deliverables": "",
       "shortTitle": "The Light You Left On"
+    },
+    {
+      "id": "oopsie-ep2",
+      "shortTitle": "Oopsie Ep. 2",
+      "title": "Oopsie, Episode 2: Nursery Rhymes",
+      "category": "AI Animation & Characters",
+      "aspect": "16:9",
+      "featured": false,
+      "video": {
+        "type": "file",
+        "src": "oopsie-ep2.mp4"
+      },
+      "thumbnail": "oopsie-ep2.jpg",
+      "summary": "Episode two of an AI-animated nursery rhyme series.",
+      "audience": "Young children and their parents",
+      "objective": "",
+      "concept": "",
+      "hook": "Oh no! Catch that bubble!",
+      "production": "",
+      "tools": [],
+      "editing": "",
+      "deliverables": ""
     }
   ],
 
