@@ -64,7 +64,7 @@
     if (isFile && !thumb) {
       media = '<video muted playsinline preload="metadata" src="' + esc(p.video.src) + '#t=0.5"></video>';
     } else if (thumb) {
-      media = '<img loading="lazy" alt="" src="' + esc(thumb) + '" onerror="var f=this.closest(\'.frame\');if(f)f.classList.remove(\'has-img\');this.remove()">';
+      media = '<img ' + (opts.eager ? 'fetchpriority="high" ' : 'loading="lazy" ') + 'decoding="async" alt="" src="' + esc(thumb) + '" onerror="var f=this.closest(\'.frame\');if(f)f.classList.remove(\'has-img\');this.remove()">';
     }
     var cover = hasVideo(p) ?
       '<div class="cover" aria-hidden="true"><span class="cover-cat">' + esc(p.category) + '</span><strong class="cover-title">' + esc(p.shortTitle || slotLabel(p, i)) + "</strong></div>" : "";
@@ -123,7 +123,7 @@
   var featured = projects.filter(function (p) { return p.featured; }).slice(0, 3);
   if (featured.length < 3) featured = featured.concat(projects.filter(function (p) { return !p.featured; })).slice(0, 3);
   $("#hero-reel").innerHTML = featured.map(function (p) {
-    return '<div class="reel-item">' + frameHTML(p, projects.indexOf(p), { caption: false }) + "</div>";
+    return '<div class="reel-item">' + frameHTML(p, projects.indexOf(p), { caption: false, eager: true }) + "</div>";
   }).join("");
 
   /* ---------- Showreel ---------- */
@@ -131,7 +131,7 @@
   var srBox = $("#showreel");
   if (srBox && SR.src) {
     srBox.innerHTML =
-      '<video muted loop playsinline preload="auto"' + (SR.poster ? ' poster="' + esc(SR.poster) + '"' : "") + ' src="' + esc(SR.src) + '" aria-hidden="true"></video>' +
+      '<video muted loop playsinline preload="none"' + (SR.poster ? ' poster="' + esc(SR.poster) + '"' : "") + ' src="' + esc(SR.src) + '" aria-hidden="true"></video>' +
       '<div class="marks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>' +
       '<p class="sr-top"><span class="rec" aria-hidden="true"></span>' + esc(SR.label || "Showreel") + "</p>" +
       '<div class="sr-bottom"><button type="button" class="sr-sound" id="sr-sound" aria-pressed="false">' +
@@ -159,11 +159,15 @@
     srBtn.addEventListener("click", function () {
       if (srv.paused) { userPaused = false; srPlay(); } else { userPaused = true; srv.pause(); }
     });
+    var pageReady = document.readyState === "complete", srVisible = false;
+    function srMaybePlay() { if (pageReady && srVisible && !userPaused) srPlay(); }
+    if (!pageReady) window.addEventListener("load", function () { pageReady = true; srMaybePlay(); });
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (en) {
-        if (en[0].isIntersecting) { if (!userPaused) srPlay(); } else srv.pause();
+        srVisible = en[0].isIntersecting;
+        if (srVisible) srMaybePlay(); else srv.pause();
       }, { threshold: 0.25 }).observe(srBox);
-    } else if (!userPaused) srPlay();
+    } else { srVisible = true; srMaybePlay(); }
     srState();
   } else if (srBox) { srBox.hidden = true; }
 
@@ -200,7 +204,7 @@
     var i = projects.indexOf(p);
     var hook = p.cardHook || "";
     var wide = isWide(p);
-    return '<article class="card' + (wide ? " card-wide" : "") + '" style="--d:' + Math.min(n % 8, 7) * 60 + 'ms">' + frameHTML(p, i) +
+    return '<article class="card' + (wide ? " card-wide" : "") + '">' + frameHTML(p, i, { eager: n < 4 }) +
       '<div class="card-body">' +
         '<div class="card-meta"><span class="card-no">' + pad2(n + 1) + '<i>/' + pad2(total) + "</i></span>" +
           '<span class="card-cat">' + esc(p.category) + "</span>" +
@@ -215,7 +219,7 @@
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); revealIO.unobserve(e.target); } });
   }, { rootMargin: "0px 0px -8% 0px" }) : null;
   function revealCards(root) {
-    if (!revealIO) return;
+    return; // cards show immediately (no fade-in delay)
     root.classList.add("reveal-ready");
     root.querySelectorAll(".card").forEach(function (c) { revealIO.observe(c); });
   }
@@ -463,12 +467,12 @@
 
   /* ---------- About, tools, workflow ---------- */
   if (D.photo && has(D.photo.src)) {
-    $("#about-photo").innerHTML = '<img src="' + esc(D.photo.src) + '" alt="' + esc(D.photo.alt || "") + '" width="760" height="927" loading="lazy">';
+    $("#about-photo").innerHTML = '<img src="' + esc(D.photo.src) + '" alt="' + esc(D.photo.alt || "") + '" width="760" height="927" decoding="async">';
     // Reveal the photo when it scrolls into view
     var ap = $("#about-photo");
     if (!reduceMotion && "IntersectionObserver" in window) {
       ap.insertAdjacentHTML("beforeend", '<span class="scan" aria-hidden="true"></span>');
-      ap.classList.add("will-reveal");
+
       var io = new IntersectionObserver(function (en) {
         if (!en[0].isIntersecting) return;
         ap.classList.add("in-view"); io.disconnect();
