@@ -90,6 +90,50 @@ window.PORTFOLIO = {
   ------------------------------------------------------------------- */
   projects: [
     {
+      "id": "sunster-grey-to-golden",
+      "title": "Sunster Self-Tanner: Grey to Golden (Danish)",
+      "shortTitle": "Sunster: Grey to Golden",
+      "category": "Product & DTC Ads",
+      "aspect": "9:16",
+      "featured": true,
+      "video": {
+        "type": "file",
+        "src": "sunster-grey-to-golden.mp4"
+      },
+      "thumbnail": "sunster-grey-to-golden.jpg",
+      "summary": "A Danish-language DTC ad for Sunster self-tanner that follows one night from winter-pale to golden: the 22:00 routine, the glow developing overnight, the 07:00 reveal, and a friend asking if she's been on vacation.",
+      "audience": "Danish women who feel pale during the long, sunless winter",
+      "objective": "Show the full routine and believable results, then drive purchases of the self-tanning set.",
+      "concept": "A time-stamped night-to-morning story (22:00 to 07:00 to Day 5) that makes the result feel real and the routine feel easy.",
+      "hook": "“Vinterbleg?” (Winter pale?) “Ingen sol før april… og jeg ligner et spøgelse.” (No sun until April… and I look like a ghost.)",
+      "production": "Live-action AI scenes with on-screen clock timestamps, a step-by-step routine (drops in day cream for the face, mousse and mitt for the body, 10 minutes), a skin close-up showing the glow developing over 6–8 hours, and a before-and-after mirror shot.",
+      "tools": [],
+      "editing": "Danish captions with highlighted keywords, step cards and a progress bar, a before/after split, and social proof on Day 5 (“Har du været på ferie?” – Have you been on vacation?). End card: “Danmarks bedste selvbruner”, Danish Beauty Award 2025 nominee, “Køb sættet nu” (Buy the set now), 45-day risk-free trial.",
+      "deliverables": "30-second vertical (9:16) ad in Danish for TikTok, Reels and Shorts."
+    },
+    {
+      "id": "sunster-mascot",
+      "title": "Sunster Self-Tanner: Mousse Mascot (Danish)",
+      "shortTitle": "Sunster: Mousse Mascot",
+      "category": "Product & DTC Ads",
+      "aspect": "9:16",
+      "featured": false,
+      "video": {
+        "type": "file",
+        "src": "sunster-mascot.mp4"
+      },
+      "thumbnail": "sunster-mascot.jpg",
+      "summary": "A Danish-language DTC ad starring an animated mousse mascot who calls out common self-tanner problems, then introduces Sunster Mousse as the fix, backed by ratings and a risk-free trial.",
+      "audience": "Danish women frustrated by streaky, orange self-tan results",
+      "objective": "Turn common self-tanner frustrations into a reason to try Sunster, and drive trial sign-ups.",
+      "concept": "Problem-solution DTC ad with a lovable product mascot as the narrator, so the pain points feel playful instead of preachy.",
+      "hook": "“Når selvbruneren gør dig orange” (When the self-tanner turns you orange). The mascot gasps: “Åh nej… ikke igen.” (Oh no… not again.)",
+      "production": "A 3D animated foam mascot combined with realistic product and skin shots: pain points (streaks, orange hands, the smell), the product reveal, application with a tanning mitt, and a before-and-after leg comparison.",
+      "tools": [],
+      "editing": "Danish captions and animated checklist cards (✗ streaks, ✗ orange hands, ✗ the smell, then ✓ natural glow, ✓ no streaks, ✓ no orange), sparkle effects, and a star-rating social proof scene (4.6 stars, 1,100+ reviews, loved by 50,000+ Danish women). CTA: “Prøv risikofrit i 45 dage” (Try it risk-free for 45 days), sunster.dk.",
+      "deliverables": "32-second vertical (9:16) ad in Danish for TikTok, Reels and Shorts."
+    },
+    {
       "id": "bag-ugc",
       "title": "CARRIE Handbag Commercial",
       "category": "Product & DTC Ads",
@@ -160,7 +204,7 @@ window.PORTFOLIO = {
       "title": "Cozy Cloud: A Little Cup of Comfort",
       "category": "AI Animation & Characters",
       "aspect": "9:16",
-      "featured": true,
+      "featured": false,
       "video": {
         "type": "file",
         "src": "cozy-clouds.mp4"
