@@ -72,7 +72,7 @@
       '<div class="slot-note"><b>' + (draft ? "Video slot" : "Coming soon") + "</b>" +
       (draft ? "<span>Add link in data.js</span>" : "") + "</div>";
     return (
-      '<button type="button" class="frame' + (ready ? "" : " slot") + (hasImg ? " has-img" : "") + '"' + (isFile ? ' data-preview="' + esc(p.video.src) + '"' : "") + ' data-id="' + esc(p.id) + '" style="--ar:' + ratio(p) + '" ' +
+      '<button type="button" class="frame' + (ready ? "" : " slot") + (hasImg ? " has-img" : "") + '"' + (isFile ? ' data-preview="' + esc(p.preview || p.video.src) + '"' : "") + ' data-id="' + esc(p.id) + '" style="--ar:' + ratio(p) + '" ' +
       'aria-label="Open ' + esc(slotLabel(p, i)) + '">' +
         '<div class="frame-media">' + cover + media + note +
           '<div class="marks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>' +
@@ -253,7 +253,7 @@
     var v = f._pv;
     if (!v) {
       v = document.createElement("video");
-      v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto";
+      v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto"; v.disablePictureInPicture = true;
       v.setAttribute("muted", ""); v.setAttribute("playsinline", "");
       v.src = f.getAttribute("data-preview");
       v.className = "hover-vid";

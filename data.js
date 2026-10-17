@@ -52,7 +52,7 @@ window.PORTFOLIO = {
      A short muted montage that loops in the hero. */
   showreel: {
     src: "showreel.mp4",
-    poster: "showreel.jpg",
+    poster: "showreel.webp",
     label: "Showreel 2026"
   },
 
@@ -102,7 +102,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "sunster-grey-to-golden.mp4"
       },
-      "thumbnail": "sunster-grey-to-golden.jpg",
+      "thumbnail": "sunster-grey-to-golden.webp",
       "summary": "A Danish-language DTC ad for Sunster self-tanner that follows one night from winter-pale to golden: the 22:00 routine, the glow developing overnight, the 07:00 reveal, and a friend asking if she's been on vacation.",
       "audience": "Danish women who feel pale during the long, sunless winter",
       "objective": "Show the full routine and believable results, then drive purchases of the self-tanning set.",
@@ -113,7 +113,8 @@ window.PORTFOLIO = {
       "editing": "Danish captions with highlighted keywords, step cards and a progress bar, a before/after split, and social proof on Day 5 (“Har du været på ferie?” – Have you been on vacation?). End card: “Danmarks bedste selvbruner”, Danish Beauty Award 2025 nominee, “Køb sættet nu” (Buy the set now), 45-day risk-free trial.",
       "deliverables": "30-second vertical (9:16) ad in Danish for TikTok, Reels and Shorts.",
       "cardHook": "Vinterbleg? (Winter pale?)",
-      "duration": "0:30"
+      "duration": "0:30",
+      "preview": "sunster-grey-to-golden-p.mp4"
     },
     {
       "id": "sunster-mascot",
@@ -126,7 +127,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "sunster-mascot.mp4"
       },
-      "thumbnail": "sunster-mascot.jpg",
+      "thumbnail": "sunster-mascot.webp",
       "summary": "A Danish-language DTC ad starring an animated mousse mascot who calls out common self-tanner problems, then introduces Sunster Mousse as the fix, backed by ratings and a risk-free trial.",
       "audience": "Danish women frustrated by streaky, orange self-tan results",
       "objective": "Turn common self-tanner frustrations into a reason to try Sunster, and drive trial sign-ups.",
@@ -137,7 +138,8 @@ window.PORTFOLIO = {
       "editing": "Danish captions and animated checklist cards (✗ streaks, ✗ orange hands, ✗ the smell, then ✓ natural glow, ✓ no streaks, ✓ no orange), sparkle effects, and a star-rating social proof scene (4.6 stars, 1,100+ reviews, loved by 50,000+ Danish women). CTA: “Prøv risikofrit i 45 dage” (Try it risk-free for 45 days), sunster.dk.",
       "deliverables": "32-second vertical (9:16) ad in Danish for TikTok, Reels and Shorts.",
       "cardHook": "Når selvbruneren gør dig orange (When the self-tanner turns you orange)",
-      "duration": "0:32"
+      "duration": "0:32",
+      "preview": "sunster-mascot-p.mp4"
     },
     {
       "id": "bag-ugc",
@@ -149,7 +151,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "bag-ugc.mp4"
       },
-      "thumbnail": "bag-ugc.jpg",
+      "thumbnail": "bag-ugc.webp",
       "summary": "A premium-looking AI commercial for a real fashion handbag, with consistent product appearance, deliberate pacing, captions and sound design.",
       "audience": "Fashion and e-commerce shoppers",
       "objective": "Turn a real fashion product into a premium commercial an e-commerce brand could run.",
@@ -167,7 +169,8 @@ window.PORTFOLIO = {
       "shortTitle": "CARRIE Handbag",
       "marquee": "Your outfit isn’t the problem",
       "cardHook": "Your outfit isn’t the problem… but something’s missing.",
-      "duration": "0:26"
+      "duration": "0:26",
+      "preview": "bag-ugc-p.mp4"
     },
     {
       "id": "clay-cartoon",
@@ -179,7 +182,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "clay-cartoon.mp4"
       },
-      "thumbnail": "clay-cartoon.jpg",
+      "thumbnail": "clay-cartoon.webp",
       "summary": "A clay-style, story-driven ad for a pet supplement, built on a full direct-response structure.",
       "audience": "Dog owners who care about their pet's well-being",
       "objective": "Show an end-to-end video ad workflow, from hook to CTA.",
@@ -207,7 +210,8 @@ window.PORTFOLIO = {
       },
       "marquee": "I thought he was just getting old",
       "cardHook": "I thought he was just getting old.",
-      "duration": "0:59"
+      "duration": "0:59",
+      "preview": "clay-cartoon-p.mp4"
     },
     {
       "id": "cozy-clouds",
@@ -219,7 +223,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "cozy-clouds.mp4"
       },
-      "thumbnail": "cozy-clouds.jpg",
+      "thumbnail": "cozy-clouds.webp",
       "summary": "Pip, a grumpy little cloud, makes storms over everyday annoyances until a cup of hot chocolate calms him down.",
       "audience": "",
       "objective": "Show original concept development, character-led storytelling, scene continuity and emotional pacing.",
@@ -236,7 +240,8 @@ window.PORTFOLIO = {
       "shortTitle": "Cozy Cloud",
       "marquee": "Bad mood. Bad weather.",
       "cardHook": "Bad mood. Bad weather.",
-      "duration": "1:00"
+      "duration": "1:00",
+      "preview": "cozy-clouds-p.mp4"
     },
     {
       "id": "uhp-sample",
@@ -248,7 +253,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "uhp-sample.mp4"
       },
-      "thumbnail": "uhp-sample.jpg",
+      "thumbnail": "uhp-sample.webp",
       "summary": "A wellness commercial sample produced against a potential client's brief and submitted.",
       "audience": "Busy professionals and business owners",
       "objective": "Follow a client brief, develop a commercial visual direction, and deliver a sample.",
@@ -260,7 +265,8 @@ window.PORTFOLIO = {
       "deliverables": "Submitted video sample for a potential client.",
       "shortTitle": "UHP Wellness",
       "cardHook": "Your business has a system. What about your health?",
-      "duration": "0:32"
+      "duration": "0:32",
+      "preview": "uhp-sample-p.mp4"
     },
     {
       "id": "creatine-explainer",
@@ -272,7 +278,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "creatine-explainer.mp4"
       },
-      "thumbnail": "creatine-explainer.jpg",
+      "thumbnail": "creatine-explainer.webp",
       "summary": "An educational animation where expressive muscle characters, an exhausted ATP worker and creatine as the backup energy helper explain how creatine works.",
       "audience": "Fitness and supplement buyers",
       "objective": "Make a supplement topic entertaining and easy to follow with memorable characters.",
@@ -289,7 +295,8 @@ window.PORTFOLIO = {
       "shortTitle": "Creatine Animation",
       "marquee": "Your muscles have a secret battery",
       "cardHook": "Your muscles have a secret battery.",
-      "duration": "0:42"
+      "duration": "0:42",
+      "preview": "creatine-explainer-p.mp4"
     },
     {
       "id": "nineone-snow-winter",
@@ -302,18 +309,21 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "nineone-snow-winter.mp4"
       },
-      "thumbnail": "nineone-snow-winter.jpg",
+      "thumbnail": "nineone-snow-winter.webp",
       "summary": "An AI video with full motion graphics for NineOne Car Rental Services, styled as a Taglish breaking-news report: snow falls in Biñan, Laguna, and the “Snow” and “Winter” turn out to be the two rental cars. It launches the new units and their Christmas rates.",
       "audience": "Families and travelers in Laguna and Luzon planning holiday road trips",
       "objective": "Introduce two rental units, the Xpander GLS 2026 (plate “SNOW”, 7–8 seats) and the Kia Sonet LX AT (plate “WINTER”, 5–6 seats), show rates by destination, and drive bookings before Christmas.",
       "concept": "A fake live news broadcast. A tita and a kid react to snow on a hot Laguna street, a field reporter goes live, and the reveal lands: “Snow at Winter, nasa Biñan na!” (Snow and Winter are now in Biñan!). The pun is on the cars’ plate names.",
       "hook": "BREAKING: “Nag-snow sa Laguna?!” (It snowed in Laguna?!), followed by the sticker “Teka… snow?!” (Wait… snow?!)",
       "production": "AI-generated scenes: a sunny Filipino street turning snowy, a field reporter in a red jacket, a lolo interview (“Aabot ba ’yan hanggang Baguio?”, Can that make it to Baguio?), and both cars driving through Laguna, beach, rice-field, mountain and pine-road locations.",
-      "tools": [],
+      "tools": [
+        "Claude (motion graphics)"
+      ],
       "editing": "Motion graphics carry the whole ad: a news-broadcast package (BREAKING and LIVE lower thirds, a scrolling ticker, a REC timecode), pop-in stickers, car callout labels, an animated Luzon route map with a kilometer counter and an “Unlimited Mileage” stamp, a destination progress bar (Laguna → Nearby → North → Tarlac+ → Baguio+), animated rate cards for each region, a “25 days or more” best-deal burst (₱1,950/day Xpander, ₱1,650/day Kia Sonet), falling snow particles, glitch transitions, and a branded end card with the booking number and mascot.",
       "deliverables": "60-second vertical (9:16) Taglish ad for Facebook, TikTok and Reels. CTA: “Limited units ngayong Pasko! Book na!” (Limited units this Christmas, book now!)",
       "cardHook": "Nag-snow sa Laguna?! (It snowed in Laguna?!)",
-      "duration": "1:00"
+      "duration": "1:00",
+      "preview": "nineone-snow-winter-p.mp4"
     },
     {
       "id": "nineone",
@@ -325,7 +335,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "nineone.mp4"
       },
-      "thumbnail": "nineone.jpg",
+      "thumbnail": "nineone.webp",
       "summary": "A Christmas campaign for NineOne Car Rental Services about making the trip home for the holidays.",
       "audience": "Families traveling home for the holidays",
       "objective": "Promote the fleet and rental availability.",
@@ -351,7 +361,8 @@ window.PORTFOLIO = {
       "shortTitle": "NineOne Christmas",
       "marquee": "This Christmas, make your way home",
       "cardHook": "This Christmas, make your way home.",
-      "duration": "0:53"
+      "duration": "0:53",
+      "preview": "nineone-p.mp4"
     },
     {
       "id": "nineone-ofw",
@@ -364,7 +375,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "nineone-ofw.mp4"
       },
-      "thumbnail": "nineone-ofw.jpg",
+      "thumbnail": "nineone-ofw.webp",
       "summary": "A Taglish airport-homecoming ad for OFWs arriving in the Philippines who need a ride home.",
       "audience": "Overseas Filipino Workers (OFWs) and their families",
       "objective": "",
@@ -376,7 +387,8 @@ window.PORTFOLIO = {
       "deliverables": "",
       "marquee": "Ready na umuwi sa Pinas?",
       "cardHook": "Ready na umuwi sa Pinas? May ride ka na ba?",
-      "duration": "0:28"
+      "duration": "0:28",
+      "preview": "nineone-ofw-p.mp4"
     },
     {
       "id": "dtc-supplement-vsl",
@@ -389,7 +401,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "dtc-supplement-vsl.mp4"
       },
-      "thumbnail": "dtc-supplement-vsl.jpg",
+      "thumbnail": "dtc-supplement-vsl.webp",
       "summary": "A VSL-inspired direct-to-consumer supplement ad that opens on a relatable late-night overthinking moment, told through a cartoon brain character.",
       "audience": "People who struggle to switch off at night",
       "objective": "Walk viewers from problem to product to purchase with a story-driven pitch.",
@@ -401,7 +413,8 @@ window.PORTFOLIO = {
       "deliverables": "",
       "marquee": "Your brain at 11:47 PM",
       "cardHook": "Your brain at 11:47 PM. Remember that embarrassing thing?",
-      "duration": "0:36"
+      "duration": "0:36",
+      "preview": "dtc-supplement-vsl-p.mp4"
     },
     {
       "id": "dtc-ad",
@@ -413,7 +426,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "dtc-ad.mp4"
       },
-      "thumbnail": "dtc-ad.jpg",
+      "thumbnail": "dtc-ad.webp",
       "summary": "A holiday apparel ad for a “Merry & Bright” Christmas T-shirt, set in a cozy tree-decorating scene.",
       "audience": "Holiday shoppers looking for festive apparel",
       "objective": "Drive seasonal T-shirt sales.",
@@ -425,7 +438,8 @@ window.PORTFOLIO = {
       "deliverables": "",
       "shortTitle": "Christmas Tee Ad",
       "cardHook": "Your Christmas outfit just got better.",
-      "duration": "0:29"
+      "duration": "0:29",
+      "preview": "dtc-ad-p.mp4"
     },
     {
       "id": "wedding-multilanguage",
@@ -438,7 +452,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "wedding-multilanguage.mp4"
       },
-      "thumbnail": "wedding-multilanguage.jpg",
+      "thumbnail": "wedding-multilanguage.webp",
       "summary": "A Santorini destination wedding ad produced in multiple languages.",
       "audience": "Couples planning a destination wedding",
       "objective": "",
@@ -450,7 +464,8 @@ window.PORTFOLIO = {
       "deliverables": "",
       "marquee": "Some love stories deserve the world",
       "cardHook": "Some love stories deserve the world.",
-      "duration": "0:29"
+      "duration": "0:29",
+      "preview": "wedding-multilanguage-p.mp4"
     },
     {
       "id": "ugc-skincare",
@@ -462,7 +477,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "ugc-skincare.mp4"
       },
-      "thumbnail": "ugc-skincare.jpg",
+      "thumbnail": "ugc-skincare.webp",
       "summary": "A creator-style skincare ad made with AI, in the casual first-person UGC format.",
       "audience": "Skincare shoppers on social media",
       "objective": "Feel like a real customer recommendation rather than a polished commercial.",
@@ -474,7 +489,8 @@ window.PORTFOLIO = {
       "deliverables": "",
       "marquee": "Okay, I finally understand the hype",
       "cardHook": "Okay, I finally understand the hype.",
-      "duration": "0:40"
+      "duration": "0:40",
+      "preview": "ugc-skincare-p.mp4"
     },
     {
       "id": "centrum-advance",
@@ -487,7 +503,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "centrum-advance.mp4"
       },
-      "thumbnail": "centrum-advance.jpg",
+      "thumbnail": "centrum-advance.webp",
       "summary": "A talking-head wellness ad that opens with an easy banana-berry smoothie recipe, then introduces Centrum Advance multivitamins as the way to cover the nutritional gaps one breakfast can't.",
       "audience": "Health-conscious adults looking for a simple daily routine",
       "objective": "Build trust with a useful tip first, then introduce the product as a natural next step.",
@@ -498,7 +514,8 @@ window.PORTFOLIO = {
       "editing": "Word-by-word captions with highlighted keywords, animated on-screen titles (“Vitamins + Protein + Calcium”, “Variety Matters”), and an end card: “Your daily routine, made simple.”",
       "deliverables": "66-second vertical (9:16) ad for TikTok, Reels and Shorts.",
       "cardHook": "Healthy breakfast. Zero complications.",
-      "duration": "1:06"
+      "duration": "1:06",
+      "preview": "centrum-advance-p.mp4"
     },
     {
       "id": "viva-blend",
@@ -510,7 +527,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "viva-blend.mp4"
       },
-      "thumbnail": "viva-blend.jpg",
+      "thumbnail": "viva-blend.webp",
       "summary": "A day-in-the-life UGC ad for Viva Blend, built around a rushed morning that still ends with breakfast.",
       "audience": "Busy people who tend to skip breakfast",
       "objective": "",
@@ -522,7 +539,8 @@ window.PORTFOLIO = {
       "deliverables": "",
       "marquee": "Woke up late. Still made breakfast.",
       "cardHook": "Woke up late. Still made breakfast.",
-      "duration": "0:30"
+      "duration": "0:30",
+      "preview": "viva-blend-p.mp4"
     },
     {
       "id": "real-estate",
@@ -534,7 +552,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "real-estate.mp4"
       },
-      "thumbnail": "real-estate.jpg",
+      "thumbnail": "real-estate.webp",
       "summary": "A luxury home ad that walks a couple up to the front door and inside.",
       "audience": "Property buyers and investors",
       "objective": "Generate property inquiries.",
@@ -546,7 +564,8 @@ window.PORTFOLIO = {
       "deliverables": "",
       "marquee": "Come inside",
       "cardHook": "Come inside.",
-      "duration": "0:20"
+      "duration": "0:20",
+      "preview": "real-estate-p.mp4"
     },
     {
       "id": "talking-babies",
@@ -558,7 +577,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "talking-babies.mp4"
       },
-      "thumbnail": "talking-babies.jpg",
+      "thumbnail": "talking-babies.webp",
       "summary": "Two babies hold a “board meeting” in their crib in this comedic AI character skit.",
       "audience": "",
       "objective": "",
@@ -570,7 +589,8 @@ window.PORTFOLIO = {
       "deliverables": "",
       "marquee": "The board meeting has been called to order",
       "cardHook": "POV: The board meeting has been called to order.",
-      "duration": "0:45"
+      "duration": "0:45",
+      "preview": "talking-babies-p.mp4"
     },
     {
       "id": "acoustic-singing",
@@ -582,7 +602,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "acoustic-singing.mp4"
       },
-      "thumbnail": "acoustic-singing.jpg",
+      "thumbnail": "acoustic-singing.webp",
       "summary": "An AI-generated acoustic performance of “The Light You Left On,” credited on screen to Noah Reed.",
       "audience": "",
       "objective": "",
@@ -594,7 +614,8 @@ window.PORTFOLIO = {
       "deliverables": "",
       "shortTitle": "The Light You Left On",
       "cardHook": "I leave the porch light on…",
-      "duration": "0:25"
+      "duration": "0:25",
+      "preview": "acoustic-singing-p.mp4"
     },
     {
       "id": "oopsie-ep2",
@@ -607,7 +628,7 @@ window.PORTFOLIO = {
         "type": "file",
         "src": "oopsie-ep2.mp4"
       },
-      "thumbnail": "oopsie-ep2.jpg",
+      "thumbnail": "oopsie-ep2.webp",
       "summary": "Episode two of an AI-animated nursery rhyme series.",
       "audience": "Young children and their parents",
       "objective": "",
@@ -618,7 +639,8 @@ window.PORTFOLIO = {
       "editing": "",
       "deliverables": "",
       "cardHook": "Oh no! Catch that bubble!",
-      "duration": "0:50"
+      "duration": "0:50",
+      "preview": "oopsie-ep2-p.mp4"
     }
   ],
 
@@ -712,7 +734,7 @@ window.PORTFOLIO = {
     { name: "Canva AI", use: "AI-assisted design" },
     { name: "ChatGPT", use: "Concepts, scripts, prompts" },
     { name: "Gemini", use: "Music" },
-    { name: "Claude", use: "Writing and planning" },
+    { name: "Claude", use: "Motion graphics, writing, planning" },
     { name: "AI Studio", use: "Voiceover" },
     { name: "Vibe", use: "Image to video" }
   ],

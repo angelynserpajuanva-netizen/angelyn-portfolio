@@ -592,7 +592,7 @@ a { color: inherit; }
 }
 .showreel {
   position: relative; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 6px; overflow: hidden;
-  background: var(--surface-2) url("showreel.jpg") center / cover no-repeat; border: 1px solid var(--line);
+  background: var(--surface-2) url("showreel.webp") center / cover no-repeat; border: 1px solid var(--line);
   box-shadow: 0 30px 80px -30px rgba(62,224,238,.35), 0 20px 40px -20px rgba(0,0,0,.8);
   animation: fade .9s .15s var(--ease) both;
 }
@@ -888,3 +888,19 @@ section[id] { scroll-margin-top: 118px; }
 @media (prefers-reduced-motion: reduce) {
   .grid.reveal-ready .card:not(.in) { opacity: 1; transform: none; }
 }
+
+/* ---------- Services strip: bigger and louder ---------- */
+.marquee { padding-block: 14px; background: linear-gradient(90deg, rgba(62,224,238,.10), rgba(11,12,14,.92) 30%, rgba(11,12,14,.92) 70%, rgba(62,224,238,.10)); border-bottom: 1px solid rgba(62,224,238,.35); }
+.mq-item { font-size: clamp(1.45rem, 2.5vw, 2.25rem); letter-spacing: .02em; padding: 0 clamp(18px, 2.2vw, 30px); }
+.mq-group .mq-item:nth-of-type(even) { color: var(--accent); -webkit-text-stroke: 0; }
+.mq-group .mq-item:nth-of-type(even):hover, .mq-item:hover { color: #fff; }
+.mq-sep { width: 9px; height: 9px; box-shadow: 0 0 12px rgba(62,224,238,.8); }
+.marquee-track { animation-duration: 55s; will-change: transform; }
+section[id] { scroll-margin-top: 136px; }
+@media (max-width: 600px) {
+  .marquee { padding-block: 10px; }
+  .mq-item { font-size: 1.3rem; padding: 0 16px; }
+  .mq-sep { width: 7px; height: 7px; }
+  section[id] { scroll-margin-top: 122px; }
+}
+
