@@ -84,7 +84,8 @@ window.PORTFOLIO = {
      aspect:     "9:16", "16:9", "1:1" or "4:5".
      featured:   true = shown in the hero (keep it to 3).
      shortTitle: optional shorter name used on the cover card.
-     marquee:    optional hook line shown in the scrolling hook strip.
+     cardHook:   short hook line shown on the gallery card.
+     duration:   video length shown on the card, e.g. "0:30".
      audience / objective were inferred from each file name and format. Correct them
      if they're wrong. Any field left "" is hidden on the site.
   ------------------------------------------------------------------- */
@@ -109,7 +110,9 @@ window.PORTFOLIO = {
       "production": "Live-action AI scenes with on-screen clock timestamps, a step-by-step routine (drops in day cream for the face, mousse and mitt for the body, 10 minutes), a skin close-up showing the glow developing over 6–8 hours, and a before-and-after mirror shot.",
       "tools": [],
       "editing": "Danish captions with highlighted keywords, step cards and a progress bar, a before/after split, and social proof on Day 5 (“Har du været på ferie?” – Have you been on vacation?). End card: “Danmarks bedste selvbruner”, Danish Beauty Award 2025 nominee, “Køb sættet nu” (Buy the set now), 45-day risk-free trial.",
-      "deliverables": "30-second vertical (9:16) ad in Danish for TikTok, Reels and Shorts."
+      "deliverables": "30-second vertical (9:16) ad in Danish for TikTok, Reels and Shorts.",
+      "cardHook": "Vinterbleg? (Winter pale?)",
+      "duration": "0:30"
     },
     {
       "id": "sunster-mascot",
@@ -131,7 +134,9 @@ window.PORTFOLIO = {
       "production": "A 3D animated foam mascot combined with realistic product and skin shots: pain points (streaks, orange hands, the smell), the product reveal, application with a tanning mitt, and a before-and-after leg comparison.",
       "tools": [],
       "editing": "Danish captions and animated checklist cards (✗ streaks, ✗ orange hands, ✗ the smell, then ✓ natural glow, ✓ no streaks, ✓ no orange), sparkle effects, and a star-rating social proof scene (4.6 stars, 1,100+ reviews, loved by 50,000+ Danish women). CTA: “Prøv risikofrit i 45 dage” (Try it risk-free for 45 days), sunster.dk.",
-      "deliverables": "32-second vertical (9:16) ad in Danish for TikTok, Reels and Shorts."
+      "deliverables": "32-second vertical (9:16) ad in Danish for TikTok, Reels and Shorts.",
+      "cardHook": "Når selvbruneren gør dig orange (When the self-tanner turns you orange)",
+      "duration": "0:32"
     },
     {
       "id": "bag-ugc",
@@ -159,7 +164,9 @@ window.PORTFOLIO = {
       "editing": "Final assembly, captions and sound design in CapCut. Background music generated with Gemini.",
       "deliverables": "",
       "shortTitle": "CARRIE Handbag",
-      "marquee": "Your outfit isn’t the problem"
+      "marquee": "Your outfit isn’t the problem",
+      "cardHook": "Your outfit isn’t the problem… but something’s missing.",
+      "duration": "0:26"
     },
     {
       "id": "clay-cartoon",
@@ -197,7 +204,9 @@ window.PORTFOLIO = {
         "consistency": "Reference images kept the characters consistent from scene to scene.",
         "finalDeliverable": "Edited in CapCut with voiceover, music, sound effects, captions and transitions, then submitted as a sample."
       },
-      "marquee": "I thought he was just getting old"
+      "marquee": "I thought he was just getting old",
+      "cardHook": "I thought he was just getting old.",
+      "duration": "0:59"
     },
     {
       "id": "cozy-clouds",
@@ -224,7 +233,9 @@ window.PORTFOLIO = {
       "editing": "Story assembled and edited in CapCut.",
       "deliverables": "",
       "shortTitle": "Cozy Cloud",
-      "marquee": "Bad mood. Bad weather."
+      "marquee": "Bad mood. Bad weather.",
+      "cardHook": "Bad mood. Bad weather.",
+      "duration": "1:00"
     },
     {
       "id": "uhp-sample",
@@ -246,7 +257,9 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "",
       "deliverables": "Submitted video sample for a potential client.",
-      "shortTitle": "UHP Wellness"
+      "shortTitle": "UHP Wellness",
+      "cardHook": "Your business has a system. What about your health?",
+      "duration": "0:32"
     },
     {
       "id": "creatine-explainer",
@@ -273,7 +286,9 @@ window.PORTFOLIO = {
       "editing": "Captions, sound design and final edit in CapCut.",
       "deliverables": "",
       "shortTitle": "Creatine Animation",
-      "marquee": "Your muscles have a secret battery"
+      "marquee": "Your muscles have a secret battery",
+      "cardHook": "Your muscles have a secret battery.",
+      "duration": "0:42"
     },
     {
       "id": "nineone",
@@ -308,7 +323,9 @@ window.PORTFOLIO = {
         "finalDeliverable": ""
       },
       "shortTitle": "NineOne Christmas",
-      "marquee": "This Christmas, make your way home"
+      "marquee": "This Christmas, make your way home",
+      "cardHook": "This Christmas, make your way home.",
+      "duration": "0:53"
     },
     {
       "id": "nineone-ofw",
@@ -331,7 +348,9 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "",
       "deliverables": "",
-      "marquee": "Ready na umuwi sa Pinas?"
+      "marquee": "Ready na umuwi sa Pinas?",
+      "cardHook": "Ready na umuwi sa Pinas? May ride ka na ba?",
+      "duration": "0:28"
     },
     {
       "id": "dtc-supplement-vsl",
@@ -354,7 +373,9 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "",
       "deliverables": "",
-      "marquee": "Your brain at 11:47 PM"
+      "marquee": "Your brain at 11:47 PM",
+      "cardHook": "Your brain at 11:47 PM. Remember that embarrassing thing?",
+      "duration": "0:36"
     },
     {
       "id": "dtc-ad",
@@ -376,7 +397,9 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "",
       "deliverables": "",
-      "shortTitle": "Christmas Tee Ad"
+      "shortTitle": "Christmas Tee Ad",
+      "cardHook": "Your Christmas outfit just got better.",
+      "duration": "0:29"
     },
     {
       "id": "wedding-multilanguage",
@@ -399,7 +422,9 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "",
       "deliverables": "",
-      "marquee": "Some love stories deserve the world"
+      "marquee": "Some love stories deserve the world",
+      "cardHook": "Some love stories deserve the world.",
+      "duration": "0:29"
     },
     {
       "id": "ugc-skincare",
@@ -421,7 +446,9 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "",
       "deliverables": "",
-      "marquee": "Okay, I finally understand the hype"
+      "marquee": "Okay, I finally understand the hype",
+      "cardHook": "Okay, I finally understand the hype.",
+      "duration": "0:40"
     },
     {
       "id": "centrum-advance",
@@ -444,7 +471,8 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "Word-by-word captions with highlighted keywords, animated on-screen titles (“Vitamins + Protein + Calcium”, “Variety Matters”), and an end card: “Your daily routine, made simple.”",
       "deliverables": "66-second vertical (9:16) ad for TikTok, Reels and Shorts.",
-      "marquee": ""
+      "cardHook": "Healthy breakfast. Zero complications.",
+      "duration": "1:06"
     },
     {
       "id": "viva-blend",
@@ -466,7 +494,9 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "",
       "deliverables": "",
-      "marquee": "Woke up late. Still made breakfast."
+      "marquee": "Woke up late. Still made breakfast.",
+      "cardHook": "Woke up late. Still made breakfast.",
+      "duration": "0:30"
     },
     {
       "id": "real-estate",
@@ -488,7 +518,9 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "",
       "deliverables": "",
-      "marquee": "Come inside"
+      "marquee": "Come inside",
+      "cardHook": "Come inside.",
+      "duration": "0:20"
     },
     {
       "id": "talking-babies",
@@ -510,7 +542,9 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "",
       "deliverables": "",
-      "marquee": "The board meeting has been called to order"
+      "marquee": "The board meeting has been called to order",
+      "cardHook": "POV: The board meeting has been called to order.",
+      "duration": "0:45"
     },
     {
       "id": "acoustic-singing",
@@ -532,7 +566,9 @@ window.PORTFOLIO = {
       "tools": [],
       "editing": "",
       "deliverables": "",
-      "shortTitle": "The Light You Left On"
+      "shortTitle": "The Light You Left On",
+      "cardHook": "I leave the porch light on…",
+      "duration": "0:25"
     },
     {
       "id": "oopsie-ep2",
@@ -554,7 +590,9 @@ window.PORTFOLIO = {
       "production": "",
       "tools": [],
       "editing": "",
-      "deliverables": ""
+      "deliverables": "",
+      "cardHook": "Oh no! Catch that bubble!",
+      "duration": "0:50"
     }
   ],
 

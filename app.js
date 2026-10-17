@@ -195,19 +195,39 @@
       return '<button type="button" class="chip" aria-pressed="' + (c === active) + '" data-cat="' + esc(c) + '">' + esc(c) + '<span class="n">' + n + "</span></button>";
     }).join("");
   }
-  function cardHTML(p) {
+  function pad2(n) { return (n < 10 ? "0" : "") + n; }
+  function cardHTML(p, n, total) {
     var i = projects.indexOf(p);
-    var desc = has(p.summary) ? p.summary : (draft ? "Add a title and one-line description in data.js." : "");
-    return '<article class="card">' + frameHTML(p, i) +
-      '<div class="card-body"><span class="card-cat">' + esc(p.category) + "</span><h3>" + esc(slotLabel(p, i)) + "</h3>" +
-      (desc ? "<p>" + esc(desc) + "</p>" : "") + "</div></article>";
+    var hook = p.cardHook || "";
+    var wide = isWide(p);
+    return '<article class="card' + (wide ? " card-wide" : "") + '" style="--d:' + Math.min(n % 8, 7) * 60 + 'ms">' + frameHTML(p, i) +
+      '<div class="card-body">' +
+        '<div class="card-meta"><span class="card-no">' + pad2(n + 1) + '<i>/' + pad2(total) + "</i></span>" +
+          '<span class="card-cat">' + esc(p.category) + "</span>" +
+          (p.featured ? '<span class="card-pick">\u2605 Top pick</span>' : "") +
+          "</div>" +
+        "<h3>" + esc(p.shortTitle || slotLabel(p, i)) + "</h3>" +
+        (hook ? '<p class="card-hook">\u201c' + esc(hook) + "\u201d</p>" : "") +
+      "</div></article>";
+  }
+  // Cards slide up gently as they scroll into view (transform/opacity only, so it stays fast).
+  var revealIO = (!reduceMotion && "IntersectionObserver" in window) ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); revealIO.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px" }) : null;
+  function revealCards(root) {
+    if (!revealIO) return;
+    root.classList.add("reveal-ready");
+    root.querySelectorAll(".card").forEach(function (c) { revealIO.observe(c); });
   }
   function renderGrid(animate) {
     var grid = $("#grid");
     var list = projects.filter(function (p) { return active === "All" || p.category === active; });
     var draw = function () {
-      grid.innerHTML = list.length ? list.map(cardHTML).join("") : '<p class="empty-filter">No projects in this category yet.</p>';
+      grid.innerHTML = list.length ? list.map(function (p, n) { return cardHTML(p, n, list.length); }).join("") : '<p class="empty-filter">No projects in this category yet.</p>';
       bindHoverPreview(grid);
+      revealCards(grid);
+      var cnt = $("#work-count");
+      if (cnt) cnt.textContent = list.length + (list.length === 1 ? " video" : " videos") + (active === "All" ? " \u00b7 " + cats.length + " categories" : " \u00b7 " + active);
     };
     if (animate && !reduceMotion && grid.children.length) {
       Array.prototype.forEach.call(grid.children, function (c) { c.classList.add("leaving"); });
