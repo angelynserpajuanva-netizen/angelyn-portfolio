@@ -904,3 +904,37 @@ section[id] { scroll-margin-top: 136px; }
   section[id] { scroll-margin-top: 122px; }
 }
 
+
+/* =====================================================================
+   Hero: "Test my skills" CTA, bigger desktop showreel, narrower side margins
+   ===================================================================== */
+.cta-test {
+  display: flex; align-items: center; gap: 14px; margin-top: -10px;
+  padding: 12px 16px; min-height: 56px; border-radius: var(--radius);
+  border: 1px dashed rgba(62,224,238,.55); background: rgba(62,224,238,.06);
+  color: var(--fg); text-decoration: none;
+  transition: background .2s, border-color .2s;
+  animation: fade .8s .5s var(--ease) both;
+}
+.cta-test:hover, .cta-test:focus-visible { background: rgba(62,224,238,.14); border-color: var(--accent); border-style: solid; }
+.cta-test-tag {
+  flex: none; font-family: var(--f-mono); font-size: .66rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  color: #06171a; background: var(--accent); border-radius: 999px; padding: 5px 9px;
+}
+.cta-test-text { display: grid; gap: 2px; min-width: 0; flex: 1 1 auto; }
+.cta-test-text b { font-weight: 600; font-size: .98rem; }
+.cta-test-text span { font-size: .84rem; color: var(--muted); }
+.cta-test-arrow { flex: none; width: 20px; height: 20px; color: var(--accent); transition: transform .2s var(--ease); }
+.cta-test:hover .cta-test-arrow { transform: translateX(4px); }
+@media (max-width: 900px) { .cta-test { margin-top: -6px; } }
+
+/* Wider content on large screens, so the side margins stay balanced */
+@media (min-width: 1280px) {
+  .wrap { max-width: 1440px; padding-left: clamp(32px, 4vw, 64px); padding-right: clamp(32px, 4vw, 64px); }
+}
+
+/* Bigger showreel on desktop, but never taller than the screen */
+@media (min-width: 901px) {
+  .stage { width: clamp(420px, min(38vw, calc((100dvh - 110px) * .74)), 660px); grid-template-columns: minmax(0, 3.3fr) minmax(0, 1fr); gap: 14px; }
+  .hero { padding-top: clamp(20px, 2.6vw, 40px); }
+}
