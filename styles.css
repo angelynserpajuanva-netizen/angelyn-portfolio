@@ -989,3 +989,5 @@ section[id] { scroll-margin-top: 136px; }
   .sr-top { font-size: .72rem; }
 }
 @media (max-width: 420px) { .sb-frame-tc, .sb-frame-shot { font-size: .6rem; } }
+.grid-more .btn::after { content: ""; width: 7px; height: 7px; margin-left: 10px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .2s var(--ease); }
+.grid-more .btn.is-less::after { transform: translateY(2px) rotate(-135deg); }

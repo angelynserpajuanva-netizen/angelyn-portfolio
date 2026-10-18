@@ -233,20 +233,26 @@
   var showAll = false;
   function gridLimit(grid) {
     var cols = getComputedStyle(grid).gridTemplateColumns.split(" ").filter(Boolean).length || 2;
-    var rows = window.innerWidth <= 600 ? 4 : 2;
-    return Math.max(cols * rows, 6);
+    var rows = window.innerWidth <= 600 ? 4 : 2;   // even row count, so the preview is always an even number of full rows
+    var n = cols * rows;
+    if (n < 6) n = 6;
+    return n % 2 ? n + 1 : n;
   }
   function renderGrid(animate) {
     var grid = $("#grid");
     var list = projects.filter(function (p) { return active === "All" || p.category === active; });
     var draw = function () {
-      var limit = (showAll || active !== "All") ? list.length : gridLimit(grid);
+      var limit = showAll ? list.length : gridLimit(grid);
+      if (list.length - limit <= 1) limit = list.length;   // don't hide just one video
       var shown = list.slice(0, limit);
       grid.innerHTML = list.length ? shown.map(function (p, n) { return cardHTML(p, n, list.length); }).join("") : '<p class="empty-filter">No projects in this category yet.</p>';
       var more = $("#grid-more"), moreBtn = $("#grid-more-btn");
       if (more && moreBtn) {
-        more.hidden = shown.length >= list.length;
-        moreBtn.textContent = "Show all " + list.length + " videos";
+        var collapsible = gridLimit(grid) < list.length - 1;
+        more.hidden = !collapsible;
+        moreBtn.textContent = showAll ? "Show less" : "Show all " + list.length + " videos";
+        moreBtn.setAttribute("aria-expanded", showAll ? "true" : "false");
+        moreBtn.classList.toggle("is-less", showAll);
       }
       bindHoverPreview(grid);
       revealCards(grid);
@@ -261,6 +267,7 @@
   $("#filters").addEventListener("click", function (e) {
     var b = e.target.closest(".chip"); if (!b) return;
     active = b.getAttribute("data-cat");
+    showAll = false;
     try { localStorage.setItem("pf-filter", active); } catch (err) {}
     renderFilters(); renderGrid(true);
     var nb = $('.chip[data-cat="' + CSS.escape(active) + '"]'); if (nb) nb.focus();
@@ -269,9 +276,16 @@
   var moreBtnEl = $("#grid-more-btn");
   if (moreBtnEl) moreBtnEl.addEventListener("click", function () {
     var grid = $("#grid"), before = grid.children.length;
-    showAll = true; renderGrid(false);
-    var next = grid.children[before]; var f = next && next.querySelector(".frame");
-    if (f) f.focus({ preventScroll: true });
+    if (!showAll) {
+      showAll = true; renderGrid(false);
+      var next = grid.children[before]; var f = next && next.querySelector(".frame");
+      if (f) f.focus({ preventScroll: true });
+    } else {
+      showAll = false; renderGrid(false);
+      // keep the button where the visitor's eyes are, instead of leaving them far down the page
+      moreBtnEl.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
+      moreBtnEl.focus({ preventScroll: true });
+    }
   });
 
   // Silent previews. Desktop: play on hover. Phones and tablets: the card in the
