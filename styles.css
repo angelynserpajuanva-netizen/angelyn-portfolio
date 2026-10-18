@@ -938,3 +938,54 @@ section[id] { scroll-margin-top: 136px; }
   .stage { width: clamp(420px, min(38vw, calc((100dvh - 110px) * .74)), 660px); grid-template-columns: minmax(0, 3.3fr) minmax(0, 1fr); gap: 14px; }
   .hero { padding-top: clamp(20px, 2.6vw, 40px); }
 }
+
+/* =====================================================================
+   UI/UX pass: pause control, "show all" button, tap targets, small text
+   ===================================================================== */
+
+/* Services strip: fade lives on the inner viewport so the pause button stays crisp */
+.marquee { display: flex; align-items: center; -webkit-mask-image: none; mask-image: none; padding-right: 8px; }
+.mq-view { flex: 1 1 auto; min-width: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 92%, transparent); }
+.marquee.is-paused .marquee-track { animation-play-state: paused; }
+.mq-pause { flex: none; width: 40px; height: 40px; margin-left: 4px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  border: 1px solid rgba(62,224,238,.45); background: rgba(11,12,14,.8); color: var(--accent); transition: background .2s, border-color .2s; }
+.mq-pause:hover { background: var(--accent); border-color: var(--accent); }
+.mq-pause span { width: 10px; height: 12px; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
+.mq-pause:hover span { color: #06171a; }
+.marquee.is-paused .mq-pause span { width: 0; height: 0; border-right: 0; border-left: 11px solid currentColor; border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 3px; }
+@media (prefers-reduced-motion: reduce) { .mq-pause { display: none; } .mq-view { overflow-x: auto; -webkit-mask-image: none; mask-image: none; } }
+
+/* "Show all videos" */
+.grid-more { display: flex; justify-content: center; margin-top: clamp(28px, 4vw, 44px); position: relative; }
+.grid-more::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--line); }
+.grid-more .btn { position: relative; background: var(--bg); min-width: min(100%, 260px); border-color: rgba(62,224,238,.5); }
+.grid-more .btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Comfortable 44px tap targets on touch screens and small windows */
+@media (pointer: coarse), (max-width: 900px) {
+  .nav-toggle { min-height: 44px; padding: 0 16px; }
+  .brand { display: inline-flex; align-items: center; min-height: 44px; }
+  .chip { min-height: 44px; padding: 0 18px; display: inline-flex; align-items: center; }
+  .sb-chip { min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; }
+  .btn-small { min-height: 44px; }
+  .sr-sound { height: 44px !important; }
+  .sr-toggle { width: 44px !important; height: 44px !important; }
+  .mq-pause { width: 44px; height: 44px; }
+  .marquee { padding-block: 0 !important; }
+  .mq-item { display: inline-flex; align-items: center; min-height: 48px; }
+  .footer a, a.email { display: inline-flex; align-items: center; min-height: 44px; }
+}
+
+/* Readable small labels: nothing under 12px for text people need to read */
+.card-meta, .card-cat, .chip .n, .hero-meta dt, .case-fields dt, .details dt, .opt,
+.sb-hooks li span, .sb-hook span, .sb-scene dt, .tl-kind, .cta-test-tag, .frame-cap span, .tl-skills span { font-size: .75rem; }
+.sr-top { font-size: .72rem; }
+.sb-frame-tc, .sb-frame-shot, .sr-meta, .sr-music { font-size: .64rem; }
+@media (max-width: 600px) {
+  .card-meta { font-size: .75rem; letter-spacing: .04em; gap: 4px 8px; }
+  .card-no { display: none; }
+  .sr-top { font-size: .72rem; }
+}
+@media (max-width: 420px) { .sb-frame-tc, .sb-frame-shot { font-size: .6rem; } }

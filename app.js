@@ -182,6 +182,12 @@
           '<span class="mq-sep" aria-hidden="true"></span>';
       }).join("");
       mq.innerHTML = '<div class="mq-group">' + one + '</div><div class="mq-group" aria-hidden="true" inert>' + one + "</div>";
+      var mqBox = $("#marquee"), mqBtn = $("#mq-pause");
+      if (mqBtn) mqBtn.addEventListener("click", function () {
+        var paused = mqBox.classList.toggle("is-paused");
+        mqBtn.setAttribute("aria-pressed", paused ? "true" : "false");
+        mqBtn.setAttribute("aria-label", paused ? "Play scrolling services" : "Pause scrolling services");
+      });
     }
   }
 
@@ -223,11 +229,25 @@
     root.classList.add("reveal-ready");
     root.querySelectorAll(".card").forEach(function (c) { revealIO.observe(c); });
   }
+  // Show a few rows first (shorter page, faster load); "Show all" reveals the rest.
+  var showAll = false;
+  function gridLimit(grid) {
+    var cols = getComputedStyle(grid).gridTemplateColumns.split(" ").filter(Boolean).length || 2;
+    var rows = window.innerWidth <= 600 ? 4 : 2;
+    return Math.max(cols * rows, 6);
+  }
   function renderGrid(animate) {
     var grid = $("#grid");
     var list = projects.filter(function (p) { return active === "All" || p.category === active; });
     var draw = function () {
-      grid.innerHTML = list.length ? list.map(function (p, n) { return cardHTML(p, n, list.length); }).join("") : '<p class="empty-filter">No projects in this category yet.</p>';
+      var limit = (showAll || active !== "All") ? list.length : gridLimit(grid);
+      var shown = list.slice(0, limit);
+      grid.innerHTML = list.length ? shown.map(function (p, n) { return cardHTML(p, n, list.length); }).join("") : '<p class="empty-filter">No projects in this category yet.</p>';
+      var more = $("#grid-more"), moreBtn = $("#grid-more-btn");
+      if (more && moreBtn) {
+        more.hidden = shown.length >= list.length;
+        moreBtn.textContent = "Show all " + list.length + " videos";
+      }
       bindHoverPreview(grid);
       revealCards(grid);
       var cnt = $("#work-count");
@@ -246,6 +266,13 @@
     var nb = $('.chip[data-cat="' + CSS.escape(active) + '"]'); if (nb) nb.focus();
   });
   renderFilters(); renderGrid(false);
+  var moreBtnEl = $("#grid-more-btn");
+  if (moreBtnEl) moreBtnEl.addEventListener("click", function () {
+    var grid = $("#grid"), before = grid.children.length;
+    showAll = true; renderGrid(false);
+    var next = grid.children[before]; var f = next && next.querySelector(".frame");
+    if (f) f.focus({ preventScroll: true });
+  });
 
   // Silent previews. Desktop: play on hover. Phones and tablets: the card in the
   // middle of the screen plays on its own, like Reels. Videos load only when needed.
