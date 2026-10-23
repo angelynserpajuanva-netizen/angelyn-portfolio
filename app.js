@@ -131,7 +131,7 @@
   var srBox = $("#showreel");
   if (srBox && SR.src) {
     srBox.innerHTML =
-      '<video muted loop playsinline preload="none"' + (SR.poster ? ' poster="' + esc(SR.poster) + '"' : "") + ' src="' + esc(SR.src) + '" aria-hidden="true"></video>' +
+      '<video muted loop playsinline preload="none" controlslist="nodownload" disablepictureinpicture disableremoteplayback' + (SR.poster ? ' poster="' + esc(SR.poster) + '"' : "") + ' src="' + esc(SR.src) + '" aria-hidden="true"></video>' +
       '<div class="marks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>' +
       '<p class="sr-top"><span class="rec" aria-hidden="true"></span>' + esc(SR.label || "Showreel") + "</p>" +
       '<div class="sr-bottom"><button type="button" class="sr-sound" id="sr-sound" aria-pressed="false">' +
@@ -170,6 +170,14 @@
     } else { srVisible = true; srMaybePlay(); }
     srState();
   } else if (srBox) { srBox.hidden = true; }
+
+  /* ---------- Protect videos: no right-click / long-press "Save video" menu ---------- */
+  document.addEventListener("contextmenu", function (e) {
+    if (e.target.closest && e.target.closest("video, .frame, .showreel, .player, .modal-media")) e.preventDefault();
+  });
+  document.addEventListener("dragstart", function (e) {
+    if (e.target.closest && e.target.closest("video, .frame, .showreel, .player")) e.preventDefault();
+  });
 
   /* ---------- Hook marquee ---------- */
   var mq = $("#marquee-track");
@@ -294,7 +302,7 @@
     var v = f._pv;
     if (!v) {
       v = document.createElement("video");
-      v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto"; v.disablePictureInPicture = true;
+      v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto"; v.disablePictureInPicture = true; v.setAttribute("controlslist", "nodownload");
       v.setAttribute("muted", ""); v.setAttribute("playsinline", "");
       v.src = f.getAttribute("data-preview");
       v.className = "hover-vid";
@@ -355,7 +363,7 @@
     }
     if (hasVideo(p)) {
       if (v.type === "file") {
-        inner = '<video controls autoplay playsinline preload="auto" src="' + esc(v.src) + '"></video>';
+        inner = '<video controls autoplay playsinline preload="auto" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback src="' + esc(v.src) + '"></video>';
       } else if (v.type === "drive" && driveId(v.src)) {
         inner = '<iframe src="https://drive.google.com/file/d/' + driveId(v.src) + '/preview" allow="autoplay; fullscreen" allowfullscreen loading="lazy" title="' + esc(slotLabel(p, 0)) + '"></iframe>';
       } else if (v.type === "youtube" && youtubeId(v.src)) {

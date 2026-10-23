@@ -173,6 +173,31 @@ window.PORTFOLIO = {
       "preview": "bag-ugc-p.mp4"
     },
     {
+      "id": "facelove-photo-quiz",
+      "title": "Facelove: Photo Quiz (AI Avatar Ad)",
+      "shortTitle": "Facelove: Photo Quiz",
+      "category": "UGC-Style Ads",
+      "aspect": "9:16",
+      "featured": false,
+      "video": {
+        "type": "file",
+        "src": "facelove-photo-quiz.mp4"
+      },
+      "thumbnail": "facelove-photo-quiz.webp",
+      "preview": "facelove-photo-quiz-p.mp4",
+      "summary": "A 30-second sample ad for Facelove led by a realistic AI avatar: a 60-year-old woman shows two photos of herself, one at 40 and one from last week, asks viewers to guess which is which, then tells the story of how her skin looked 12 weeks ago.",
+      "audience": "Women 50 and over who are worried about wrinkles, fine lines and dark spots",
+      "objective": "Stop the scroll with an interactive guessing game, drive comments, and keep viewers watching until the reveal.",
+      "concept": "An engagement-bait photo quiz. A countdown over a side-by-side of two photos, then the presenter talks straight to camera: “I look BETTER right now than I did at 40. But 12 weeks ago, I didn’t.”",
+      "hook": "“One of these photos is me at 40. The other was taken last week. I’m 60 now. Can you guess which is which?” over a 5-4-3-2-1 countdown",
+      "production": "One consistent AI avatar across every scene: the photo comparison, a selfie-style talking head, a sit-down confession on the sofa, and moody flashback shots (the bathroom mirror, close-ups of forehead wrinkles, mouth lines and sun spots, and a low moment after her divorce).",
+      "tools": [],
+      "editing": "Word-by-word captions with key words in caps (BEFORE, BETTER), a countdown number overlay, and a shift from warm, bright present-day scenes to a cold, desaturated grade for the “12 weeks ago” story.",
+      "deliverables": "30-second vertical (9:16) sample ad for TikTok, Reels and Shorts.",
+      "cardHook": "One of these photos is me at 40. I’m 60 now.",
+      "duration": "0:29"
+    },
+    {
       "id": "clay-cartoon",
       "title": "Clay-Style Pet Supplement VSL",
       "category": "Product & DTC Ads",
@@ -297,6 +322,31 @@ window.PORTFOLIO = {
       "cardHook": "Your muscles have a secret battery.",
       "duration": "0:42",
       "preview": "creatine-explainer-p.mp4"
+    },
+    {
+      "id": "shiesty-zip-hoodie",
+      "title": "Shiesty Zip: The Anti-Social Hoodie (UGC POV Ad)",
+      "shortTitle": "Shiesty Zip Hoodie",
+      "category": "UGC-Style Ads",
+      "aspect": "9:16",
+      "featured": false,
+      "video": {
+        "type": "file",
+        "src": "shiesty-zip-hoodie.mp4"
+      },
+      "thumbnail": "shiesty-zip-hoodie.webp",
+      "preview": "shiesty-zip-hoodie-p.mp4",
+      "summary": "A 9-second TikTok-style POV sample ad for the Shiesty Zip hoodie, a full-zip hoodie that zips all the way up over the face.",
+      "audience": "Young streetwear buyers on TikTok and Instagram",
+      "objective": "Show the product’s one standout feature in a few seconds and push viewers to the link in bio.",
+      "concept": "A native POV trend format: one model on a foggy, neon-lit city street at night zips the hoodie up over his face, then pulls the hood on.",
+      "hook": "“POV: the anti-social hoodie”",
+      "production": "A single realistic AI-generated shot with a moody night-street setting (wet pavement, street lights, red neon) and one clear product demo: the zip going all the way up.",
+      "tools": [],
+      "editing": "Native TikTok-style caption, a switch to “link in bio ❄️” for the call to action, and music timed to the zip-up.",
+      "deliverables": "9-second vertical (9:16) sample ad for TikTok and Reels.",
+      "cardHook": "POV: the anti-social hoodie",
+      "duration": "0:09"
     },
     {
       "id": "nineone-snow-winter",
