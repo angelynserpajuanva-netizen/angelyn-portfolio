@@ -486,7 +486,13 @@
   function openSkill(el) {
     $$(".skill", deck).forEach(function (s) { var on = s === el; s.classList.toggle("open", on); $(".skill-head", s).setAttribute("aria-expanded", String(on)); });
   }
-  deck.addEventListener("click", function (e) { var h = e.target.closest(".skill-head"); if (h) openSkill(h.parentNode); });
+  deck.addEventListener("click", function (e) {
+    var h = e.target.closest(".skill-head"); if (!h) return;
+    var el = h.parentNode;
+    // stacked list (tablets and phones): tapping an open panel closes it
+    if (el.classList.contains("open") && window.innerWidth <= 1000) { openSkill(null); return; }
+    openSkill(el);
+  });
   if (fine) deck.addEventListener("mouseover", function (e) { var s = e.target.closest(".skill"); if (s && !s.classList.contains("open") && window.innerWidth > 1000) openSkill(s); });
   $("#tool-cloud").innerHTML = (D.tools || []).map(function (t, i) { return '<li style="--d:' + (i % 5) + '"><b>' + esc(t.name) + "</b><span>" + esc(t.use || "") + "</span></li>"; }).join("");
 
