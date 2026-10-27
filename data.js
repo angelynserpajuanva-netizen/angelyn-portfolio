@@ -899,6 +899,30 @@ window.PORTFOLIO = {
     { name: "Vibe", use: "Image to video" }
   ],
 
+  /* ---------- Toolkit pipeline (Chapter 05) ----------
+     Each stage: the tools used, what goes in, what happens, what comes out.
+     Tool names must match the names in "tools" above. */
+  pipeline: [
+    { stage: "Plan the hook", tools: ["ChatGPT", "Claude"], input: "Your product, audience and offer",
+      does: "I find the angle, write hook options and the script, then break the ad into scenes with a detailed prompt for each one.",
+      output: ["3 hook options", "Script", "Scene-by-scene prompts"] },
+    { stage: "Generate the scenes", tools: ["Google Flow", "Vibe"], input: "Scene prompts and reference images",
+      does: "Google Flow generates the video scenes, and Vibe brings still images to life. I refine every shot until the characters and the product stay consistent.",
+      output: ["AI video scenes", "Consistent characters", "Consistent product"] },
+    { stage: "Give it a voice", tools: ["AI Studio", "Gemini"], input: "The final script and the mood",
+      does: "AI Studio voices the script in a tone matched to your customer, and Gemini creates the music underneath.",
+      output: ["Voiceover", "Original music"] },
+    { stage: "Add motion graphics", tools: ["Claude"], input: "Prices, maps, offers and features",
+      does: "Claude helps me build animated overlays, like news tickers, route maps, rate cards and kinetic text, so the details land on screen.",
+      output: ["Animated overlays", "Kinetic text"] },
+    { stage: "Edit and finish", tools: ["CapCut"], input: "Scenes, voice, music and graphics",
+      does: "Everything comes together in CapCut: pacing, cuts, captions, sound effects and the final mix.",
+      output: ["Final cut", "Captions", "Sound design"] },
+    { stage: "Brand visuals", tools: ["Canva", "Canva AI"], input: "Your brand colors and fonts",
+      does: "Posters and social graphics that match the ad, designed in Canva with help from Canva AI.",
+      output: ["Posters", "Social graphics"] }
+  ],
+
   /* ---------- Storyboard request form ----------
      Submissions are emailed to you through FormSubmit (free, no account).
      The FIRST time someone submits, FormSubmit emails you an activation link.

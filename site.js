@@ -496,7 +496,59 @@
     openSkill(el);
   });
 
-  $("#tool-cloud").innerHTML = (D.tools || []).map(function (t, i) { return '<li style="--d:' + (i % 5) + '"><b>' + esc(t.name) + "</b><span>" + esc(t.use || "") + "</span></li>"; }).join("");
+
+  /* ================= TOOLKIT PIPELINE (interactive) ================= */
+  (function () {
+    var stages = D.pipeline || [], tk = $("#tk"); if (!tk || !stages.length) return;
+    var toolsBy = {}; (D.tools || []).forEach(function (t) { toolsBy[t.name] = t; });
+    var mono = function (n) { var w = n.split(" "); return (w.length > 1 ? w[0][0] + w[1][0] : n.slice(0, 2)).replace(/^(.)(.)$/, function (m, a, b) { return a.toUpperCase() + b.toLowerCase(); }); };
+    var list = $("#tk-stages"), body = $("#tk-body"), cur = -1, timer = null, auto = !reduce, inView = false, DUR = 5200;
+    list.innerHTML = stages.map(function (st, i) {
+      return '<li role="presentation"><button type="button" role="tab" class="tk-stage" id="tk-tab-' + i + '" aria-selected="false" data-i="' + i + '">' +
+        '<span class="tk-n">' + pad(i + 1) + '</span><span class="tk-name">' + esc(st.stage) + '</span><span class="tk-mini">' + st.tools.map(esc).join(" + ") + '</span><span class="tk-prog" aria-hidden="true"><i></i></span></button></li>';
+    }).join("");
+    $("#tk-all").innerHTML = (D.tools || []).map(function (t) { return '<li data-tool="' + esc(t.name) + '"><span class="tk-glyph">' + esc(mono(t.name)) + "</span><b>" + esc(t.name) + "</b><span>" + esc(t.use || "") + "</span></li>"; }).join("");
+    function show(i, fromUser) {
+      if (i === cur) return; cur = i;
+      var st = stages[i];
+      $$(".tk-stage", list).forEach(function (b, k) { b.classList.toggle("on", k === i); b.classList.toggle("done", k < i); b.setAttribute("aria-selected", String(k === i)); });
+      $$("#tk-all li").forEach(function (li) { li.classList.toggle("on", st.tools.indexOf(li.getAttribute("data-tool")) > -1); });
+      $("#tk-file").textContent = "pipeline / " + pad(i + 1) + " — " + st.stage.toLowerCase();
+      body.innerHTML =
+        '<div class="tk-flow">' +
+          '<div class="tk-col tk-in"><p class="tk-lbl">In</p><p class="tk-chip">' + esc(st.input) + "</p></div>" +
+          '<div class="tk-wire" aria-hidden="true"><i></i></div>' +
+          '<div class="tk-col tk-tools"><p class="tk-lbl">Tools</p>' + st.tools.map(function (n, k) {
+            var t = toolsBy[n] || { name: n };
+            return '<div class="tk-tool" style="--k:' + k + '"><span class="tk-glyph">' + esc(mono(n)) + "</span><span><b>" + esc(n) + "</b><em>" + esc(t.use || "") + "</em></span></div>";
+          }).join("") + "</div>" +
+          '<div class="tk-wire" aria-hidden="true"><i></i></div>' +
+          '<div class="tk-col tk-out"><p class="tk-lbl">Out</p>' + st.output.map(function (o, k) { return '<p class="tk-chip out" style="--k:' + k + '">✓ ' + esc(o) + "</p>"; }).join("") + "</div>" +
+        "</div>" +
+        '<p class="tk-does">' + esc(st.does) + "</p>";
+      tk.classList.remove("tk-run"); void tk.offsetWidth; tk.classList.add("tk-run");
+      var status = $("#tk-status"); status.textContent = "rendering…"; clearTimeout(show._s);
+      show._s = setTimeout(function () { status.textContent = "done ✓"; }, reduce ? 0 : 1500);
+      if (fromUser) { auto = false; tk.classList.add("manual"); }
+      schedule();
+    }
+    function schedule() {
+      clearTimeout(timer);
+      if (!auto || !inView) { tk.classList.remove("auto"); return; }
+      tk.classList.add("auto");
+      timer = setTimeout(function () { show((cur + 1) % stages.length); }, DUR);
+    }
+    list.addEventListener("click", function (e) { var b = e.target.closest(".tk-stage"); if (b) show(+b.getAttribute("data-i"), true); });
+    list.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp" && e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      e.preventDefault(); var n = (cur + (e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : stages.length - 1)) % stages.length;
+      show(n, true); $("#tk-tab-" + n).focus();
+    });
+    tk.addEventListener("mouseenter", function () { if (auto) { clearTimeout(timer); tk.classList.add("hold"); } });
+    tk.addEventListener("mouseleave", function () { tk.classList.remove("hold"); schedule(); });
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { inView = en[0].isIntersecting; schedule(); }, { threshold: 0.35 }).observe(tk);
+    show(0);
+  })();
 
   /* ================= PROCESS ================= */
   var steps = $("#process-steps");
@@ -589,7 +641,7 @@
   /* ================= REVEALS + DECODING LABELS ================= */
   if (!reduce && "IntersectionObserver" in window) {
     var rio = new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); rio.unobserve(e.target); } }); }, { rootMargin: "0px 0px -8% 0px" });
-    $$(".display, .contact-title, .sec-sub, .skill, .tool-cloud li, .portrait, .contact-row .btn").forEach(function (el) { el.classList.add("rv"); rio.observe(el); });
+    $$(".display, .contact-title, .sec-sub, .skill, .tk-all li, .portrait, .contact-row .btn").forEach(function (el) { el.classList.add("rv"); rio.observe(el); });
     var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#/<>";
     var scramble = function (el) {
       var fin = el.textContent, len = fin.length, t0 = performance.now(), dur = Math.min(900, 280 + len * 18);
