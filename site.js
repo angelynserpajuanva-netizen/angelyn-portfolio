@@ -449,7 +449,7 @@
     $("#modal-summary").textContent = p.summary || "";
     var media = $("#modal-media");
     media.className = "modal-media" + (isWide(p) ? " wide" : "");
-    media.innerHTML = '<div class="player" style="--ar:' + (p.aspect || "9:16").replace(":", "/") + '"><video controls autoplay playsinline preload="auto" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback src="' + esc(p.video && p.video.src) + '"></video></div>';
+    media.innerHTML = '<div class="player" style="--ar:' + (p.aspect || "9:16").replace(":", "/") + '"><video controls autoplay playsinline preload="auto" poster="' + esc(p.thumbnail) + '" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback src="' + esc(p.video && p.video.src) + '"></video></div>';
     $("#modal-details").innerHTML = Object.keys(labels).map(function (k) {
       var v = p[k]; if (!has(v)) return "";
       return "<div><dt>" + labels[k] + "</dt><dd>" + (Array.isArray(v) ? '<span class="tags">' + v.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</span>" : esc(v)) + "</dd></div>";
@@ -563,7 +563,12 @@
     var layer = document.createElement("span"); layer.className = "mega-img"; mega.insertBefore(layer, megaText);
     var fit = function () {
       megaText.style.fontSize = "";
-      var w = mega.clientWidth, cur = parseFloat(getComputedStyle(megaText).fontSize), tw = megaText.scrollWidth;
+      var w = mega.clientWidth, cur = parseFloat(getComputedStyle(megaText).fontSize), tw = 0;
+      var rg = document.createRange(); rg.selectNodeContents(megaText);
+      var lines = {};   // add up the pieces of text that sit on the same line
+      Array.prototype.forEach.call(rg.getClientRects(), function (r) { var k = Math.round(r.top / 8); lines[k] = (lines[k] || 0) + r.width; });
+      Object.keys(lines).forEach(function (k) { tw = Math.max(tw, lines[k]); });
+      if (!tw) tw = megaText.scrollWidth;
       if (w && tw) megaText.style.fontSize = Math.floor(cur * (w / tw) * 0.96) + "px";
       mega.style.setProperty("--tile", Math.round(4242 * (mega.clientHeight / 360)) + "px");
     };
