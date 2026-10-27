@@ -109,16 +109,16 @@ window.PORTFOLIO = {
      music.src: an MP3 in the site folder, e.g. "soundtrack.mp3" (loops quietly).
      voiceLines: one short MP3 per line, played once when that chapter comes into view.
      Leave a src empty ("") to skip it. */
-  music: { src: "", volume: 0.35 },
+  music: { src: "soundtrack.mp3", volume: 0.3 },
   sound: {
     label: "Sound on",
     tick: "tick.mp3",
     voiceLines: [
-      { at: "#hooks", src: "", text: "You've got three seconds. Starting… now." },
-      { at: "#anatomy", src: "", text: "Still scrolling? Good. That's the whole point." },
-      { at: "#work", src: "", text: "These ads made people stop. Like you just did." },
-      { at: "#storyboard", src: "", text: "Try me before you hire me. It's free." },
-      { at: "#contact", src: "", text: "Okay, you made it to the end. Let's make your ad." }
+      { at: "#hooks", src: "vo-hooks.mp3", text: "You've got three seconds. Starting… now." },
+      { at: "#anatomy", src: "vo-anatomy.mp3", text: "Still scrolling? Good. That's the whole point." },
+      { at: "#work", src: "vo-work.mp3", text: "These ads made people stop. Like you just did." },
+      { at: "#storyboard", src: "vo-storyboard.mp3", text: "Try me before you hire me. It's free." },
+      { at: "#contact", src: "vo-contact.mp3", text: "Okay, you made it to the end. Let's make your ad." }
     ]
   },
 
