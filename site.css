@@ -693,4 +693,4 @@ html { background: var(--bg); }
 .music-btn.on .music-eq i { animation: eq 1s ease-in-out infinite; }
 .music-btn.on .music-eq i:nth-child(2) { animation-duration: .8s; animation-delay: -.3s; } .music-btn.on .music-eq i:nth-child(3) { animation-duration: 1.15s; animation-delay: -.6s; } .music-btn.on .music-eq i:nth-child(4) { animation-duration: .9s; animation-delay: -.1s; }
 .modal-open .music-btn, .menu-open .music-btn { opacity: 0; pointer-events: none; }
-@media (max-width: 600px) { .music-btn .music-title { display: none; } .music-btn { padding: 0 14px; } }
+@media (max-width: 600px) { .music-btn { min-height: 44px; padding: 0 14px 0 12px; font-size: .8rem; } }

@@ -227,7 +227,9 @@
       if (i === active) return;
       if (active > -1) stopPreview($(".hw-cover", items[active]));
       items.forEach(function (it, k) { it.classList.toggle("is-active", k === i); });
+      var first = active === -1;
       active = i; n.textContent = pad(i + 1);
+      if (!first) document.dispatchEvent(new CustomEvent("hookchange", { detail: i }));
       dotEls.forEach(function (d, k) { d.classList.toggle("on", k === i); });
       $("#hw-prev").disabled = i === 0; $("#hw-next").disabled = i === items.length - 1;
       if (fine && !reduce && inView && list[i].p.preview) previewVideo($(".hw-cover", items[i]), list[i].p.preview);
@@ -623,39 +625,69 @@
     });
   }
 
-  /* ================= SOUNDTRACK (opt-in, never autoplays) ================= */
+  /* ================= SOUND (one opt-in switch: music + voice lines + reel ticks) =================
+     Nothing ever plays until the visitor presses "Sound on". */
   (function () {
-    var M = D.music || {}, btn = $("#music-btn");
-    if (!btn || !M.src) return;
-    var audio = new Audio(); audio.preload = "none"; audio.loop = true; audio.src = M.src;
-    var target = typeof M.volume === "number" ? M.volume : 0.35, fadeT = null, wanted = false, ducked = false;
+    var S = D.sound || {}, M = D.music || {}, btn = $("#music-btn");
+    if (!btn) return;
+    var lines = (S.voiceLines || []).filter(function (l) { return l.src && document.querySelector(l.at); });
+    if (!M.src && !lines.length && !S.tick) return;
     btn.hidden = false;
-    $(".music-title", btn).textContent = M.title || "Play the soundtrack";
-    function fade(to, done) {
+    var on = false, ducked = false, speaking = false, fadeT = null, target = typeof M.volume === "number" ? M.volume : 0.35;
+    var music = null;
+    if (M.src) { music = new Audio(); music.preload = "none"; music.loop = true; music.src = M.src; music.addEventListener("error", function () { music = null; }); }
+    function fadeTo(to, done) {
+      if (!music) { if (done) done(); return; }
       clearInterval(fadeT);
       fadeT = setInterval(function () {
-        var v = audio.volume + (to > audio.volume ? 0.03 : -0.04);
-        if ((to > audio.volume && v >= to) || (to <= audio.volume && v <= to)) { audio.volume = Math.max(0, Math.min(1, to)); clearInterval(fadeT); if (done) done(); }
-        else audio.volume = Math.max(0, Math.min(1, v));
+        var v = music.volume, step = to > v ? 0.03 : -0.04, nv = v + step;
+        if ((step > 0 && nv >= to) || (step < 0 && nv <= to)) { music.volume = Math.max(0, Math.min(1, to)); clearInterval(fadeT); if (done) done(); }
+        else music.volume = Math.max(0, Math.min(1, nv));
       }, 40);
     }
-    function play() { audio.volume = 0; var pr = audio.play(); if (pr && pr.catch) pr.catch(function () { set(false); }); fade(target); }
-    function pause() { fade(0, function () { audio.pause(); }); }
-    function set(on) {
-      wanted = on; btn.classList.toggle("on", on); btn.setAttribute("aria-pressed", String(on));
-      btn.setAttribute("aria-label", on ? "Pause the soundtrack" : "Play the soundtrack");
-      try { localStorage.setItem("asj-music", on ? "1" : "0"); } catch (e) {}
-      if (on && !ducked) play(); else pause();
+    function level() { return ducked ? 0 : speaking ? target * 0.3 : target; }
+    function musicUpdate() {
+      if (!music) return;
+      if (on && !ducked) { if (music.paused) { music.volume = 0; var pr = music.play(); if (pr && pr.catch) pr.catch(function () {}); } fadeTo(level()); }
+      else fadeTo(0, function () { music.pause(); });
     }
-    btn.addEventListener("click", function () { set(!wanted); });
-    audio.addEventListener("error", function () { btn.hidden = true; });
-    // step aside whenever a video with sound is playing, then come back
-    function duck(on) { ducked = on; if (!wanted) return; if (on) pause(); else play(); }
+    // reel tick when a hook clicks into place
+    var tick = S.tick ? new Audio(S.tick) : null; if (tick) { tick.preload = "auto"; tick.volume = 0.5; }
+    document.addEventListener("hookchange", function () { if (on && !ducked && tick) { try { var t = tick.cloneNode(); t.volume = 0.45; t.play().catch(function () {}); } catch (e) {} } });
+    // witty voice lines, once each, when a chapter comes into view
+    var played = {}, voice = null;
+    function say(l) {
+      if (!on || ducked || played[l.at]) return;
+      played[l.at] = true;
+      if (voice) { voice.pause(); }
+      voice = new Audio(l.src); voice.volume = 1;
+      speaking = true; musicUpdate();
+      voice.addEventListener("ended", function () { speaking = false; musicUpdate(); });
+      voice.addEventListener("error", function () { speaking = false; musicUpdate(); });
+      var pr = voice.play(); if (pr && pr.catch) pr.catch(function () { speaking = false; musicUpdate(); });
+    }
+    if (lines.length && "IntersectionObserver" in window) {
+      var vio = new IntersectionObserver(function (en) {
+        en.forEach(function (e) { if (e.isIntersecting) { var l = lines.filter(function (x) { return document.querySelector(x.at) === e.target; })[0]; if (l) say(l); } });
+      }, { rootMargin: "-35% 0px -45% 0px" });   // fires when the chapter reaches the middle of the screen
+      lines.forEach(function (l) { vio.observe(document.querySelector(l.at)); });
+    }
+    function set(v) {
+      on = v; btn.classList.toggle("on", v); btn.setAttribute("aria-pressed", String(v));
+      btn.setAttribute("aria-label", v ? "Turn sound off" : "Turn sound on");
+      $(".music-title", btn).textContent = v ? "Sound off" : (S.label || "Sound on");
+      if (!v && voice) { voice.pause(); speaking = false; }
+      musicUpdate();
+    }
+    $(".music-title", btn).textContent = S.label || "Sound on";
+    btn.addEventListener("click", function () { set(!on); });
+    // step aside whenever a video with sound plays, then come back
+    function duck(v) { ducked = v; if (v && voice) { voice.pause(); speaking = false; } musicUpdate(); }
     document.addEventListener("play", function (e) { if (e.target.tagName === "VIDEO" && !e.target.muted) duck(true); }, true);
     document.addEventListener("pause", function (e) { if (e.target.tagName === "VIDEO" && !e.target.muted) duck(false); }, true);
     document.addEventListener("volumechange", function (e) { if (e.target.tagName === "VIDEO") duck(!e.target.muted && !e.target.paused); }, true);
     modal.addEventListener("close", function () { if (ducked) duck(false); });
-    document.addEventListener("visibilitychange", function () { if (!wanted) return; if (document.hidden) audio.pause(); else if (!ducked) play(); });
+    document.addEventListener("visibilitychange", function () { if (!music || !on) return; if (document.hidden) music.pause(); else musicUpdate(); });
   })();
 
   onScroll();

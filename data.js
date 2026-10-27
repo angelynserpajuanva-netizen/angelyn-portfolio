@@ -105,11 +105,22 @@ window.PORTFOLIO = {
     "Since 2021 I've also built user interfaces for enterprise brands at Accenture and Myridius. That's why the details in my ads hold up: clear hierarchy, consistent branding, and nothing left to chance."
   ],
 
-  /* ---------- Soundtrack (optional) ----------
-     Put an MP3 in the site folder and write its name in src, e.g. "soundtrack.mp3".
-     It never autoplays: visitors press the "Play the soundtrack" button.
-     Leave src empty to hide the button. */
-  music: { src: "", title: "Play the soundtrack", volume: 0.35 },
+  /* ---------- Sound (all optional, nothing plays until the visitor presses "Sound on") ----------
+     music.src: an MP3 in the site folder, e.g. "soundtrack.mp3" (loops quietly).
+     voiceLines: one short MP3 per line, played once when that chapter comes into view.
+     Leave a src empty ("") to skip it. */
+  music: { src: "", volume: 0.35 },
+  sound: {
+    label: "Sound on",
+    tick: "tick.mp3",
+    voiceLines: [
+      { at: "#hooks", src: "", text: "You've got three seconds. Starting… now." },
+      { at: "#anatomy", src: "", text: "Still scrolling? Good. That's the whole point." },
+      { at: "#work", src: "", text: "These ads made people stop. Like you just did." },
+      { at: "#storyboard", src: "", text: "Try me before you hire me. It's free." },
+      { at: "#contact", src: "", text: "Okay, you made it to the end. Let's make your ad." }
+    ]
+  },
 
   /* ---------- Contact ---------- */
   contact: {
