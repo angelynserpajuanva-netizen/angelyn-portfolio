@@ -26,6 +26,85 @@ window.PORTFOLIO = {
     intro: "I create cinematic AI videos, product commercials, and scroll-stopping ad creatives using AI-powered production workflows."
   },
 
+  /* ---------- New site copy: written to a client, as one story ----------
+     Every line is about what the client gets. Edit freely. */
+  hero: {
+    kicker: "AI video ads for brands that need attention",
+    // big headline: lead line, then "I make the one they ___" with the last words rolling
+    lead: "Your customers scroll past ads all day.",
+    rollLead: "I make the one they",
+    words: ["stop for.", "remember.", "click.", "buy from."],
+    intro: "I'm Angelyn, an AI video creator. I build every short-form ad around one job: grab your customer in the first 3 seconds, hold them all the way to your product, and give them a reason to act.",
+    proof: ["Skincare · Supplements · Fashion · Cars · Pets", "English · Danish · Taglish", "Client work for NineOne Car Rental"]
+  },
+
+  /* Chapter 2: one real ad broken down beat by beat (frames are beat-01.webp ... beat-08.webp) */
+  anatomy: {
+    project: "nineone-snow-winter",
+    beats: [
+      { t: "0:00", name: "The hook", img: "beat-01.webp",
+        text: "A breaking-news alert: it snowed in Laguna?! On a hot Filipino street, that can't be true, so the viewer stops to find out.",
+        why: "Pattern interrupt" },
+      { t: "0:08", name: "The twist", img: "beat-02.webp",
+        text: "The reporter reveals that Snow and Winter are in Biñan: the two new rental cars, named after their plates. The product arrives as the punchline, not as an ad.",
+        why: "Product as the payoff" },
+      { t: "0:17", name: "The doubt", img: "beat-03.webp",
+        text: "A lolo asks what every customer is thinking: “Aabot ba ’yan hanggang Baguio?” (Can that make it all the way to Baguio?)",
+        why: "Say the objection out loud" },
+      { t: "0:20", name: "The answer", img: "beat-04.webp",
+        text: "An animated route map counts the kilometers and lands on Unlimited Mileage. The objection is answered on screen, not in small print.",
+        why: "Show, don't claim" },
+      { t: "0:24", name: "The offer", img: "beat-05.webp",
+        text: "Rate cards for each destination, from within Laguna to La Union, Baguio and Bicol, so every viewer finds their own price.",
+        why: "Make it personal" },
+      { t: "0:44", name: "The best deal", img: "beat-06.webp",
+        text: "25 days or more: the lowest daily rate, plus free delivery, 24/7 chat and no hidden charges.",
+        why: "Anchor the value" },
+      { t: "0:53", name: "The urgency", img: "beat-07.webp",
+        text: "“Limited units ngayong Pasko! Book na!” (Limited units this Christmas, book now!)",
+        why: "A reason to act today" },
+      { t: "0:55", name: "The call to action", img: "beat-08.webp",
+        text: "One clear end card: the number, the Facebook page, the services and where to find them.",
+        why: "Make the next step easy" }
+    ]
+  },
+
+  skills: [
+    { name: "AI Video Ads", tag: "Product & DTC",
+      text: "A product ad that opens on a hook, shows the problem, reveals your product and ends on a clear call to action.",
+      projects: ["bag-ugc", "sunster-grey-to-golden", "dtc-supplement-vsl", "clay-cartoon"] },
+    { name: "AI Avatars & UGC", tag: "Talking heads",
+      text: "A realistic presenter who talks to your customer the way a creator would, in English, Danish or Taglish.",
+      projects: ["facelove-photo-quiz", "centrum-advance", "ugc-skincare", "viva-blend"] },
+    { name: "Motion Graphics", tag: "AI + motion",
+      text: "Prices, maps, offers and features animated on screen, so the details land without slowing the story down.",
+      projects: ["nineone-snow-winter"] },
+    { name: "AI Animation", tag: "Characters",
+      text: "A mascot or character people remember, who explains your product, from clay-style to 3D cartoon.",
+      projects: ["sunster-mascot", "creatine-explainer", "cozy-clouds", "talking-babies"] },
+    { name: "Scripts & Storyboards", tag: "Pre-production",
+      text: "Already have a team? I write the hook, the script and a scene-by-scene storyboard, plus AI voiceovers matched to your audience.",
+      projects: [], cta: "#storyboard" },
+    { name: "Graphic Design", tag: "Brand visuals",
+      text: "Posters and social graphics in your brand colors and type, to run next to your video ads.",
+      projects: [] }
+  ],
+
+  /* Chapter 5: how working together goes, from the client's side */
+  clientProcess: [
+    { step: "You tell me about the product", text: "Your brand, your customer and your offer. Send your website, references, or just a few lines." },
+    { step: "I find the hook", text: "The angle and the first 3 seconds, with hook options for you to choose from." },
+    { step: "You approve the storyboard", text: "The script and a scene-by-scene plan, before anything is generated." },
+    { step: "I produce the ad", text: "AI scenes with your product and characters kept consistent, plus voiceover, music and captions." },
+    { step: "You get the final cut", text: "Vertical video ready for TikTok, Reels, Shorts and Facebook." }
+  ],
+
+  aboutStory: [
+    "An AI video creator and graphic designer from Nueva Ecija, Philippines. I don't start with a prompt. I start with your customer: what makes them stop, what they doubt, and what makes them buy.",
+    "Then I plan every second: the hook, the script, and a storyboard you can approve. I generate the scenes, keep your product and characters consistent from shot to shot, and finish with voiceover, music and captions.",
+    "Since 2021 I've also built user interfaces for enterprise brands at Accenture and Myridius. That's why the details in my ads hold up: clear hierarchy, consistent branding, and nothing left to chance."
+  ],
+
   /* ---------- Contact ---------- */
   contact: {
     "email": "serpajuanangelyn@gmail.com",
@@ -70,6 +149,20 @@ window.PORTFOLIO = {
     "Social Media Reels",
     "Explainer Videos",
     "Brand Graphics & Posters"
+  ],
+
+  /* ---------- Hook Wall ----------
+     The big sideways-scrolling "You get 3 seconds" section under the hero.
+     id = project to open when clicked, hook = the big line, sub = optional translation. */
+  hookWall: [
+    { id: "facelove-photo-quiz", hook: "One of these photos is me at 40. I'm 60 now." },
+    { id: "dtc-supplement-vsl", hook: "Your brain at 11:47 PM." },
+    { id: "nineone-snow-winter", hook: "Nag-snow sa Laguna?!", sub: "It snowed in Laguna?!" },
+    { id: "clay-cartoon", hook: "I thought he was just getting old." },
+    { id: "sunster-mascot", hook: "Når selvbruneren gør dig orange", sub: "When the self-tanner turns you orange" },
+    { id: "creatine-explainer", hook: "Your muscles have a secret battery." },
+    { id: "bag-ugc", hook: "Your outfit isn't the problem." },
+    { id: "shiesty-zip-hoodie", hook: "POV: the anti-social hoodie" }
   ],
 
   /* ---------- Photo ---------- */
