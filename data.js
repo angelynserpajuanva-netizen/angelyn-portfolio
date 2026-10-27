@@ -105,6 +105,12 @@ window.PORTFOLIO = {
     "Since 2021 I've also built user interfaces for enterprise brands at Accenture and Myridius. That's why the details in my ads hold up: clear hierarchy, consistent branding, and nothing left to chance."
   ],
 
+  /* ---------- Soundtrack (optional) ----------
+     Put an MP3 in the site folder and write its name in src, e.g. "soundtrack.mp3".
+     It never autoplays: visitors press the "Play the soundtrack" button.
+     Leave src empty to hide the button. */
+  music: { src: "", title: "Play the soundtrack", volume: 0.35 },
+
   /* ---------- Contact ---------- */
   contact: {
     "email": "serpajuanangelyn@gmail.com",

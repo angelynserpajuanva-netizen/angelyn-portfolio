@@ -407,7 +407,7 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(placePill);
 
   // previews: hover on desktop, the card in the middle of the screen on phones
-  var centreIO = (!reduce && !fine && !saveData && "IntersectionObserver" in window) ? new IntersectionObserver(function (en) {
+  var centreIO = false && (!reduce && !fine && !saveData && "IntersectionObserver" in window) ? new IntersectionObserver(function (en) {
     en.forEach(function (e) { var host = $(".frame-media", e.target); if (e.isIntersecting) previewVideo(host, e.target.getAttribute("data-preview")); else stopPreview(host); });
   }, { rootMargin: "-42% 0px -42% 0px" }) : null;
   function bindPreviews(root) {
@@ -489,11 +489,11 @@
   deck.addEventListener("click", function (e) {
     var h = e.target.closest(".skill-head"); if (!h) return;
     var el = h.parentNode;
-    // stacked list (tablets and phones): tapping an open panel closes it
-    if (el.classList.contains("open") && window.innerWidth <= 1000) { openSkill(null); return; }
+    // tapping or clicking an open panel closes it (desktop and mobile)
+    if (el.classList.contains("open")) { openSkill(null); return; }
     openSkill(el);
   });
-  if (fine) deck.addEventListener("mouseover", function (e) { var s = e.target.closest(".skill"); if (s && !s.classList.contains("open") && window.innerWidth > 1000) openSkill(s); });
+
   $("#tool-cloud").innerHTML = (D.tools || []).map(function (t, i) { return '<li style="--d:' + (i % 5) + '"><b>' + esc(t.name) + "</b><span>" + esc(t.use || "") + "</span></li>"; }).join("");
 
   /* ================= PROCESS ================= */
@@ -622,6 +622,41 @@
       b.addEventListener("pointerleave", function () { b.style.transform = ""; });
     });
   }
+
+  /* ================= SOUNDTRACK (opt-in, never autoplays) ================= */
+  (function () {
+    var M = D.music || {}, btn = $("#music-btn");
+    if (!btn || !M.src) return;
+    var audio = new Audio(); audio.preload = "none"; audio.loop = true; audio.src = M.src;
+    var target = typeof M.volume === "number" ? M.volume : 0.35, fadeT = null, wanted = false, ducked = false;
+    btn.hidden = false;
+    $(".music-title", btn).textContent = M.title || "Play the soundtrack";
+    function fade(to, done) {
+      clearInterval(fadeT);
+      fadeT = setInterval(function () {
+        var v = audio.volume + (to > audio.volume ? 0.03 : -0.04);
+        if ((to > audio.volume && v >= to) || (to <= audio.volume && v <= to)) { audio.volume = Math.max(0, Math.min(1, to)); clearInterval(fadeT); if (done) done(); }
+        else audio.volume = Math.max(0, Math.min(1, v));
+      }, 40);
+    }
+    function play() { audio.volume = 0; var pr = audio.play(); if (pr && pr.catch) pr.catch(function () { set(false); }); fade(target); }
+    function pause() { fade(0, function () { audio.pause(); }); }
+    function set(on) {
+      wanted = on; btn.classList.toggle("on", on); btn.setAttribute("aria-pressed", String(on));
+      btn.setAttribute("aria-label", on ? "Pause the soundtrack" : "Play the soundtrack");
+      try { localStorage.setItem("asj-music", on ? "1" : "0"); } catch (e) {}
+      if (on && !ducked) play(); else pause();
+    }
+    btn.addEventListener("click", function () { set(!wanted); });
+    audio.addEventListener("error", function () { btn.hidden = true; });
+    // step aside whenever a video with sound is playing, then come back
+    function duck(on) { ducked = on; if (!wanted) return; if (on) pause(); else play(); }
+    document.addEventListener("play", function (e) { if (e.target.tagName === "VIDEO" && !e.target.muted) duck(true); }, true);
+    document.addEventListener("pause", function (e) { if (e.target.tagName === "VIDEO" && !e.target.muted) duck(false); }, true);
+    document.addEventListener("volumechange", function (e) { if (e.target.tagName === "VIDEO") duck(!e.target.muted && !e.target.paused); }, true);
+    modal.addEventListener("close", function () { if (ducked) duck(false); });
+    document.addEventListener("visibilitychange", function () { if (!wanted) return; if (document.hidden) audio.pause(); else if (!ducked) play(); });
+  })();
 
   onScroll();
 })();

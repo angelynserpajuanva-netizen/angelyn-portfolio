@@ -663,3 +663,34 @@ details[open] .tl-more::after { transform: rotate(0); }
 /* giant name: two lines on phones so it stays big */
 .mega-br { display: none; }
 @media (max-width: 600px) { .mega-br { display: inline; } .mega-text { white-space: normal; line-height: .82; } }
+
+/* ---------- Mobile: header stays solid at the very top (no page showing above it) ---------- */
+html { background: var(--bg); }
+.nav::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: 120px; background: inherit; pointer-events: none; }
+@media (max-width: 900px) {
+  .nav { top: 0; }
+  .nav.scrolled { background: rgba(7,9,11,.94); }
+}
+
+/* ---------- Services accordion: a close icon on the open panel (all screens) ---------- */
+.skill.open .skill-head { padding-right: 58px; }
+.skill.open .skill-plus { display: block; right: 22px; top: 50%; margin-top: -7px; }
+.skill-plus::before, .skill-plus::after { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 2px; background: var(--accent); transition: transform .4s var(--ease); }
+.skill-plus::after { transform: rotate(90deg); }
+.skill.open .skill-plus::after { transform: rotate(0); }
+@media (min-width: 1001px) { .skill.open .skill-head { top: 0; height: auto; padding: 22px 58px 22px 20px; } .skill.open .skill-tag { margin-left: auto; } }
+
+/* ---------- Soundtrack button ---------- */
+.music-btn { position: fixed; z-index: 70; left: max(16px, env(safe-area-inset-left, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; gap: 10px;
+  min-height: 46px; padding: 0 18px 0 14px; border-radius: 999px; border: 1px solid rgba(62,224,238,.45); background: rgba(7,9,11,.82); color: var(--fg);
+  font: 600 .86rem/1 var(--f-body); cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 12px 30px -12px rgba(0,0,0,.8);
+  transition: background .25s, color .25s, border-color .25s; animation: musicIn .6s 2.5s var(--ease) both; }
+@keyframes musicIn { from { opacity: 0; transform: translateY(16px); } }
+.music-btn:hover { border-color: var(--accent); }
+.music-btn.on { background: var(--accent); color: #041416; border-color: var(--accent); }
+.music-eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+.music-eq i { width: 3px; height: 100%; border-radius: 1px; background: currentColor; transform-origin: 50% 100%; transform: scaleY(.3); }
+.music-btn.on .music-eq i { animation: eq 1s ease-in-out infinite; }
+.music-btn.on .music-eq i:nth-child(2) { animation-duration: .8s; animation-delay: -.3s; } .music-btn.on .music-eq i:nth-child(3) { animation-duration: 1.15s; animation-delay: -.6s; } .music-btn.on .music-eq i:nth-child(4) { animation-duration: .9s; animation-delay: -.1s; }
+.modal-open .music-btn, .menu-open .music-btn { opacity: 0; pointer-events: none; }
+@media (max-width: 600px) { .music-btn .music-title { display: none; } .music-btn { padding: 0 14px; } }
