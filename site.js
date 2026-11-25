@@ -68,7 +68,7 @@
   $("#ht-rolllead").textContent = H.rollLead || "";
   if (H.kicker) $("#hero-kicker").textContent = H.kicker;
   $("#hero-intro").textContent = H.intro || P.intro || "";
-  $("#proof").innerHTML = ['<li><b>' + projects.length + '</b> ads made</li>'].concat((H.proof || []).map(function (t) { return "<li>" + esc(t) + "</li>"; })).join("");
+  $("#proof").innerHTML = ['<li><b>' + projects.reduce(function (n, p) { return n + Math.max(1, (p.variants || []).length); }, 0) + '</b> ads made</li>'].concat((H.proof || []).map(function (t) { return "<li>" + esc(t) + "</li>"; })).join("");
   var words = H.words && H.words.length ? H.words : ["stop."];
   var wordEl = $("#ht-word"), roll = wordEl.parentNode, wi = 0;
   wordEl.textContent = words[0];
@@ -97,13 +97,47 @@
     }, 2400);
   }
 
-  // floating cover cards behind the showreel
-  var featured = projects.filter(function (p) { return p.featured; });
-  [["#fc1", featured[2] || projects[2]], ["#fc2", featured[1] || projects[1]]].forEach(function (x) {
-    var el = $(x[0]), p = x[1]; if (el && p) el.innerHTML = '<img src="' + esc(p.thumbnail) + '" alt="" decoding="async" fetchpriority="low">';
-  });
+  // video wall: a tilted grid of real hooks playing behind the headline
+  var wall = $("#hw2-tilt"), hero = $("#hero"), heroCopy = $("#hero-copy");
+  var wallList = projects.filter(function (p) { return p.preview && !isWide(p); });
+  var stepprs = wallList.filter(function (p) { return /^stepprs/.test(p.id); }), others = wallList.filter(function (p) { return !/^stepprs/.test(p.id); });
+  var mixed = []; while (stepprs.length || others.length) { if (others.length) mixed.push(others.shift()); if (stepprs.length) mixed.push(stepprs.shift()); if (others.length) mixed.push(others.shift()); }
+  var wallCols = [];
+  function buildWall() {
+    var w = window.innerWidth, cols = w <= 600 ? 4 : w <= 1000 ? 5 : 7, rows = 4;
+    if (wall._cols === cols) return; wall._cols = cols;
+    wall.style.setProperty("--cols", cols);
+    var html = "", k = 0;
+    for (var c = 0; c < cols; c++) {
+      html += '<div class="hw2-col">';
+      for (var r = 0; r < rows; r++) {
+        var p = mixed[k++ % mixed.length];
+        html += '<button type="button" class="hw2-tile" data-open-project="' + esc(p.id) + '" data-src="' + esc(p.preview) + '" style="background-image:url(\'' + esc(p.thumbnail) + '\')" aria-label="Watch ' + esc(p.shortTitle || p.title) + '" tabindex="-1"><b>' + esc(p.shortTitle || p.title) + "</b></button>";
+      }
+      html += "</div>";
+    }
+    wall.innerHTML = html;
+    wallCols = $$(".hw2-col", wall);
+    var tiles = $$(".hw2-tile", wall);
+    tiles.forEach(function (t, i) { setTimeout(function () { t.classList.add("on"); }, reduce ? 0 : 80 + i * 45); });
+    if (reduce || saveData) return;
+    // play every tile that is actually on screen, muted and looping
+    var io = "IntersectionObserver" in window ? new IntersectionObserver(function (en) {
+      en.forEach(function (e) {
+        var t = e.target, v = t._v;
+        if (e.isIntersecting) {
+          if (!v) { v = t._v = document.createElement("video"); v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("muted", ""); v.preload = "auto"; v.src = t.getAttribute("data-src"); v.setAttribute("aria-hidden", "true"); t.insertBefore(v, t.firstChild); }
+          var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+        } else if (v) v.pause();
+      });
+    }, { threshold: 0.15 }) : null;
+    if (io) tiles.forEach(function (t, i) { setTimeout(function () { io.observe(t); }, 300 + i * 60); });
+  }
+  buildWall();
+  window.addEventListener("resize", function () { clearTimeout(buildWall._t); buildWall._t = setTimeout(buildWall, 200); });
 
-  // showreel in the phone frame
+
+  // showreel in the phone frame (muted loop; "Sound on" restarts it with sound)
   var SR = D.showreel || {}, srBox = $("#showreel");
   if (srBox && SR.src) {
     srBox.innerHTML =
@@ -127,34 +161,20 @@
     if (!pageReady) window.addEventListener("load", function () { pageReady = true; srMaybe(); });
     if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { srVisible = en[0].isIntersecting; if (srVisible) srMaybe(); else srv.pause(); }, { threshold: 0.25 }).observe(srBox);
     srState();
-    // running timecode while the reel plays
     var tcEl = $("#stage-tc");
     setInterval(function () {
       if (srv.paused) return;
-      var t = srv.currentTime || 0, s = Math.floor(t);
-      tcEl.textContent = "00:00:" + pad(s % 60) + ":" + pad(Math.floor((t - s) * 24));
+      var t = srv.currentTime || 0, sec = Math.floor(t);
+      tcEl.textContent = "00:00:" + pad(sec % 60) + ":" + pad(Math.floor((t - sec) * 24));
     }, 84);
   }
 
-  // mouse parallax on the hero stage + cinematic exit on scroll
-  var stage = $("#hero-stage"), heroCopy = $("#hero-copy"), hero = $("#hero");
-  var mx = 0, my = 0;
-  if (fine && !reduce) {
-    hero.addEventListener("pointermove", function (e) {
-      var r = hero.getBoundingClientRect();
-      mx = (e.clientX - r.left) / r.width - 0.5; my = (e.clientY - r.top) / r.height - 0.5;
-      heroFx();
-    }, { passive: true });
-  }
+  // columns drift at different speeds as you scroll; the headline lifts away
   function heroFx() {
     if (reduce) return;
-    var y = Math.min(window.scrollY, vh()), k = y / vh();
-    if (y > vh() * 1.2) return;
-    heroCopy.style.transform = "translate3d(0," + (-y * 0.18).toFixed(1) + "px,0)";
-    heroCopy.style.opacity = String(Math.max(0.15, 1 - k * 0.9).toFixed(3));
-    $("#showreel").style.transform = "translate3d(" + (mx * -10).toFixed(1) + "px," + (y * 0.06 + my * -10).toFixed(1) + "px,0) scale(" + (1 - k * 0.06).toFixed(3) + ")";
-    $("#fc1").style.transform = "translate3d(" + (mx * 26).toFixed(1) + "px," + (-y * 0.12 + my * 20).toFixed(1) + "px,0) rotate(-9deg)";
-    $("#fc2").style.transform = "translate3d(" + (mx * 34).toFixed(1) + "px," + (-y * 0.22 + my * 26).toFixed(1) + "px,0) rotate(8deg)";
+    var y = Math.min(window.scrollY, vh() * 1.2), k = y / vh();
+    if (window.scrollY > vh() * 1.4) return;
+    wallCols.forEach(function (c, i) { c.style.transform = "translate3d(0," + (-y * (i % 2 ? 0.32 : 0.14)).toFixed(1) + "px,0)"; });
   }
   scrollFns.push(heroFx);
 
@@ -181,6 +201,51 @@
     };
     requestAnimationFrame(ribLoop);
   }
+
+  /* ================= HOOK LAB: four hooks, one ad ================= */
+  (function () {
+    var sets = D.hookLab || [], box = $("#hl-phones"); if (!box || !sets.length) return;
+    var setBox = $("#hl-sets"), note = $("#hl-note"), cur = 0, inView = false, live = -1, vids = [], bars = [];
+    var snd = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>';
+    setBox.innerHTML = sets.map(function (s, i) { return '<button type="button" class="hl-set" aria-pressed="' + (i === 0) + '" data-i="' + i + '">' + esc(s.name) + "</button>"; }).join("");
+    function playAll() { if (!inView) return; vids.forEach(function (v) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }); }
+    function restart() { vids.forEach(function (v) { try { v.currentTime = 0; } catch (e) {} }); playAll(); }
+    function render() {
+      var s = sets[cur], p = byId(s.project) || {}, vs = p.variants || [];
+      note.textContent = s.note || "";
+      live = -1;
+      box.innerHTML = vs.slice(0, 4).map(function (v, i) {
+        return '<button type="button" class="hl-phone" data-i="' + i + '" aria-label="Hook ' + "ABCD"[i] + ": " + esc(v.hook) + ', play with sound">' +
+          '<span class="hl-screen"><video muted playsinline preload="metadata" poster="' + esc(v.thumbnail) + '" src="' + esc(v.src.replace(/\.mp4$/, "-hook.mp4")) + '"></video>' +
+          '<span class="hl-bar"><i></i></span><span class="hl-tag">Hook ' + "ABCD"[i] + '</span><span class="hl-snd">' + snd + "</span></span>" +
+          '<span class="hl-line">' + esc(v.hook) + "</span></button>";
+      }).join("");
+      vids = $$("video", box); bars = $$(".hl-bar i", box);
+      if (vids[0]) vids[0].addEventListener("ended", restart);
+      restart();
+    }
+    setBox.addEventListener("click", function (e) {
+      var b = e.target.closest(".hl-set"); if (!b) return;
+      cur = +b.getAttribute("data-i");
+      $$(".hl-set", setBox).forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      render();
+    });
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest(".hl-phone"); if (!b) return;
+      var i = +b.getAttribute("data-i");
+      live = live === i ? -1 : i;
+      $$(".hl-phone", box).forEach(function (x, j) { x.classList.toggle("live", j === live); vids[j].muted = j !== live; });
+      if (live >= 0) restart();
+    });
+    $("#hl-watch").addEventListener("click", function (e) { openProject(sets[cur].project, e.currentTarget); });
+    (function tick() { if (inView && vids[0] && vids[0].duration) { var k = vids[0].currentTime / vids[0].duration; bars.forEach(function (b) { b.style.transform = "scaleX(" + k.toFixed(3) + ")"; }); } requestAnimationFrame(tick); })();
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (en) {
+      inView = en[0].isIntersecting;
+      if (inView) playAll(); else { vids.forEach(function (v) { v.pause(); v.muted = true; }); live = -1; $$(".hl-phone", box).forEach(function (x) { x.classList.remove("live"); }); }
+    }, { threshold: 0.2 }).observe(box);
+    else inView = true;
+    render();
+  })();
 
   /* ================= MEDIA HELPERS ================= */
   function cover(p, eager) {
@@ -312,6 +377,63 @@
     layout();
   })();
 
+
+  /* ================= FEATURED FILMS (one plays at a time) ================= */
+  (function () {
+    var box = $("#films-list"), F = (D.films || []).map(function (f) { var p = byId(f.id); return p ? { p: p, why: f.why } : null; }).filter(Boolean);
+    if (!box || !F.length) { var fs = $("#films"); if (fs) fs.hidden = true; return; }
+    var snd = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg>';
+    box.innerHTML = F.map(function (f, i) {
+      var p = f.p;
+      return '<article class="film is-paused' + (i % 2 ? " flip" : "") + '" data-i="' + i + '">' +
+        '<div class="film-glow" aria-hidden="true" style="background-image:url(\'' + esc(p.thumbnail) + '\')"></div>' +
+        '<div class="wrap film-inner">' +
+          '<div class="film-stage"><video class="film-video" muted playsinline loop preload="none" poster="' + esc(p.thumbnail) + '" src="' + esc(p.video && p.video.src) + '" aria-label="' + esc(p.title) + '" controlslist="nodownload" disablepictureinpicture></video>' +
+            '<span class="film-bar" aria-hidden="true"><i></i></span><span class="film-play" aria-hidden="true"><span></span></span>' +
+            '<button type="button" class="film-sound" aria-pressed="false">' + snd + "<span>Sound on</span></button></div>" +
+          '<div class="film-copy"><p class="film-n"><b>Film ' + pad(i + 1) + " / " + pad(F.length) + "</b> · " + esc(p.category) + " · " + esc(p.duration || "") + "</p>" +
+            '<h3 class="film-title">' + esc(p.shortTitle || p.title) + "</h3>" +
+            '<p class="film-hook">“' + esc(p.cardHook || p.hook || "") + "”</p>" +
+            '<p class="film-why">' + esc(f.why) + "</p>" +
+            '<button type="button" class="btn btn-line" data-open-project="' + esc(p.id) + '"><span>How it was made</span></button></div>' +
+        "</div></article>";
+    }).join("");
+    var films = $$(".film", box), vids = films.map(function (f) { return $("video", f); }), userStopped = films.map(function () { return reduce; });
+    function state(i) { films[i].classList.toggle("is-paused", vids[i].paused); films[i].classList.toggle("has-sound", !vids[i].muted); var b = $(".film-sound", films[i]); b.setAttribute("aria-pressed", String(!vids[i].muted)); $("span", b).textContent = vids[i].muted ? "Sound on" : "Sound off"; }
+    function pauseAll(except) { vids.forEach(function (v, k) { if (k !== except && !v.paused) v.pause(); }); }
+    function play(i) { pauseAll(i); var pr = vids[i].play(); if (pr && pr.catch) pr.catch(function () { state(i); }); }
+    function quietOthers() { $$("audio").forEach(function (a) { if (!a.paused) a.pause(); }); var mb = $("#music-btn"); if (mb && mb.classList.contains("on")) mb.click(); }
+    vids.forEach(function (v, i) {
+      v.addEventListener("play", function () { state(i); }); v.addEventListener("pause", function () { state(i); });
+      v.addEventListener("volumechange", function () { state(i); });
+      v.addEventListener("timeupdate", function () { if (v.duration) $(".film-bar i", films[i]).style.transform = "scaleX(" + (v.currentTime / v.duration).toFixed(3) + ")"; });
+    });
+    box.addEventListener("click", function (e) {
+      var f = e.target.closest(".film"); if (!f) return;
+      if (e.target.closest("[data-open-project]")) { pauseAll(-1); return; }
+      var i = +f.getAttribute("data-i"), v = vids[i];
+      if (e.target.closest(".film-sound")) {
+        if (v.muted) { v.muted = false; v.currentTime = 0; quietOthers(); userStopped[i] = false; play(i); } else v.muted = true;
+        return;
+      }
+      if (e.target.closest(".film-stage")) {
+        if (v.paused) { userStopped[i] = false; if (v.muted) { v.muted = false; v.currentTime = 0; quietOthers(); } play(i); }
+        else { userStopped[i] = true; v.pause(); }
+      }
+    });
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          var i = films.indexOf(e.target.closest(".film"));
+          if (e.intersectionRatio >= 0.55) { if (!userStopped[i]) play(i); }
+          else if (!vids[i].paused) vids[i].pause();
+        });
+      }, { threshold: [0, 0.55] });
+      films.forEach(function (f) { io.observe($(".film-stage", f)); });
+    }
+    document.addEventListener("click", function (e) { if (e.target.closest && e.target.closest(".frame[data-id], [data-open-project]")) pauseAll(-1); }, true);
+  })();
+
   /* ================= INSIDE ONE AD (beat-by-beat breakdown) ================= */
   (function () {
     var A = D.anatomy, list = $("#an-beats");
@@ -319,7 +441,7 @@
     var proj = byId(A.project), beats = A.beats || [];
     var toSec = function (t) { var m = String(t).split(":"); return (+m[0]) * 60 + (+m[1] || 0); };
     var total = proj && proj.duration ? toSec(proj.duration) : 60;
-    $("#an-sub").textContent = "Here's how my " + (proj ? proj.duration + " " : "") + "ad for NineOne Car Rental moves a viewer from “wait, what?” to “book now”, one beat at a time.";
+    $("#an-sub").textContent = "Here's how my " + (proj ? proj.duration + " " : "") + "ad for " + (A.brand || "NineOne Car Rental") + " moves a viewer " + (A.promise || "from “wait, what?” to “book now”") + ", one beat at a time.";
     $("#an-len").textContent = proj ? proj.duration : "";
     $("#an-frames").innerHTML = beats.map(function (b, i) { return '<img src="' + esc(b.img) + '" alt="" loading="lazy" decoding="async" class="' + (i === 0 ? "on" : "") + '">'; }).join("");
     list.innerHTML = beats.map(function (b, i) {
@@ -392,7 +514,7 @@
     btn.classList.toggle("is-less", showAll);
     bindPreviews(grid);
     var cnt = $("#work-count");
-    if (cnt) cnt.textContent = "Chapter 03 · The proof · " + list.length + (list.length === 1 ? " ad" : " ads") + (activeCat === "All" ? "" : " · " + activeCat);
+    if (cnt) cnt.textContent = "Panel 05 / 11 · The proof · " + list.length + (list.length === 1 ? " ad" : " ads") + (activeCat === "All" ? "" : " · " + activeCat);
   }
   filters.addEventListener("click", function (e) {
     var b = e.target.closest(".chip"); if (!b) return;
@@ -452,9 +574,21 @@
     var media = $("#modal-media");
     media.className = "modal-media" + (isWide(p) ? " wide" : "");
     media.innerHTML = '<div class="player" style="--ar:' + (p.aspect || "9:16").replace(":", "/") + '"><video controls autoplay playsinline preload="auto" poster="' + esc(p.thumbnail) + '" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback src="' + esc(p.video && p.video.src) + '"></video></div>';
+    var vs = p.variants || [];
+    if (vs.length > 1) {
+      media.insertAdjacentHTML("beforeend", '<div class="variants" role="group" aria-label="Hook variations"><p class="label">' + vs.length + " hook variations</p>" +
+        vs.map(function (v, i) { return '<button type="button" class="var-btn" aria-pressed="' + (i === 0) + '" data-v="' + i + '"><img src="' + esc(v.thumbnail) + '" alt="" loading="lazy"><span>' + esc(v.label) + "</span></button>"; }).join("") + "</div>");
+      $(".variants", media).addEventListener("click", function (e) {
+        var b = e.target.closest(".var-btn"); if (!b) return;
+        var v = vs[+b.getAttribute("data-v")], vid = $("video", media);
+        $$(".var-btn", media).forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        vid.poster = v.thumbnail; vid.src = v.src; vid.play && vid.play().catch(function () {});
+        var hk = $('#modal-details [data-k="hook"]'); if (hk && v.hook) hk.textContent = v.hook;
+      });
+    }
     $("#modal-details").innerHTML = Object.keys(labels).map(function (k) {
-      var v = p[k]; if (!has(v)) return "";
-      return "<div><dt>" + labels[k] + "</dt><dd>" + (Array.isArray(v) ? '<span class="tags">' + v.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</span>" : esc(v)) + "</dd></div>";
+      var v = p[k]; if (k === "hook" && vs.length && vs[0].hook) v = vs[0].hook; if (!has(v)) return "";
+      return "<div><dt>" + labels[k] + '</dt><dd data-k="' + k + '">' + (Array.isArray(v) ? '<span class="tags">' + v.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</span>" : esc(v)) + "</dd></div>";
     }).join("");
     if (modal.showModal) modal.showModal(); else modal.setAttribute("open", "");
     document.documentElement.classList.add("modal-open");

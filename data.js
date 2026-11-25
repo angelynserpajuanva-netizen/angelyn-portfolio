@@ -34,45 +34,65 @@ window.PORTFOLIO = {
     lead: "Your customers scroll past ads all day.",
     rollLead: "I make the one they",
     words: ["stop for.", "remember.", "click.", "buy from."],
-    intro: "I'm Angelyn, an AI video creator. I build every short-form ad around one job: grab your customer in the first 3 seconds, hold them all the way to your product, and give them a reason to act.",
-    proof: ["Skincare · Supplements · Fashion · Cars · Pets", "English · Danish · Taglish", "Client work for NineOne Car Rental"]
+    intro: "I'm Angelyn. I make short-form ads that stop your customer in the first 3 seconds and carry them all the way to your product.",
+    proof: ["Ads for an 8-figure e-commerce brand", "English · Danish · Taglish"]
   },
 
-  /* Chapter 2: one real ad broken down beat by beat (frames are beat-01.webp ... beat-08.webp) */
+  /* Chapter 3: one real ad broken down beat by beat (frames are fam-beat-01.webp ... fam-beat-08.webp).
+     brand / promise fill the intro line under the heading. */
   anatomy: {
-    project: "nineone-snow-winter",
+    project: "stepprs-xmas-fam",
+    brand: "Stepprs",
+    promise: "from “insoles? for Christmas?” to a five-pair order",
     beats: [
-      { t: "0:00", name: "The hook", img: "beat-01.webp",
-        text: "A breaking-news alert: it snowed in Laguna?! On a hot Filipino street, that can't be true, so the viewer stops to find out.",
-        why: "Pattern interrupt" },
-      { t: "0:08", name: "The twist", img: "beat-02.webp",
-        text: "The reporter reveals that Snow and Winter are in Biñan: the two new rental cars, named after their plates. The product arrives as the punchline, not as an ad.",
-        why: "Product as the payoff" },
-      { t: "0:17", name: "The doubt", img: "beat-03.webp",
-        text: "A lolo asks what every customer is thinking: “Aabot ba ’yan hanggang Baguio?” (Can that make it all the way to Baguio?)",
-        why: "Say the objection out loud" },
-      { t: "0:20", name: "The answer", img: "beat-04.webp",
-        text: "An animated route map counts the kilometers and lands on Unlimited Mileage. The objection is answered on screen, not in small print.",
-        why: "Show, don't claim" },
-      { t: "0:24", name: "The offer", img: "beat-05.webp",
-        text: "Rate cards for each destination, from within Laguna to La Union, Baguio and Bicol, so every viewer finds their own price.",
-        why: "Make it personal" },
-      { t: "0:44", name: "The best deal", img: "beat-06.webp",
-        text: "25 days or more: the lowest daily rate, plus free delivery, 24/7 chat and no hidden charges.",
-        why: "Anchor the value" },
-      { t: "0:53", name: "The urgency", img: "beat-07.webp",
-        text: "“Limited units ngayong Pasko! Book na!” (Limited units this Christmas, book now!)",
-        why: "A reason to act today" },
-      { t: "0:55", name: "The call to action", img: "beat-08.webp",
-        text: "One clear end card: the number, the Facebook page, the services and where to find them.",
-        why: "Make the next step easy" }
+      { t: "0:00", name: "The hook", img: "fam-beat-01.webp",
+        text: "“I know it's not even December yet, but I've already figured out what I'm getting my entire family for Christmas.” Every holiday shopper wants that answer.",
+        why: "Open a loop" },
+      { t: "0:10", name: "The objection", img: "fam-beat-02.webp",
+        text: "The insoles appear, and she says what the viewer is thinking: “Insoles don't sound like the most exciting Christmas present, but hear me out.”",
+        why: "Say the doubt out loud" },
+      { t: "0:16", name: "Dad", img: "fam-beat-03.webp",
+        text: "He's in steel-toe boots all day and comes home complaining about his feet. The first core customer, shown in his warehouse.",
+        why: "Customer one: the boot wearer" },
+      { t: "0:26", name: "Mum", img: "fam-beat-04.webp",
+        text: "A nurse on 12-hour shifts who barely sits down. Arch support and massage-point cushioning land as callouts while she walks the corridor.",
+        why: "Customer two: the shift worker" },
+      { t: "0:37", name: "Brother", img: "fam-beat-05.webp",
+        text: "He's tried so many different shoes for his heel pain. Supportive arches and shock-absorbing cushioning, framed as comfort, never as a cure.",
+        why: "Customer three: tried everything" },
+      { t: "0:48", name: "Grandma", img: "fam-beat-06.webp",
+        text: "Her feet are sore by the end of every day. The checklist ticks off one more name, and every viewer has spotted someone they're buying for.",
+        why: "Everyone sees their own family" },
+      { t: "1:03", name: "The offer", img: "fam-beat-07.webp",
+        text: "Five labelled pairs, one per person. The Black Friday deal: five pairs for less than the price of two.",
+        why: "Make the bundle the obvious buy" },
+      { t: "1:14", name: "The safety net", img: "fam-beat-08.webp",
+        text: "A 90-day money-back guarantee, then the close: “If you're stuck on what to get your family this Christmas, this is one Black Friday deal worth grabbing.”",
+        why: "Remove the last risk" }
     ]
   },
+
+  /* Chapter 2: hook testing. Each set plays the first 6 s of its 4 variations (files named <variant>-hook.mp4). */
+  hookLab: [
+    { name: "BFCM Gift for Him", project: "stepprs-solebrace", note: "Same kitchen, same body, same offer. Only the opening line changes." },
+    { name: "3, 2, 1 Reveal", project: "stepprs-321-reveal", note: "Same countdown reveal, four different customers and their pain." },
+    { name: "Never Again", project: "stepprs-neveragain", note: "Same structure, four different jobs, four different complaints." }
+  ],
+
+  /* Featured films: shown large, one at a time, right after the hook wall */
+  films: [
+    { id: "dgraca-brut", why: "Real bottle, foil and label footage cut together with AI scenes into one candlelit world, so the product looks exactly as it does on the shelf." },
+    { id: "facelove-photo-quiz", why: "A guessing game in the first second turns viewers into players, and the story of her skin 12 weeks ago keeps them watching to the end." },
+    { id: "stepprs-xmas-fam", why: "One Christmas list speaks to three different customers at once, then lands on a five-pair Black Friday bundle." }
+  ],
 
   skills: [
     { name: "AI Video Ads", tag: "Product & DTC",
       text: "A product ad that opens on a hook, shows the problem, reveals your product and ends on a clear call to action.",
-      projects: ["bag-ugc", "sunster-grey-to-golden", "dtc-supplement-vsl", "clay-cartoon"] },
+      projects: ["dgraca-brut", "bag-ugc", "sunster-grey-to-golden", "dtc-supplement-vsl"] },
+    { name: "Claude Video Automation", tag: "Claude Code pipelines",
+      text: "I use Claude Code to automate the edit: one script builds all 4 hook variations, checks AI clips frame by frame for glitches and logo errors, adds captions and graphics, and exports platform-ready files. More versions to test, faster.",
+      projects: ["stepprs-solebrace", "stepprs-321-reveal", "stepprs-everyx", "stepprs-neveragain"] },
     { name: "AI Avatars & UGC", tag: "Talking heads",
       text: "A realistic presenter who talks to your customer the way a creator would, in English, Danish or Taglish.",
       projects: ["facelove-photo-quiz", "centrum-advance", "ugc-skincare", "viva-blend"] },
@@ -101,7 +121,7 @@ window.PORTFOLIO = {
 
   aboutStory: [
     "An AI video creator and graphic designer from Nueva Ecija, Philippines. I don't start with a prompt. I start with your customer: what makes them stop, what they doubt, and what makes them buy.",
-    "Then I plan every second: the hook, the script, and a storyboard you can approve. I generate the scenes, keep your product and characters consistent from shot to shot, and finish with voiceover, music and captions.",
+    "Then I plan every second: the hook, the script, and a storyboard you can approve. I generate the scenes, keep your product and characters consistent from shot to shot, and finish with voiceover, music and captions. Most recently I made paid-social ads for an 8-figure e-commerce brand, with Claude Code automating the build so every brief shipped as 4 hook variations.",
     "Since 2021 I've also built user interfaces for enterprise brands at Accenture and Myridius. That's why the details in my ads hold up: clear hierarchy, consistent branding, and nothing left to chance."
   ],
 
@@ -201,6 +221,208 @@ window.PORTFOLIO = {
      if they're wrong. Any field left "" is hidden on the site.
   ------------------------------------------------------------------- */
   projects: [
+    /* ---- Stepprs: paid-social work for an 8-figure e-commerce brand (Nov 2026) ----
+       variants: extra hook versions shown as switchable tabs in the video dialog. */
+    {
+      "id": "stepprs-321-reveal",
+      "title": "Stepprs: 3, 2, 1 Reveal (4 Hook Variations)",
+      "shortTitle": "Stepprs: 3, 2, 1 Reveal",
+      "category": "8-Figure E-commerce",
+      "aspect": "9:16",
+      "featured": true,
+      "video": { "type": "file", "src": "stepprs-321-steeltoe.mp4" },
+      "thumbnail": "stepprs-321-steeltoe.webp",
+      "preview": "stepprs-321-steeltoe-p.mp4",
+      "variants": [
+        { "label": "Steel toe", "src": "stepprs-321-steeltoe.mp4", "thumbnail": "stepprs-321-steeltoe.webp", "hook": "My feet are killing me after work. Me: 3, 2, 1…" },
+        { "label": "Everyday pain", "src": "stepprs-321-girlfriend.mp4", "thumbnail": "stepprs-321-girlfriend.webp", "hook": "My feet hurt every single day. Me: 3, 2, 1…" },
+        { "label": "Heel pain", "src": "stepprs-321-heelpain.mp4", "thumbnail": "stepprs-321-heelpain.webp", "hook": "I hate waking up with heel pain. Me: 3, 2, 1…" },
+        { "label": "Walker", "src": "stepprs-321-walker.mp4", "thumbnail": "stepprs-321-walker.webp", "hook": "How do you walk 10k steps every day? Me: 3, 2, 1…" }
+      ],
+      "summary": "Four 11-second shareable reveal ads for Stepprs massage insoles. A towel or hi-vis vest hides the shoes, a voice counts down 3, 2, 1, and the bright orange insoles are pulled out from under it, then pressed and walked on. Each version speaks to a different customer.",
+      "audience": "Shift workers in steel-toe boots, people with everyday foot pain, people with morning heel pain, and daily walkers",
+      "objective": "Get the ad shared: every version ends on a “send this to…” caption aimed at the viewer's friends or coworkers.",
+      "concept": "A dropship-style countdown reveal. The orange glowing through a thin white towel teases the product before the pull.",
+      "hook": "One relatable complaint on screen (“My feet are killing me after work”), then “Me:” and a spoken 3, 2, 1 countdown.",
+      "production": "AI scenes from approved keyframes in Google Flow, with the real Stepprs heel logo and node layout checked frame by frame and corrected where the AI got it wrong. Orange step-glow rings on the walk-out.",
+      "tools": ["Google Flow", "Nano Banana", "Gemini (voice)", "Claude Code", "FFmpeg"],
+      "editing": "Cuts timed to the reference's beat, a caption swap from the complaint to the share line, countdown voiceover over the music bed, mixed to -14 LUFS.",
+      "deliverables": "4 vertical (9:16) ads, about 11 seconds each, for TikTok, Reels, Meta and Snapchat.",
+      "cardHook": "My feet are killing me after work. Me: 3, 2, 1…",
+      "duration": "0:11"
+    },
+    {
+      "id": "stepprs-everyx",
+      "title": "Stepprs: Everyone with Plantar Fasciitis Needs This (4 Hook Variations)",
+      "shortTitle": "Stepprs: Needs to See This",
+      "category": "8-Figure E-commerce",
+      "aspect": "9:16",
+      "featured": false,
+      "video": { "type": "file", "src": "stepprs-everyx-v1.mp4" },
+      "thumbnail": "stepprs-everyx-v1.webp",
+      "preview": "stepprs-everyx-v1-p.mp4",
+      "variants": [
+        { "label": "Needs this", "src": "stepprs-everyx-v1.mp4", "thumbnail": "stepprs-everyx-v1.webp", "hook": "Everyone with PLANTAR FASCIITIS needs this" },
+        { "label": "Nobody talks", "src": "stepprs-everyx-v2.mp4", "thumbnail": "stepprs-everyx-v2.webp", "hook": "Nobody talks about THIS part of PLANTAR FASCIITIS" },
+        { "label": "Thank me later", "src": "stepprs-everyx-v3.mp4", "thumbnail": "stepprs-everyx-v3.webp", "hook": "PLANTAR FASCIITIS sufferers… THANK ME LATER" },
+        { "label": "Every morning", "src": "stepprs-everyx-v4.mp4", "thumbnail": "stepprs-everyx-v4.webp", "hook": "If your heels hurt EVERY morning, watch this" }
+      ],
+      "summary": "Four 10-second before-and-after ads. A different person in each version sits on the bed gripping a sore heel, the insole slides into their sneaker, and they walk toward the camera smiling.",
+      "audience": "Adults 35+ with first-step-in-the-morning heel pain",
+      "objective": "Stop people who already know the problem and show relief in under 10 seconds.",
+      "concept": "Copy a proven reference ad's format and timing (one before/after cut at 6 seconds) and swap in four different hooks and characters.",
+      "hook": "A bold callout caption over the pain moment, e.g. “Everyone with PLANTAR FASCIITIS needs this”.",
+      "production": "AI before/after scenes in Google Flow with real brand footage for the insole insert, so the product is always accurate. Characters, props and set checked for continuity across shots.",
+      "tools": ["Google Flow", "Nano Banana", "Claude Code", "FFmpeg"],
+      "editing": "Hard cut and short dissolves on the music beat, one caption for the whole ad, music only.",
+      "deliverables": "4 vertical (9:16) ads, 10 seconds each.",
+      "cardHook": "Everyone with PLANTAR FASCIITIS needs this",
+      "duration": "0:10"
+    },
+    {
+      "id": "stepprs-neveragain",
+      "title": "Stepprs: I'm NEVER… Again (4 Hook Variations)",
+      "shortTitle": "Stepprs: Never Again",
+      "category": "8-Figure E-commerce",
+      "aspect": "9:16",
+      "featured": false,
+      "video": { "type": "file", "src": "stepprs-neveragain-v1.mp4" },
+      "thumbnail": "stepprs-neveragain-v1.webp",
+      "preview": "stepprs-neveragain-v1-p.mp4",
+      "variants": [
+        { "label": "Steel-toe boots", "src": "stepprs-neveragain-v1.mp4", "thumbnail": "stepprs-neveragain-v1.webp", "hook": "I'm NEVER wearing steel-toe boots again" },
+        { "label": "Mornings", "src": "stepprs-neveragain-v2.mp4", "thumbnail": "stepprs-neveragain-v2.webp", "hook": "I'm NEVER getting out of bed again" },
+        { "label": "Concrete floors", "src": "stepprs-neveragain-v3.mp4", "thumbnail": "stepprs-neveragain-v3.webp", "hook": "I'm DONE walking on concrete for 10 hours a day" },
+        { "label": "Quit my job", "src": "stepprs-neveragain-v4.mp4", "thumbnail": "stepprs-neveragain-v4.webp", "hook": "My feet are BEGGING me to quit my job" }
+      ],
+      "summary": "Four 12-second comedy ads. A construction worker, a man getting out of bed, a warehouse worker and a store worker are fed up with their feet, then the insoles arrive and each one ends jumping for joy.",
+      "audience": "Steel-toe boot wearers, 12-hour shift workers and people with morning foot pain",
+      "objective": "Turn a dramatic, relatable complaint into a quick before-and-after that ends on the product.",
+      "concept": "Two captions only: the dramatic “I'm NEVER…” complaint, then the payoff (“The insoles that changed my life”).",
+      "hook": "“I'm NEVER wearing steel-toe boots again 😩” on a worker sitting on a pallet, rubbing his foot.",
+      "production": "AI characters in Google Flow, with real Stepprs footage for unboxing and product shots so the logo and nodes are always correct. Props and set dressing kept consistent shot to shot.",
+      "tools": ["Google Flow", "Claude Code", "FFmpeg", "Demucs (audio cleanup)"],
+      "editing": "Cut times, caption style and audio copied from the brand's reference ad, unboxing sounds cleaned from the music track.",
+      "deliverables": "4 vertical (9:16) ads, 12.3 seconds each.",
+      "cardHook": "I'm NEVER wearing steel-toe boots again",
+      "duration": "0:12"
+    },
+    {
+      "id": "stepprs-solebrace",
+      "title": "Stepprs: Black Friday Gift for Him (4 Hook Variations)",
+      "shortTitle": "Stepprs: BFCM Gift for Him",
+      "category": "8-Figure E-commerce",
+      "aspect": "9:16",
+      "featured": false,
+      "video": { "type": "file", "src": "stepprs-solebrace-v1.mp4" },
+      "thumbnail": "stepprs-solebrace-v1.webp",
+      "preview": "stepprs-solebrace-v1-p.mp4",
+      "variants": [
+        { "label": "On his feet", "src": "stepprs-solebrace-v1.mp4", "thumbnail": "stepprs-solebrace-v1.webp", "hook": "If your husband works on his feet all day…" },
+        { "label": "Steel toe boots", "src": "stepprs-solebrace-v2.mp4", "thumbnail": "stepprs-solebrace-v2.webp", "hook": "If your husband wears steel toe boots…" },
+        { "label": "Works hard", "src": "stepprs-solebrace-v3.mp4", "thumbnail": "stepprs-solebrace-v3.webp", "hook": "For the men who work hard for their families ❤️" },
+        { "label": "Hard worker", "src": "stepprs-solebrace-v4.mp4", "thumbnail": "stepprs-solebrace-v4.webp", "hook": "If your husband is a hard worker" }
+      ],
+      "summary": "Four 50-second Black Friday ads aimed at wives buying for their husbands. A woman in her kitchen holds up the insoles and explains why her husband needs them, with b-roll of him at work, benefit chips and an “up to 75% off” offer card.",
+      "audience": "Women shopping for a husband who works on his feet",
+      "objective": "Sell Stepprs as the Black Friday gift for the hard worker in the family.",
+      "concept": "A gift-giver talking head: one hook line per version, the same proven body, and the offer at the end.",
+      "hook": "“If your husband works on his feet all day…” as the top banner over the insoles in hand.",
+      "production": "Kitchen scenes generated in Google Flow from six real product reference photos, so the heel logo and nodes came out right. Frozen frames at the end of AI clips found and cut automatically.",
+      "tools": ["Google Flow", "Gemini (voice)", "Claude Code", "FFmpeg"],
+      "editing": "Word-by-word captions, a Black Friday banner, a b-roll picture-in-picture window, benefit chips and an offer card, all laid out above the Meta 4:5 safe line. Voiceover kept at natural speed, mixed to -14 LUFS.",
+      "deliverables": "4 vertical (9:16) ads, about 50 seconds each.",
+      "cardHook": "If your husband works on his feet all day…",
+      "duration": "0:50"
+    },
+    {
+      "id": "stepprs-doctor-tierlist",
+      "title": "Stepprs: Doctor Ranks Insoles (Tier List)",
+      "shortTitle": "Stepprs: Insole Tier List",
+      "category": "8-Figure E-commerce",
+      "aspect": "9:16",
+      "featured": false,
+      "video": { "type": "file", "src": "stepprs-doctor-tierlist.mp4" },
+      "thumbnail": "stepprs-doctor-tierlist.webp",
+      "preview": "stepprs-doctor-tierlist-p.mp4",
+      "summary": "A 74-second expert-style ad. A doctor on camera ranks popular insoles from S to D tier, from custom orthotics and drugstore brands down to cheap marketplace pairs, and explains why Stepprs earns the top spot.",
+      "audience": "Problem-aware shoppers comparing insoles before they buy",
+      "objective": "Win the comparison: answer “why not just buy the cheap ones?” before the viewer asks.",
+      "concept": "The tier-list format people already binge: the ranking builds curiosity, and every placement is a reason to believe.",
+      "hook": "An expert talking head with an empty S–D tier board below him.",
+      "production": "AI doctor presenter with product logos dropped into the tier board as he talks.",
+      "tools": ["AI avatar", "Claude Code", "FFmpeg"],
+      "editing": "Word-by-word captions between the presenter and the animated tier board, product cut-ins when Stepprs lands.",
+      "deliverables": "74-second vertical (9:16) ad.",
+      "cardHook": "A doctor ranks every insole, S tier to D tier.",
+      "duration": "1:14"
+    },
+    {
+      "id": "stepprs-xmas-fam",
+      "title": "Stepprs: What I'm Getting My Whole Fam for Xmas",
+      "shortTitle": "Stepprs: Xmas Fam List",
+      "category": "8-Figure E-commerce",
+      "aspect": "9:16",
+      "featured": false,
+      "video": { "type": "file", "src": "stepprs-xmas-fam.mp4" },
+      "thumbnail": "stepprs-xmas-fam.webp",
+      "preview": "stepprs-xmas-fam-p.mp4",
+      "summary": "An 86-second holiday UGC ad. A creator at her kitchen table walks through her Christmas list, ticking off Dad, Mum, her brother and Grandma, and shows why everyone is getting a pair of Stepprs this Black Friday.",
+      "audience": "Holiday shoppers buying for the whole family",
+      "objective": "Make Stepprs the easy Black Friday gift for everyone on the list, and drive multi-pair orders.",
+      "concept": "A “my Xmas list” checklist: each family member gets a quick scene showing why their feet hurt, then a five-pair reveal.",
+      "hook": "“What I'm getting my whole fam for Xmas” over a cozy creator talking to camera.",
+      "production": "AI family scenes in Google Flow (Dad in the warehouse, Mum in a corridor, Grandma at home) mixed with real Stepprs footage for every product moment. Heel logos tracked and fixed frame by frame where needed. Revised through a client feedback round.",
+      "tools": ["Google Flow", "Whisper (transcript checks)", "Claude Code", "FFmpeg"],
+      "editing": "Animated checklist with ticks, word-by-word captions, a five-pairs reveal, a 90-day guarantee badge and a warm grade on the creator footage.",
+      "deliverables": "86-second vertical (9:16) ad, part of a 4-hook set.",
+      "cardHook": "What I'm getting my whole fam for Xmas",
+      "duration": "1:26"
+    },
+    {
+      "id": "stepprs-bf-urgency",
+      "title": "Stepprs: Black Friday, Ends Midnight",
+      "shortTitle": "Stepprs: BF Ends Midnight",
+      "category": "8-Figure E-commerce",
+      "aspect": "9:16",
+      "featured": false,
+      "video": { "type": "file", "src": "stepprs-bf-urgency.mp4" },
+      "thumbnail": "stepprs-bf-urgency.webp",
+      "preview": "stepprs-bf-urgency-p.mp4",
+      "summary": "A 49-second Black Friday urgency ad: fast product shots, a pinned “Up to 75% off, ends midnight” badge, massage-point close-ups and a real bundle-pricing card so the viewer knows exactly what to buy.",
+      "audience": "Warm shoppers who already know Stepprs and are waiting for a deal",
+      "objective": "Turn Black Friday traffic into orders before the sale ends.",
+      "concept": "Most-aware urgency: no long story, just the offer, the proof and the deadline.",
+      "hook": "“UP TO 75% OFF! ENDS MIDNIGHT” from the first frame.",
+      "production": "AI and real product footage of the massage nodes and cushioning, with the brand's real pricing tiers on screen.",
+      "tools": ["Google Flow", "Claude Code", "FFmpeg"],
+      "editing": "Persistent offer badge, word-by-word captions, feature callouts and a pricing card with an Add to Cart button.",
+      "deliverables": "49-second vertical (9:16) ad.",
+      "cardHook": "UP TO 75% OFF! ENDS MIDNIGHT",
+      "duration": "0:49"
+    },
+    {
+      "id": "dgraca-brut",
+      "title": "D.Graça Espumante do Douro Brut: An Unexpected Origin",
+      "shortTitle": "D.Graça Brut Sparkling Wine",
+      "category": "Product & DTC Ads",
+      "aspect": "9:16",
+      "featured": false,
+      "video": { "type": "file", "src": "dgraca-brut.mp4" },
+      "thumbnail": "dgraca-brut.webp",
+      "preview": "dgraca-brut-p.mp4",
+      "summary": "A 20-second premium paid-social ad for D.Graça Brut, a traditional-method sparkling wine from Portugal's Douro. A cork releases, bubbles rise, she sips, and the real bottle, foil and label close the story in warm candlelight.",
+      "audience": "Wine lovers who would not expect great sparkling wine from the Douro",
+      "objective": "Introduce a Douro sparkling wine with a premium, sensory feel and keep the real bottle exactly as it looks on the shelf.",
+      "concept": "“An unexpected origin.” A candlelit evening in one warm world: cork, bubbles, a sip, a pour and a raised glass, then the hero bottle and the end card.",
+      "hook": "A macro cork release, then bubbles and her lips on the wine at the rim: “An unexpected origin.”",
+      "production": "Four AI scenes generated in Google Flow from approved keyframes and character references (bubbles, the sip, the pour, the raised glass). Every product shot is real client footage or the client's own bottle photo, with no generated bottle, label or foil.",
+      "tools": ["Google Flow", "Nano Banana", "Claude Code", "FFmpeg"],
+      "editing": "Captions in Poppins (the brief's typeface) kept inside the Reels safe area, one grade and grain across real and AI shots, a synced cork pop, pour and fizz, licensed music mixed to -17 LUFS, and a dark end card with the Wine Portugal logo. A textless version was also delivered for the German edit.",
+      "deliverables": "20-second vertical (9:16) English ad, plus a textless version for localization.",
+      "cardHook": "An unexpected origin.",
+      "duration": "0:20"
+    },
     {
       "id": "sunster-grey-to-golden",
       "title": "Sunster Self-Tanner: Grey to Golden (Danish)",
@@ -874,6 +1096,20 @@ window.PORTFOLIO = {
         "Create promotional content for NineOne Car Rental Services."
       ],
       skills: ["Google Flow", "CapCut", "Canva", "ChatGPT", "AI voiceovers", "Storyboarding"]
+    },
+    {
+      dates: "Nov 2026",
+      title: "AI Video Ad Creative (Paid Social)",
+      org: "Stepprs · 8-figure e-commerce brand",
+      kind: "Creative",
+      points: [
+        "Produced AI video ads for TikTok, Instagram, Meta and Snapchat for an 8-figure DTC brand, delivering every brief as 4 hook variations for testing.",
+        "Turned creative briefs and proven reference ads into storyboards, Google Flow prompts and approved keyframes, then built the final cuts.",
+        "Built a Claude Code video pipeline (Python + FFmpeg) that assembles each variation from one edit list, adds captions and graphics, and mixes audio to -14 LUFS.",
+        "Checked every AI frame for product accuracy (logo, massage-node layout, hands) and fixed errors frame by frame, or covered them with real brand footage.",
+        "Followed strict brand and ad-compliance rules (comfort and relief claims only) and revised from client feedback rounds."
+      ],
+      skills: ["Claude Code", "Google Flow", "FFmpeg", "Python", "Hook testing", "Ad compliance"]
     }
   ],
 
@@ -895,6 +1131,7 @@ window.PORTFOLIO = {
     { name: "ChatGPT", use: "Concepts, scripts, prompts" },
     { name: "Gemini", use: "Music" },
     { name: "Claude", use: "Motion graphics, writing, planning" },
+    { name: "Claude Code", use: "Video automation" },
     { name: "AI Studio", use: "Voiceover" },
     { name: "Vibe", use: "Image to video" }
   ],
@@ -915,6 +1152,9 @@ window.PORTFOLIO = {
     { stage: "Add motion graphics", tools: ["Claude"], input: "Prices, maps, offers and features",
       does: "Claude helps me build animated overlays, like news tickers, route maps, rate cards and kinetic text, so the details land on screen.",
       output: ["Animated overlays", "Kinetic text"] },
+    { stage: "Automate the build", tools: ["Claude Code"], input: "Approved clips, script and brand rules",
+      does: "Claude Code writes and runs my build scripts: it cuts every hook variation from one edit list, checks AI clips frame by frame for glitches and wrong logos, lays in captions and graphics, and mixes the audio to -14 LUFS.",
+      output: ["4 hook variations", "Frame-checked clips", "Platform-ready exports"] },
     { stage: "Edit and finish", tools: ["CapCut"], input: "Scenes, voice, music and graphics",
       does: "Everything comes together in CapCut: pacing, cuts, captions, sound effects and the final mix.",
       output: ["Final cut", "Captions", "Sound design"] },
