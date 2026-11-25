@@ -225,6 +225,7 @@ window.PORTFOLIO = {
        variants: extra hook versions shown as switchable tabs in the video dialog. */
     {
       "id": "stepprs-321-reveal",
+      "brand": "Stepprs",
       "title": "Stepprs: 3, 2, 1 Reveal (4 Hook Variations)",
       "shortTitle": "Stepprs: 3, 2, 1 Reveal",
       "category": "8-Figure E-commerce",
@@ -253,6 +254,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "stepprs-everyx",
+      "brand": "Stepprs",
       "title": "Stepprs: Everyone with Plantar Fasciitis Needs This (4 Hook Variations)",
       "shortTitle": "Stepprs: Needs to See This",
       "category": "8-Figure E-commerce",
@@ -281,6 +283,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "stepprs-neveragain",
+      "brand": "Stepprs",
       "title": "Stepprs: I'm NEVER… Again (4 Hook Variations)",
       "shortTitle": "Stepprs: Never Again",
       "category": "8-Figure E-commerce",
@@ -309,6 +312,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "stepprs-solebrace",
+      "brand": "Stepprs",
       "title": "Stepprs: Black Friday Gift for Him (4 Hook Variations)",
       "shortTitle": "Stepprs: BFCM Gift for Him",
       "category": "8-Figure E-commerce",
@@ -337,6 +341,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "stepprs-doctor-tierlist",
+      "brand": "Stepprs",
       "title": "Stepprs: Doctor Ranks Insoles (Tier List)",
       "shortTitle": "Stepprs: Insole Tier List",
       "category": "8-Figure E-commerce",
@@ -359,6 +364,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "stepprs-xmas-fam",
+      "brand": "Stepprs",
       "title": "Stepprs: What I'm Getting My Whole Fam for Xmas",
       "shortTitle": "Stepprs: Xmas Fam List",
       "category": "8-Figure E-commerce",
@@ -381,6 +387,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "stepprs-bf-urgency",
+      "brand": "Stepprs",
       "title": "Stepprs: Black Friday, Ends Midnight",
       "shortTitle": "Stepprs: BF Ends Midnight",
       "category": "8-Figure E-commerce",
@@ -403,6 +410,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "dgraca-brut",
+      "brand": "D.Graça",
       "title": "D.Graça Espumante do Douro Brut: An Unexpected Origin",
       "shortTitle": "D.Graça Brut Sparkling Wine",
       "category": "Product & DTC Ads",
@@ -425,6 +433,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "sunster-grey-to-golden",
+      "brand": "Sunster",
       "title": "Sunster Self-Tanner: Grey to Golden (Danish)",
       "shortTitle": "Sunster: Grey to Golden",
       "category": "Product & DTC Ads",
@@ -450,6 +459,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "sunster-mascot",
+      "brand": "Sunster",
       "title": "Sunster Self-Tanner: Mousse Mascot (Danish)",
       "shortTitle": "Sunster: Mousse Mascot",
       "category": "Product & DTC Ads",
@@ -475,6 +485,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "bag-ugc",
+      "brand": "CARRIE",
       "title": "CARRIE Handbag Commercial",
       "category": "Product & DTC Ads",
       "aspect": "9:16",
@@ -506,6 +517,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "facelove-photo-quiz",
+      "brand": "Facelove",
       "title": "Facelove: Photo Quiz (AI Avatar Ad)",
       "shortTitle": "Facelove: Photo Quiz",
       "category": "UGC-Style Ads",
@@ -531,6 +543,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "clay-cartoon",
+      "brand": "",
       "title": "Clay-Style Pet Supplement VSL",
       "category": "Product & DTC Ads",
       "aspect": "9:16",
@@ -572,6 +585,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "cozy-clouds",
+      "brand": "",
       "title": "Cozy Cloud: A Little Cup of Comfort",
       "category": "AI Animation & Characters",
       "aspect": "9:16",
@@ -602,6 +616,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "uhp-sample",
+      "brand": "UHP Wellness",
       "title": "UHP Wellness AI Video Sample",
       "category": "Product & DTC Ads",
       "aspect": "9:16",
@@ -627,6 +642,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "creatine-explainer",
+      "brand": "",
       "title": "Creatine Animation: Your Muscles Have a Secret Battery",
       "category": "Product & DTC Ads",
       "aspect": "9:16",
@@ -657,6 +673,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "shiesty-zip-hoodie",
+      "brand": "Shiesty Zip",
       "title": "Shiesty Zip: The Anti-Social Hoodie (UGC POV Ad)",
       "shortTitle": "Shiesty Zip Hoodie",
       "category": "UGC-Style Ads",
@@ -682,6 +699,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "nineone-snow-winter",
+      "brand": "NineOne Car Rental Services",
       "title": "NineOne Car Rental: Snow & Winter (AI Video + Motion Graphics)",
       "shortTitle": "NineOne: Snow & Winter",
       "category": "Client Work",
@@ -709,6 +727,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "nineone",
+      "brand": "NineOne Car Rental Services",
       "title": "NineOne Car Rental: Christmas Homecoming",
       "category": "Client Work",
       "aspect": "9:16",
@@ -748,6 +767,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "nineone-ofw",
+      "brand": "NineOne Car Rental Services",
       "shortTitle": "NineOne OFW",
       "title": "NineOne Car Rental: OFW Airport Pickup",
       "category": "Client Work",
@@ -774,6 +794,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "dtc-supplement-vsl",
+      "brand": "",
       "shortTitle": "Brain at 11:47 PM",
       "title": "Your Brain at 11:47 PM",
       "category": "Product & DTC Ads",
@@ -800,6 +821,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "dtc-ad",
+      "brand": "",
       "title": "Christmas T-Shirt Ad",
       "category": "Product & DTC Ads",
       "aspect": "9:16",
@@ -825,6 +847,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "wedding-multilanguage",
+      "brand": "",
       "shortTitle": "Destination Wedding",
       "title": "Destination Wedding Ad (Multilingual)",
       "category": "Product & DTC Ads",
@@ -851,6 +874,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "ugc-skincare",
+      "brand": "",
       "title": "Skincare UGC Ad",
       "category": "UGC-Style Ads",
       "aspect": "9:16",
@@ -876,6 +900,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "centrum-advance",
+      "brand": "Centrum",
       "title": "Centrum Advance: Healthy Breakfast, Zero Complications",
       "shortTitle": "Centrum Advance",
       "category": "UGC-Style Ads",
@@ -901,6 +926,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "viva-blend",
+      "brand": "Viva Blend",
       "title": "Viva Blend UGC Ad",
       "category": "UGC-Style Ads",
       "aspect": "9:16",
@@ -926,6 +952,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "real-estate",
+      "brand": "",
       "title": "Real Estate Ad",
       "category": "Real Estate",
       "aspect": "9:16",
@@ -951,6 +978,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "talking-babies",
+      "brand": "",
       "title": "Talking Babies",
       "category": "AI Animation & Characters",
       "aspect": "9:16",
@@ -976,6 +1004,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "acoustic-singing",
+      "brand": "",
       "title": "The Light You Left On: AI Music Performance",
       "category": "AI Animation & Characters",
       "aspect": "9:16",
@@ -1001,6 +1030,7 @@ window.PORTFOLIO = {
     },
     {
       "id": "oopsie-ep2",
+      "brand": "",
       "shortTitle": "Oopsie Ep. 2",
       "title": "Oopsie, Episode 2: Nursery Rhymes",
       "category": "AI Animation & Characters",

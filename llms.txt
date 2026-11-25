@@ -1,0 +1,474 @@
+# Angelyn Serpa Juan — AI Video Creator & Graphic Designer
+
+> I create cinematic AI videos, product commercials, and scroll-stopping ad creatives using AI-powered production workflows.
+
+Portfolio of 30 AI video projects. Every project below links to its direct video file. Structured version: https://angelyn-portfolio.vercel.app/portfolio.json
+
+## Contact
+
+- Website: https://angelyn-portfolio.vercel.app/
+- Email: serpajuanangelyn@gmail.com
+- Phone (WhatsApp / Telegram): +63 908 820 0901
+- WhatsApp: https://wa.me/639088200901
+- Telegram: https://t.me/+639088200901
+- All videos (Google Drive): https://drive.google.com/drive/folders/1ljXCkA34nzPmHHNbV-sjaNnxFktHwgOc?usp=sharing
+- Location: Nueva Ecija, Philippines
+- Availability: Part-time · Flexible across EST/PST, GMT and AEST
+
+## Showreel
+
+- [Showreel 2026](https://angelyn-portfolio.vercel.app/showreel.mp4)
+
+## Production workflow
+
+- Plan the hook (ChatGPT, Claude): I find the angle, write hook options and the script, then break the ad into scenes with a detailed prompt for each one.
+- Generate the scenes (Google Flow, Vibe): Google Flow generates the video scenes, and Vibe brings still images to life. I refine every shot until the characters and the product stay consistent.
+- Give it a voice (AI Studio, Gemini): AI Studio voices the script in a tone matched to your customer, and Gemini creates the music underneath.
+- Add motion graphics (Claude): Claude helps me build animated overlays, like news tickers, route maps, rate cards and kinetic text, so the details land on screen.
+- Automate the build (Claude Code): Claude Code writes and runs my build scripts: it cuts every hook variation from one edit list, checks AI clips frame by frame for glitches and wrong logos, lays in captions and graphics, and mixes the audio to -14 LUFS.
+- Edit and finish (CapCut): Everything comes together in CapCut: pacing, cuts, captions, sound effects and the final mix.
+- Brand visuals (Canva, Canva AI): Posters and social graphics that match the ad, designed in Canva with help from Canva AI.
+
+## Projects
+
+### 1. Stepprs: 3, 2, 1 Reveal (4 Hook Variations)
+
+- Brand: Stepprs
+- Creative style: 8-Figure E-commerce
+- Concept: A dropship-style countdown reveal. The orange glowing through a thin white towel teases the product before the pull.
+- Description: Four 11-second shareable reveal ads for Stepprs massage insoles. A towel or hi-vis vest hides the shoes, a voice counts down 3, 2, 1, and the bright orange insoles are pulled out from under it, then pressed and walked on. Each version speaks to a different customer.
+- Hook: One relatable complaint on screen (“My feet are killing me after work”), then “Me:” and a spoken 3, 2, 1 countdown.
+- Audience: Shift workers in steel-toe boots, people with everyday foot pain, people with morning heel pain, and daily walkers
+- Objective: Get the ad shared: every version ends on a “send this to…” caption aimed at the viewer's friends or coworkers.
+- AI generation and production tools: Google Flow, Nano Banana, Gemini (voice), Claude Code, FFmpeg
+- Production: AI scenes from approved keyframes in Google Flow, with the real Stepprs heel logo and node layout checked frame by frame and corrected where the AI got it wrong. Orange step-glow rings on the walk-out.
+- Editing: Cuts timed to the reference's beat, a caption swap from the complaint to the share line, countdown voiceover over the music bed, mixed to -14 LUFS.
+- Claude Code editing and automation workflow: Claude Code writes and runs my build scripts: it cuts every hook variation from one edit list, checks AI clips frame by frame for glitches and wrong logos, lays in captions and graphics, and mixes the audio to -14 LUFS.
+- Deliverables: 4 vertical (9:16) ads, about 11 seconds each, for TikTok, Reels, Meta and Snapchat.
+- Format: 9:16, 0:11
+- Video URL: https://angelyn-portfolio.vercel.app/stepprs-321-steeltoe.mp4
+- Variant video — Steel toe (hook: My feet are killing me after work. Me: 3, 2, 1…): https://angelyn-portfolio.vercel.app/stepprs-321-steeltoe.mp4
+- Variant video — Everyday pain (hook: My feet hurt every single day. Me: 3, 2, 1…): https://angelyn-portfolio.vercel.app/stepprs-321-girlfriend.mp4
+- Variant video — Heel pain (hook: I hate waking up with heel pain. Me: 3, 2, 1…): https://angelyn-portfolio.vercel.app/stepprs-321-heelpain.mp4
+- Variant video — Walker (hook: How do you walk 10k steps every day? Me: 3, 2, 1…): https://angelyn-portfolio.vercel.app/stepprs-321-walker.mp4
+
+### 2. Stepprs: Everyone with Plantar Fasciitis Needs This (4 Hook Variations)
+
+- Brand: Stepprs
+- Creative style: 8-Figure E-commerce
+- Concept: Copy a proven reference ad's format and timing (one before/after cut at 6 seconds) and swap in four different hooks and characters.
+- Description: Four 10-second before-and-after ads. A different person in each version sits on the bed gripping a sore heel, the insole slides into their sneaker, and they walk toward the camera smiling.
+- Hook: A bold callout caption over the pain moment, e.g. “Everyone with PLANTAR FASCIITIS needs this”.
+- Audience: Adults 35+ with first-step-in-the-morning heel pain
+- Objective: Stop people who already know the problem and show relief in under 10 seconds.
+- AI generation and production tools: Google Flow, Nano Banana, Claude Code, FFmpeg
+- Production: AI before/after scenes in Google Flow with real brand footage for the insole insert, so the product is always accurate. Characters, props and set checked for continuity across shots.
+- Editing: Hard cut and short dissolves on the music beat, one caption for the whole ad, music only.
+- Claude Code editing and automation workflow: Claude Code writes and runs my build scripts: it cuts every hook variation from one edit list, checks AI clips frame by frame for glitches and wrong logos, lays in captions and graphics, and mixes the audio to -14 LUFS.
+- Deliverables: 4 vertical (9:16) ads, 10 seconds each.
+- Format: 9:16, 0:10
+- Video URL: https://angelyn-portfolio.vercel.app/stepprs-everyx-v1.mp4
+- Variant video — Needs this (hook: Everyone with PLANTAR FASCIITIS needs this): https://angelyn-portfolio.vercel.app/stepprs-everyx-v1.mp4
+- Variant video — Nobody talks (hook: Nobody talks about THIS part of PLANTAR FASCIITIS): https://angelyn-portfolio.vercel.app/stepprs-everyx-v2.mp4
+- Variant video — Thank me later (hook: PLANTAR FASCIITIS sufferers… THANK ME LATER): https://angelyn-portfolio.vercel.app/stepprs-everyx-v3.mp4
+- Variant video — Every morning (hook: If your heels hurt EVERY morning, watch this): https://angelyn-portfolio.vercel.app/stepprs-everyx-v4.mp4
+
+### 3. Stepprs: I'm NEVER… Again (4 Hook Variations)
+
+- Brand: Stepprs
+- Creative style: 8-Figure E-commerce
+- Concept: Two captions only: the dramatic “I'm NEVER…” complaint, then the payoff (“The insoles that changed my life”).
+- Description: Four 12-second comedy ads. A construction worker, a man getting out of bed, a warehouse worker and a store worker are fed up with their feet, then the insoles arrive and each one ends jumping for joy.
+- Hook: “I'm NEVER wearing steel-toe boots again 😩” on a worker sitting on a pallet, rubbing his foot.
+- Audience: Steel-toe boot wearers, 12-hour shift workers and people with morning foot pain
+- Objective: Turn a dramatic, relatable complaint into a quick before-and-after that ends on the product.
+- AI generation and production tools: Google Flow, Claude Code, FFmpeg, Demucs (audio cleanup)
+- Production: AI characters in Google Flow, with real Stepprs footage for unboxing and product shots so the logo and nodes are always correct. Props and set dressing kept consistent shot to shot.
+- Editing: Cut times, caption style and audio copied from the brand's reference ad, unboxing sounds cleaned from the music track.
+- Claude Code editing and automation workflow: Claude Code writes and runs my build scripts: it cuts every hook variation from one edit list, checks AI clips frame by frame for glitches and wrong logos, lays in captions and graphics, and mixes the audio to -14 LUFS.
+- Deliverables: 4 vertical (9:16) ads, 12.3 seconds each.
+- Format: 9:16, 0:12
+- Video URL: https://angelyn-portfolio.vercel.app/stepprs-neveragain-v1.mp4
+- Variant video — Steel-toe boots (hook: I'm NEVER wearing steel-toe boots again): https://angelyn-portfolio.vercel.app/stepprs-neveragain-v1.mp4
+- Variant video — Mornings (hook: I'm NEVER getting out of bed again): https://angelyn-portfolio.vercel.app/stepprs-neveragain-v2.mp4
+- Variant video — Concrete floors (hook: I'm DONE walking on concrete for 10 hours a day): https://angelyn-portfolio.vercel.app/stepprs-neveragain-v3.mp4
+- Variant video — Quit my job (hook: My feet are BEGGING me to quit my job): https://angelyn-portfolio.vercel.app/stepprs-neveragain-v4.mp4
+
+### 4. Stepprs: Black Friday Gift for Him (4 Hook Variations)
+
+- Brand: Stepprs
+- Creative style: 8-Figure E-commerce
+- Concept: A gift-giver talking head: one hook line per version, the same proven body, and the offer at the end.
+- Description: Four 50-second Black Friday ads aimed at wives buying for their husbands. A woman in her kitchen holds up the insoles and explains why her husband needs them, with b-roll of him at work, benefit chips and an “up to 75% off” offer card.
+- Hook: “If your husband works on his feet all day…” as the top banner over the insoles in hand.
+- Audience: Women shopping for a husband who works on his feet
+- Objective: Sell Stepprs as the Black Friday gift for the hard worker in the family.
+- AI generation and production tools: Google Flow, Gemini (voice), Claude Code, FFmpeg
+- Production: Kitchen scenes generated in Google Flow from six real product reference photos, so the heel logo and nodes came out right. Frozen frames at the end of AI clips found and cut automatically.
+- Editing: Word-by-word captions, a Black Friday banner, a b-roll picture-in-picture window, benefit chips and an offer card, all laid out above the Meta 4:5 safe line. Voiceover kept at natural speed, mixed to -14 LUFS.
+- Claude Code editing and automation workflow: Claude Code writes and runs my build scripts: it cuts every hook variation from one edit list, checks AI clips frame by frame for glitches and wrong logos, lays in captions and graphics, and mixes the audio to -14 LUFS.
+- Deliverables: 4 vertical (9:16) ads, about 50 seconds each.
+- Format: 9:16, 0:50
+- Video URL: https://angelyn-portfolio.vercel.app/stepprs-solebrace-v1.mp4
+- Variant video — On his feet (hook: If your husband works on his feet all day…): https://angelyn-portfolio.vercel.app/stepprs-solebrace-v1.mp4
+- Variant video — Steel toe boots (hook: If your husband wears steel toe boots…): https://angelyn-portfolio.vercel.app/stepprs-solebrace-v2.mp4
+- Variant video — Works hard (hook: For the men who work hard for their families ❤️): https://angelyn-portfolio.vercel.app/stepprs-solebrace-v3.mp4
+- Variant video — Hard worker (hook: If your husband is a hard worker): https://angelyn-portfolio.vercel.app/stepprs-solebrace-v4.mp4
+
+### 5. Stepprs: Doctor Ranks Insoles (Tier List)
+
+- Brand: Stepprs
+- Creative style: 8-Figure E-commerce
+- Concept: The tier-list format people already binge: the ranking builds curiosity, and every placement is a reason to believe.
+- Description: A 74-second expert-style ad. A doctor on camera ranks popular insoles from S to D tier, from custom orthotics and drugstore brands down to cheap marketplace pairs, and explains why Stepprs earns the top spot.
+- Hook: An expert talking head with an empty S–D tier board below him.
+- Audience: Problem-aware shoppers comparing insoles before they buy
+- Objective: Win the comparison: answer “why not just buy the cheap ones?” before the viewer asks.
+- AI generation and production tools: AI avatar, Claude Code, FFmpeg
+- Production: AI doctor presenter with product logos dropped into the tier board as he talks.
+- Editing: Word-by-word captions between the presenter and the animated tier board, product cut-ins when Stepprs lands.
+- Claude Code editing and automation workflow: Claude Code writes and runs my build scripts: it cuts every hook variation from one edit list, checks AI clips frame by frame for glitches and wrong logos, lays in captions and graphics, and mixes the audio to -14 LUFS.
+- Deliverables: 74-second vertical (9:16) ad.
+- Format: 9:16, 1:14
+- Video URL: https://angelyn-portfolio.vercel.app/stepprs-doctor-tierlist.mp4
+
+### 6. Stepprs: What I'm Getting My Whole Fam for Xmas
+
+- Brand: Stepprs
+- Creative style: 8-Figure E-commerce
+- Concept: A “my Xmas list” checklist: each family member gets a quick scene showing why their feet hurt, then a five-pair reveal.
+- Description: An 86-second holiday UGC ad. A creator at her kitchen table walks through her Christmas list, ticking off Dad, Mum, her brother and Grandma, and shows why everyone is getting a pair of Stepprs this Black Friday.
+- Hook: “What I'm getting my whole fam for Xmas” over a cozy creator talking to camera.
+- Audience: Holiday shoppers buying for the whole family
+- Objective: Make Stepprs the easy Black Friday gift for everyone on the list, and drive multi-pair orders.
+- AI generation and production tools: Google Flow, Whisper (transcript checks), Claude Code, FFmpeg
+- Production: AI family scenes in Google Flow (Dad in the warehouse, Mum in a corridor, Grandma at home) mixed with real Stepprs footage for every product moment. Heel logos tracked and fixed frame by frame where needed. Revised through a client feedback round.
+- Editing: Animated checklist with ticks, word-by-word captions, a five-pairs reveal, a 90-day guarantee badge and a warm grade on the creator footage.
+- Claude Code editing and automation workflow: Claude Code writes and runs my build scripts: it cuts every hook variation from one edit list, checks AI clips frame by frame for glitches and wrong logos, lays in captions and graphics, and mixes the audio to -14 LUFS.
+- Deliverables: 86-second vertical (9:16) ad, part of a 4-hook set.
+- Format: 9:16, 1:26
+- Video URL: https://angelyn-portfolio.vercel.app/stepprs-xmas-fam.mp4
+
+### 7. Stepprs: Black Friday, Ends Midnight
+
+- Brand: Stepprs
+- Creative style: 8-Figure E-commerce
+- Concept: Most-aware urgency: no long story, just the offer, the proof and the deadline.
+- Description: A 49-second Black Friday urgency ad: fast product shots, a pinned “Up to 75% off, ends midnight” badge, massage-point close-ups and a real bundle-pricing card so the viewer knows exactly what to buy.
+- Hook: “UP TO 75% OFF! ENDS MIDNIGHT” from the first frame.
+- Audience: Warm shoppers who already know Stepprs and are waiting for a deal
+- Objective: Turn Black Friday traffic into orders before the sale ends.
+- AI generation and production tools: Google Flow, Claude Code, FFmpeg
+- Production: AI and real product footage of the massage nodes and cushioning, with the brand's real pricing tiers on screen.
+- Editing: Persistent offer badge, word-by-word captions, feature callouts and a pricing card with an Add to Cart button.
+- Claude Code editing and automation workflow: Claude Code writes and runs my build scripts: it cuts every hook variation from one edit list, checks AI clips frame by frame for glitches and wrong logos, lays in captions and graphics, and mixes the audio to -14 LUFS.
+- Deliverables: 49-second vertical (9:16) ad.
+- Format: 9:16, 0:49
+- Video URL: https://angelyn-portfolio.vercel.app/stepprs-bf-urgency.mp4
+
+### 8. D.Graça Espumante do Douro Brut: An Unexpected Origin
+
+- Brand: D.Graça
+- Creative style: Product & DTC Ads
+- Concept: “An unexpected origin.” A candlelit evening in one warm world: cork, bubbles, a sip, a pour and a raised glass, then the hero bottle and the end card.
+- Description: A 20-second premium paid-social ad for D.Graça Brut, a traditional-method sparkling wine from Portugal's Douro. A cork releases, bubbles rise, she sips, and the real bottle, foil and label close the story in warm candlelight.
+- Hook: A macro cork release, then bubbles and her lips on the wine at the rim: “An unexpected origin.”
+- Audience: Wine lovers who would not expect great sparkling wine from the Douro
+- Objective: Introduce a Douro sparkling wine with a premium, sensory feel and keep the real bottle exactly as it looks on the shelf.
+- AI generation and production tools: Google Flow, Nano Banana, Claude Code, FFmpeg
+- Production: Four AI scenes generated in Google Flow from approved keyframes and character references (bubbles, the sip, the pour, the raised glass). Every product shot is real client footage or the client's own bottle photo, with no generated bottle, label or foil.
+- Editing: Captions in Poppins (the brief's typeface) kept inside the Reels safe area, one grade and grain across real and AI shots, a synced cork pop, pour and fizz, licensed music mixed to -17 LUFS, and a dark end card with the Wine Portugal logo. A textless version was also delivered for the German edit.
+- Claude Code editing and automation workflow: Claude Code writes and runs my build scripts: it cuts every hook variation from one edit list, checks AI clips frame by frame for glitches and wrong logos, lays in captions and graphics, and mixes the audio to -14 LUFS.
+- Deliverables: 20-second vertical (9:16) English ad, plus a textless version for localization.
+- Format: 9:16, 0:20
+- Video URL: https://angelyn-portfolio.vercel.app/dgraca-brut.mp4
+
+### 9. Sunster Self-Tanner: Grey to Golden (Danish)
+
+- Brand: Sunster
+- Creative style: Product & DTC Ads
+- Concept: A time-stamped night-to-morning story (22:00 to 07:00 to Day 5) that makes the result feel real and the routine feel easy.
+- Description: A Danish-language DTC ad for Sunster self-tanner that follows one night from winter-pale to golden: the 22:00 routine, the glow developing overnight, the 07:00 reveal, and a friend asking if she's been on vacation.
+- Hook: “Vinterbleg?” (Winter pale?) “Ingen sol før april… og jeg ligner et spøgelse.” (No sun until April… and I look like a ghost.)
+- Audience: Danish women who feel pale during the long, sunless winter
+- Objective: Show the full routine and believable results, then drive purchases of the self-tanning set.
+- AI generation and production tools: Not listed
+- Production: Live-action AI scenes with on-screen clock timestamps, a step-by-step routine (drops in day cream for the face, mousse and mitt for the body, 10 minutes), a skin close-up showing the glow developing over 6–8 hours, and a before-and-after mirror shot.
+- Editing: Danish captions with highlighted keywords, step cards and a progress bar, a before/after split, and social proof on Day 5 (“Har du været på ferie?” – Have you been on vacation?). End card: “Danmarks bedste selvbruner”, Danish Beauty Award 2025 nominee, “Køb sættet nu” (Buy the set now), 45-day risk-free trial.
+- Deliverables: 30-second vertical (9:16) ad in Danish for TikTok, Reels and Shorts.
+- Format: 9:16, 0:30
+- Video URL: https://angelyn-portfolio.vercel.app/sunster-grey-to-golden.mp4
+
+### 10. Sunster Self-Tanner: Mousse Mascot (Danish)
+
+- Brand: Sunster
+- Creative style: Product & DTC Ads
+- Concept: Problem-solution DTC ad with a lovable product mascot as the narrator, so the pain points feel playful instead of preachy.
+- Description: A Danish-language DTC ad starring an animated mousse mascot who calls out common self-tanner problems, then introduces Sunster Mousse as the fix, backed by ratings and a risk-free trial.
+- Hook: “Når selvbruneren gør dig orange” (When the self-tanner turns you orange). The mascot gasps: “Åh nej… ikke igen.” (Oh no… not again.)
+- Audience: Danish women frustrated by streaky, orange self-tan results
+- Objective: Turn common self-tanner frustrations into a reason to try Sunster, and drive trial sign-ups.
+- AI generation and production tools: Not listed
+- Production: A 3D animated foam mascot combined with realistic product and skin shots: pain points (streaks, orange hands, the smell), the product reveal, application with a tanning mitt, and a before-and-after leg comparison.
+- Editing: Danish captions and animated checklist cards (✗ streaks, ✗ orange hands, ✗ the smell, then ✓ natural glow, ✓ no streaks, ✓ no orange), sparkle effects, and a star-rating social proof scene (4.6 stars, 1,100+ reviews, loved by 50,000+ Danish women). CTA: “Prøv risikofrit i 45 dage” (Try it risk-free for 45 days), sunster.dk.
+- Deliverables: 32-second vertical (9:16) ad in Danish for TikTok, Reels and Shorts.
+- Format: 9:16, 0:32
+- Video URL: https://angelyn-portfolio.vercel.app/sunster-mascot.mp4
+
+### 11. CARRIE Handbag Commercial
+
+- Brand: CARRIE
+- Creative style: Product & DTC Ads
+- Description: A premium-looking AI commercial for a real fashion handbag, with consistent product appearance, deliberate pacing, captions and sound design.
+- Hook: Your outfit isn’t the problem… but something’s missing.
+- Audience: Fashion and e-commerce shoppers
+- Objective: Turn a real fashion product into a premium commercial an e-commerce brand could run.
+- AI generation and production tools: AI video generation, Claude, CapCut, Gemini (music)
+- Production: AI video generation, with Claude used to refine prompts and creative and editing direction.
+- Editing: Final assembly, captions and sound design in CapCut. Background music generated with Gemini.
+- Format: 9:16, 0:26
+- Video URL: https://angelyn-portfolio.vercel.app/bag-ugc.mp4
+
+### 12. Facelove: Photo Quiz (AI Avatar Ad)
+
+- Brand: Facelove
+- Creative style: UGC-Style Ads
+- Concept: An engagement-bait photo quiz. A countdown over a side-by-side of two photos, then the presenter talks straight to camera: “I look BETTER right now than I did at 40. But 12 weeks ago, I didn’t.”
+- Description: A 30-second sample ad for Facelove led by a realistic AI avatar: a 60-year-old woman shows two photos of herself, one at 40 and one from last week, asks viewers to guess which is which, then tells the story of how her skin looked 12 weeks ago.
+- Hook: “One of these photos is me at 40. The other was taken last week. I’m 60 now. Can you guess which is which?” over a 5-4-3-2-1 countdown
+- Audience: Women 50 and over who are worried about wrinkles, fine lines and dark spots
+- Objective: Stop the scroll with an interactive guessing game, drive comments, and keep viewers watching until the reveal.
+- AI generation and production tools: Not listed
+- Production: One consistent AI avatar across every scene: the photo comparison, a selfie-style talking head, a sit-down confession on the sofa, and moody flashback shots (the bathroom mirror, close-ups of forehead wrinkles, mouth lines and sun spots, and a low moment after her divorce).
+- Editing: Word-by-word captions with key words in caps (BEFORE, BETTER), a countdown number overlay, and a shift from warm, bright present-day scenes to a cold, desaturated grade for the “12 weeks ago” story.
+- Deliverables: 30-second vertical (9:16) sample ad for TikTok, Reels and Shorts.
+- Format: 9:16, 0:29
+- Video URL: https://angelyn-portfolio.vercel.app/facelove-photo-quiz.mp4
+
+### 13. Clay-Style Pet Supplement VSL
+
+- Brand: Not named
+- Creative style: Product & DTC Ads
+- Concept: Hook, problem, emotional story, product solution, benefits, call to action.
+- Description: A clay-style, story-driven ad for a pet supplement, built on a full direct-response structure.
+- Hook: “I thought he was just getting old.” An emotional pet-owner problem that makes viewers care before the product appears.
+- Audience: Dog owners who care about their pet's well-being
+- Objective: Show an end-to-end video ad workflow, from hook to CTA.
+- AI generation and production tools: AI image & video generation, ChatGPT, CapCut
+- Production: AI image and video generation with reference images for character consistency. ChatGPT for concept and scripting support.
+- Editing: Voiceover, music, sound effects, captions and transitions in CapCut.
+- Deliverables: Clay-style ad sample made with the employer's product and submitted.
+- Format: 9:16, 0:59
+- Video URL: https://angelyn-portfolio.vercel.app/clay-cartoon.mp4
+
+### 14. Cozy Cloud: A Little Cup of Comfort
+
+- Brand: Not named
+- Creative style: AI Animation & Characters
+- Description: Pip, a grumpy little cloud, makes storms over everyday annoyances until a cup of hot chocolate calms him down.
+- Hook: Bad mood. Bad weather.
+- Objective: Show original concept development, character-led storytelling, scene continuity and emotional pacing.
+- AI generation and production tools: Google Flow, AI music generation, CapCut
+- Production: Scenes generated in Google Flow with AI-generated music.
+- Editing: Story assembled and edited in CapCut.
+- Format: 9:16, 1:00
+- Video URL: https://angelyn-portfolio.vercel.app/cozy-clouds.mp4
+
+### 15. UHP Wellness AI Video Sample
+
+- Brand: UHP Wellness
+- Creative style: Product & DTC Ads
+- Description: A wellness commercial sample produced against a potential client's brief and submitted.
+- Hook: Your business has a system. What about your health?
+- Audience: Busy professionals and business owners
+- Objective: Follow a client brief, develop a commercial visual direction, and deliver a sample.
+- AI generation and production tools: Not listed
+- Deliverables: Submitted video sample for a potential client.
+- Format: 9:16, 0:32
+- Video URL: https://angelyn-portfolio.vercel.app/uhp-sample.mp4
+
+### 16. Creatine Animation: Your Muscles Have a Secret Battery
+
+- Brand: Not named
+- Creative style: Product & DTC Ads
+- Description: An educational animation where expressive muscle characters, an exhausted ATP worker and creatine as the backup energy helper explain how creatine works.
+- Hook: Your muscles have a secret battery.
+- Audience: Fitness and supplement buyers
+- Objective: Make a supplement topic entertaining and easy to follow with memorable characters.
+- AI generation and production tools: AI video generation, Claude, CapCut
+- Production: AI-generated clips and reference images, with Claude used to refine prompts.
+- Editing: Captions, sound design and final edit in CapCut.
+- Format: 9:16, 0:42
+- Video URL: https://angelyn-portfolio.vercel.app/creatine-explainer.mp4
+
+### 17. Shiesty Zip: The Anti-Social Hoodie (UGC POV Ad)
+
+- Brand: Shiesty Zip
+- Creative style: UGC-Style Ads
+- Concept: A native POV trend format: one model on a foggy, neon-lit city street at night zips the hoodie up over his face, then pulls the hood on.
+- Description: A 9-second TikTok-style POV sample ad for the Shiesty Zip hoodie, a full-zip hoodie that zips all the way up over the face.
+- Hook: “POV: the anti-social hoodie”
+- Audience: Young streetwear buyers on TikTok and Instagram
+- Objective: Show the product’s one standout feature in a few seconds and push viewers to the link in bio.
+- AI generation and production tools: Not listed
+- Production: A single realistic AI-generated shot with a moody night-street setting (wet pavement, street lights, red neon) and one clear product demo: the zip going all the way up.
+- Editing: Native TikTok-style caption, a switch to “link in bio ❄️” for the call to action, and music timed to the zip-up.
+- Deliverables: 9-second vertical (9:16) sample ad for TikTok and Reels.
+- Format: 9:16, 0:09
+- Video URL: https://angelyn-portfolio.vercel.app/shiesty-zip-hoodie.mp4
+
+### 18. NineOne Car Rental: Snow & Winter (AI Video + Motion Graphics)
+
+- Brand: NineOne Car Rental Services
+- Creative style: Client Work
+- Concept: A fake live news broadcast. A tita and a kid react to snow on a hot Laguna street, a field reporter goes live, and the reveal lands: “Snow at Winter, nasa Biñan na!” (Snow and Winter are now in Biñan!). The pun is on the cars’ plate names.
+- Description: An AI video with full motion graphics for NineOne Car Rental Services, styled as a Taglish breaking-news report: snow falls in Biñan, Laguna, and the “Snow” and “Winter” turn out to be the two rental cars. It launches the new units and their Christmas rates.
+- Hook: BREAKING: “Nag-snow sa Laguna?!” (It snowed in Laguna?!), followed by the sticker “Teka… snow?!” (Wait… snow?!)
+- Audience: Families and travelers in Laguna and Luzon planning holiday road trips
+- Objective: Introduce two rental units, the Xpander GLS 2026 (plate “SNOW”, 7–8 seats) and the Kia Sonet LX AT (plate “WINTER”, 5–6 seats), show rates by destination, and drive bookings before Christmas.
+- AI generation and production tools: Claude (motion graphics)
+- Production: AI-generated scenes: a sunny Filipino street turning snowy, a field reporter in a red jacket, a lolo interview (“Aabot ba ’yan hanggang Baguio?”, Can that make it to Baguio?), and both cars driving through Laguna, beach, rice-field, mountain and pine-road locations.
+- Editing: Motion graphics carry the whole ad: a news-broadcast package (BREAKING and LIVE lower thirds, a scrolling ticker, a REC timecode), pop-in stickers, car callout labels, an animated Luzon route map with a kilometer counter and an “Unlimited Mileage” stamp, a destination progress bar (Laguna → Nearby → North → Tarlac+ → Baguio+), animated rate cards for each region, a “25 days or more” best-deal burst (₱1,950/day Xpander, ₱1,650/day Kia Sonet), falling snow particles, glitch transitions, and a branded end card with the booking number and mascot.
+- Deliverables: 60-second vertical (9:16) Taglish ad for Facebook, TikTok and Reels. CTA: “Limited units ngayong Pasko! Book na!” (Limited units this Christmas, book now!)
+- Format: 9:16, 1:00
+- Video URL: https://angelyn-portfolio.vercel.app/nineone-snow-winter.mp4
+
+### 19. NineOne Car Rental: Christmas Homecoming
+
+- Brand: NineOne Car Rental Services
+- Creative style: Client Work
+- Description: A Christmas campaign for NineOne Car Rental Services about making the trip home for the holidays.
+- Hook: This Christmas, make your way home.
+- Audience: Families traveling home for the holidays
+- Objective: Promote the fleet and rental availability.
+- AI generation and production tools: Not listed
+- Format: 9:16, 0:53
+- Video URL: https://angelyn-portfolio.vercel.app/nineone.mp4
+
+### 20. NineOne Car Rental: OFW Airport Pickup
+
+- Brand: NineOne Car Rental Services
+- Creative style: Client Work
+- Description: A Taglish airport-homecoming ad for OFWs arriving in the Philippines who need a ride home.
+- Hook: Ready na umuwi sa Pinas? May ride ka na ba? (Ready to come home? Got a ride yet?)
+- Audience: Overseas Filipino Workers (OFWs) and their families
+- AI generation and production tools: Not listed
+- Format: 9:16, 0:28
+- Video URL: https://angelyn-portfolio.vercel.app/nineone-ofw.mp4
+
+### 21. Your Brain at 11:47 PM
+
+- Brand: Not named
+- Creative style: Product & DTC Ads
+- Description: A VSL-inspired direct-to-consumer supplement ad that opens on a relatable late-night overthinking moment, told through a cartoon brain character.
+- Hook: Your brain at 11:47 PM. Remember that embarrassing thing?
+- Audience: People who struggle to switch off at night
+- Objective: Walk viewers from problem to product to purchase with a story-driven pitch.
+- AI generation and production tools: Not listed
+- Format: 9:16, 0:36
+- Video URL: https://angelyn-portfolio.vercel.app/dtc-supplement-vsl.mp4
+
+### 22. Christmas T-Shirt Ad
+
+- Brand: Not named
+- Creative style: Product & DTC Ads
+- Description: A holiday apparel ad for a “Merry & Bright” Christmas T-shirt, set in a cozy tree-decorating scene.
+- Hook: Your Christmas outfit just got better.
+- Audience: Holiday shoppers looking for festive apparel
+- Objective: Drive seasonal T-shirt sales.
+- AI generation and production tools: Not listed
+- Format: 9:16, 0:29
+- Video URL: https://angelyn-portfolio.vercel.app/dtc-ad.mp4
+
+### 23. Destination Wedding Ad (Multilingual)
+
+- Brand: Not named
+- Creative style: Product & DTC Ads
+- Description: A Santorini destination wedding ad produced in multiple languages.
+- Hook: Some love stories deserve the world.
+- Audience: Couples planning a destination wedding
+- AI generation and production tools: Not listed
+- Format: 9:16, 0:29
+- Video URL: https://angelyn-portfolio.vercel.app/wedding-multilanguage.mp4
+
+### 24. Skincare UGC Ad
+
+- Brand: Not named
+- Creative style: UGC-Style Ads
+- Description: A creator-style skincare ad made with AI, in the casual first-person UGC format.
+- Hook: Okay, I finally understand the hype.
+- Audience: Skincare shoppers on social media
+- Objective: Feel like a real customer recommendation rather than a polished commercial.
+- AI generation and production tools: Not listed
+- Format: 9:16, 0:40
+- Video URL: https://angelyn-portfolio.vercel.app/ugc-skincare.mp4
+
+### 25. Centrum Advance: Healthy Breakfast, Zero Complications
+
+- Brand: Centrum
+- Creative style: UGC-Style Ads
+- Concept: Value first, product second: a quick breakfast recipe earns attention before the multivitamin appears.
+- Description: A talking-head wellness ad that opens with an easy banana-berry smoothie recipe, then introduces Centrum Advance multivitamins as the way to cover the nutritional gaps one breakfast can't.
+- Hook: Healthy breakfast. Zero complications. “Here's something interesting. A healthy breakfast doesn't have to be complicated.”
+- Audience: Health-conscious adults looking for a simple daily routine
+- Objective: Build trust with a useful tip first, then introduce the product as a natural next step.
+- AI generation and production tools: Not listed
+- Production: An AI talking-head presenter, a recipe demo with ingredient labels (banana, berries, plain yogurt, milk), blending and pouring shots, and product hero shots of Centrum Advance.
+- Editing: Word-by-word captions with highlighted keywords, animated on-screen titles (“Vitamins + Protein + Calcium”, “Variety Matters”), and an end card: “Your daily routine, made simple.”
+- Deliverables: 66-second vertical (9:16) ad for TikTok, Reels and Shorts.
+- Format: 9:16, 1:06
+- Video URL: https://angelyn-portfolio.vercel.app/centrum-advance.mp4
+
+### 26. Viva Blend UGC Ad
+
+- Brand: Viva Blend
+- Creative style: UGC-Style Ads
+- Description: A day-in-the-life UGC ad for Viva Blend, built around a rushed morning that still ends with breakfast.
+- Hook: Woke up late. Still made breakfast.
+- Audience: Busy people who tend to skip breakfast
+- AI generation and production tools: Not listed
+- Format: 9:16, 0:30
+- Video URL: https://angelyn-portfolio.vercel.app/viva-blend.mp4
+
+### 27. Real Estate Ad
+
+- Brand: Not named
+- Creative style: Real Estate
+- Description: A luxury home ad that walks a couple up to the front door and inside.
+- Hook: Come inside.
+- Audience: Property buyers and investors
+- Objective: Generate property inquiries.
+- AI generation and production tools: Not listed
+- Format: 9:16, 0:20
+- Video URL: https://angelyn-portfolio.vercel.app/real-estate.mp4
+
+### 28. Talking Babies
+
+- Brand: Not named
+- Creative style: AI Animation & Characters
+- Description: Two babies hold a “board meeting” in their crib in this comedic AI character skit.
+- Hook: POV: The board meeting has been called to order.
+- AI generation and production tools: Not listed
+- Format: 9:16, 0:45
+- Video URL: https://angelyn-portfolio.vercel.app/talking-babies.mp4
+
+### 29. The Light You Left On: AI Music Performance
+
+- Brand: Not named
+- Creative style: AI Animation & Characters
+- Description: An AI-generated acoustic performance of “The Light You Left On,” credited on screen to Noah Reed.
+- Hook: I leave the porch light on…
+- AI generation and production tools: Not listed
+- Format: 9:16, 0:25
+- Video URL: https://angelyn-portfolio.vercel.app/acoustic-singing.mp4
+
+### 30. Oopsie, Episode 2: Nursery Rhymes
+
+- Brand: Not named
+- Creative style: AI Animation & Characters
+- Description: Episode two of an AI-animated nursery rhyme series.
+- Hook: Oh no! Catch that bubble!
+- Audience: Young children and their parents
+- AI generation and production tools: Not listed
+- Format: 16:9, 0:50
+- Video URL: https://angelyn-portfolio.vercel.app/oopsie-ep2.mp4
