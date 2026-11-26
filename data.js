@@ -96,9 +96,6 @@ window.PORTFOLIO = {
     { name: "AI Avatars & UGC", tag: "Talking heads",
       text: "A realistic presenter who talks to your customer the way a creator would, in English, Danish or Taglish.",
       projects: ["facelove-photo-quiz", "centrum-advance", "ugc-skincare", "viva-blend"] },
-    { name: "Motion Graphics", tag: "AI + motion",
-      text: "Prices, maps, offers and features animated on screen, so the details land without slowing the story down.",
-      projects: ["nineone-snow-winter"] },
     { name: "AI Animation", tag: "Characters",
       text: "A mascot or character people remember, who explains your product, from clay-style to 3D cartoon.",
       projects: ["sunster-mascot", "creatine-explainer", "cozy-clouds", "talking-babies"] },
@@ -178,7 +175,6 @@ window.PORTFOLIO = {
     "Product Commercials",
     "UGC-Style Ads",
     "VSL Ads",
-    "AI Video + Motion Graphics",
     "AI Animation",
     "AI Talking Heads",
     "AI Voiceovers",
@@ -194,7 +190,7 @@ window.PORTFOLIO = {
   hookWall: [
     { id: "facelove-photo-quiz", hook: "One of these photos is me at 40. I'm 60 now." },
     { id: "dtc-supplement-vsl", hook: "Your brain at 11:47 PM." },
-    { id: "nineone-snow-winter", hook: "Nag-snow sa Laguna?!", sub: "It snowed in Laguna?!" },
+    { id: "stepprs-doctor-tierlist", hook: "A doctor ranks every insole. S tier to D tier." },
     { id: "clay-cartoon", hook: "I thought he was just getting old." },
     { id: "sunster-mascot", hook: "Når selvbruneren gør dig orange", sub: "When the self-tanner turns you orange" },
     { id: "creatine-explainer", hook: "Your muscles have a secret battery." },
@@ -698,34 +694,6 @@ window.PORTFOLIO = {
       "duration": "0:09"
     },
     {
-      "id": "nineone-snow-winter",
-      "brand": "NineOne Car Rental Services",
-      "title": "NineOne Car Rental: Snow & Winter (AI Video + Motion Graphics)",
-      "shortTitle": "NineOne: Snow & Winter",
-      "category": "Client Work",
-      "aspect": "9:16",
-      "featured": false,
-      "video": {
-        "type": "file",
-        "src": "nineone-snow-winter.mp4"
-      },
-      "thumbnail": "nineone-snow-winter.webp",
-      "summary": "An AI video with full motion graphics for NineOne Car Rental Services, styled as a Taglish breaking-news report: snow falls in Biñan, Laguna, and the “Snow” and “Winter” turn out to be the two rental cars. It launches the new units and their Christmas rates.",
-      "audience": "Families and travelers in Laguna and Luzon planning holiday road trips",
-      "objective": "Introduce two rental units, the Xpander GLS 2026 (plate “SNOW”, 7–8 seats) and the Kia Sonet LX AT (plate “WINTER”, 5–6 seats), show rates by destination, and drive bookings before Christmas.",
-      "concept": "A fake live news broadcast. A tita and a kid react to snow on a hot Laguna street, a field reporter goes live, and the reveal lands: “Snow at Winter, nasa Biñan na!” (Snow and Winter are now in Biñan!). The pun is on the cars’ plate names.",
-      "hook": "BREAKING: “Nag-snow sa Laguna?!” (It snowed in Laguna?!), followed by the sticker “Teka… snow?!” (Wait… snow?!)",
-      "production": "AI-generated scenes: a sunny Filipino street turning snowy, a field reporter in a red jacket, a lolo interview (“Aabot ba ’yan hanggang Baguio?”, Can that make it to Baguio?), and both cars driving through Laguna, beach, rice-field, mountain and pine-road locations.",
-      "tools": [
-        "Claude (motion graphics)"
-      ],
-      "editing": "Motion graphics carry the whole ad: a news-broadcast package (BREAKING and LIVE lower thirds, a scrolling ticker, a REC timecode), pop-in stickers, car callout labels, an animated Luzon route map with a kilometer counter and an “Unlimited Mileage” stamp, a destination progress bar (Laguna → Nearby → North → Tarlac+ → Baguio+), animated rate cards for each region, a “25 days or more” best-deal burst (₱1,950/day Xpander, ₱1,650/day Kia Sonet), falling snow particles, glitch transitions, and a branded end card with the booking number and mascot.",
-      "deliverables": "60-second vertical (9:16) Taglish ad for Facebook, TikTok and Reels. CTA: “Limited units ngayong Pasko! Book na!” (Limited units this Christmas, book now!)",
-      "cardHook": "Nag-snow sa Laguna?! (It snowed in Laguna?!)",
-      "duration": "1:00",
-      "preview": "nineone-snow-winter-p.mp4"
-    },
-    {
       "id": "nineone",
       "brand": "NineOne Car Rental Services",
       "title": "NineOne Car Rental: Christmas Homecoming",
@@ -748,12 +716,11 @@ window.PORTFOLIO = {
       "deliverables": "",
       "caseStudy": {
         "videos": [
-          "nineone-snow-winter",
           "nineone",
           "nineone-ofw"
         ],
         "brief": "Keep a car rental business visible on social media with vehicle ads, rental offers, availability updates and seasonal promotions.",
-        "audience": "Families heading home for Christmas, plus a Taglish version for Overseas Filipino Workers (OFWs) landing in the Philippines, and travelers across Luzon for the Snow & Winter fleet launch.",
+        "audience": "Families heading home for Christmas, plus a Taglish version for Overseas Filipino Workers (OFWs) landing in the Philippines.",
         "storyboard": "",
         "visualDirection": "",
         "consistency": "",
@@ -1001,32 +968,6 @@ window.PORTFOLIO = {
       "cardHook": "POV: The board meeting has been called to order.",
       "duration": "0:45",
       "preview": "talking-babies-p.mp4"
-    },
-    {
-      "id": "acoustic-singing",
-      "brand": "",
-      "title": "The Light You Left On: AI Music Performance",
-      "category": "AI Animation & Characters",
-      "aspect": "9:16",
-      "featured": false,
-      "video": {
-        "type": "file",
-        "src": "acoustic-singing.mp4"
-      },
-      "thumbnail": "acoustic-singing.webp",
-      "summary": "An AI-generated acoustic performance of “The Light You Left On,” credited on screen to Noah Reed.",
-      "audience": "",
-      "objective": "",
-      "concept": "",
-      "hook": "I leave the porch light on…",
-      "production": "",
-      "tools": [],
-      "editing": "",
-      "deliverables": "",
-      "shortTitle": "The Light You Left On",
-      "cardHook": "I leave the porch light on…",
-      "duration": "0:25",
-      "preview": "acoustic-singing-p.mp4"
     },
     {
       "id": "oopsie-ep2",

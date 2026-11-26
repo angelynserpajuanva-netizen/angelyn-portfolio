@@ -284,7 +284,7 @@
     var items = $$(".hw-item", track), n = $("#hw-n"), bar = $("#hw-bar"), tc = $("#hw-tc"), bg = $(".hw-bg", hw);
     var pin = false, dist = 0, len = 0, start = 0, active = -1, inView = false, rt;
     var coarse = mm("(pointer: coarse)") || mm("(hover: none)");
-    var swipe = function () { return reduce || coarse || !fine || window.innerWidth <= 900; };
+    var swipe = function () { return reduce || coarse || !fine || window.innerWidth <= 900 || window.innerHeight < 600; };
     var dots = $("#hw-dots");
     dots.innerHTML = list.map(function () { return "<i></i>"; }).join("");
     var dotEls = $$("i", dots);
@@ -315,9 +315,11 @@
       pin = !swipe();
       hw.classList.toggle("is-pin", pin); hw.classList.toggle("is-swipe", !pin);
       track.style.transform = ""; if (bg) bg.style.transform = "";
-      if (!pin) { hw.style.height = ""; onSwipe(); return; }
+      if (!pin) { hw.style.height = ""; hw.style.removeProperty("--hw-cover"); onSwipe(); return; }
       var top = stickTop();
       hw.style.setProperty("--hw-top", top + "px");
+      // size the card to the room the strip actually has, so it is never cut off
+      hw.style.setProperty("--hw-cover", Math.max(200, Math.min(620, vp.clientHeight - 24)) + "px");
       dist = Math.max(0, track.scrollWidth - vp.clientWidth);
       len = dist * 0.62;
       hw.style.height = (vh() - top + len) + "px";
@@ -391,22 +393,30 @@
           '<div class="film-stage"><video class="film-video" muted playsinline loop preload="none" poster="' + esc(p.thumbnail) + '" src="' + esc(p.video && p.video.src) + '" aria-label="' + esc(p.title) + '" controlslist="nodownload" disablepictureinpicture></video>' +
             '<span class="film-bar" aria-hidden="true"><i></i></span><span class="film-play" aria-hidden="true"><span></span></span>' +
             '<button type="button" class="film-sound" aria-pressed="false">' + snd + "<span>Sound on</span></button></div>" +
-          '<div class="film-copy"><p class="film-n"><b>Film ' + pad(i + 1) + " / " + pad(F.length) + "</b> · " + esc(p.category) + " · " + esc(p.duration || "") + "</p>" +
+          '<div class="film-copy"><p class="film-idx" aria-hidden="true">' + pad(i + 1) + '</p><p class="film-n"><b>Film ' + pad(i + 1) + " / " + pad(F.length) + "</b> · " + esc(p.category) + " · " + esc(p.duration || "") + "</p>" +
             '<h3 class="film-title">' + esc(p.shortTitle || p.title) + "</h3>" +
             '<p class="film-hook">“' + esc(p.cardHook || p.hook || "") + "”</p>" +
             '<p class="film-why">' + esc(f.why) + "</p>" +
+            '<div class="film-hud" aria-hidden="true"><span class="film-eq"><i></i><i></i><i></i><i></i></span><span class="film-state">Paused</span><span class="film-tc">0:00</span><span class="film-track"><i></i></span><span class="film-len">' + esc(p.duration || "") + "</span></div>" +
             '<button type="button" class="btn btn-line" data-open-project="' + esc(p.id) + '"><span>How it was made</span></button></div>' +
         "</div></article>";
     }).join("");
     var films = $$(".film", box), vids = films.map(function (f) { return $("video", f); }), userStopped = films.map(function () { return reduce; });
-    function state(i) { films[i].classList.toggle("is-paused", vids[i].paused); films[i].classList.toggle("has-sound", !vids[i].muted); var b = $(".film-sound", films[i]); b.setAttribute("aria-pressed", String(!vids[i].muted)); $("span", b).textContent = vids[i].muted ? "Sound on" : "Sound off"; }
+    function state(i) { films[i].classList.toggle("is-paused", vids[i].paused); films[i].classList.toggle("has-sound", !vids[i].muted); var b = $(".film-sound", films[i]); b.setAttribute("aria-pressed", String(!vids[i].muted)); $("span", b).textContent = vids[i].muted ? "Sound on" : "Sound off"; $(".film-state", films[i]).textContent = vids[i].paused ? "Paused" : "Now playing"; }
+    function clock(s) { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ":" + pad(s % 60); }
     function pauseAll(except) { vids.forEach(function (v, k) { if (k !== except && !v.paused) v.pause(); }); }
     function play(i) { pauseAll(i); var pr = vids[i].play(); if (pr && pr.catch) pr.catch(function () { state(i); }); }
     function quietOthers() { $$("audio").forEach(function (a) { if (!a.paused) a.pause(); }); var mb = $("#music-btn"); if (mb && mb.classList.contains("on")) mb.click(); }
     vids.forEach(function (v, i) {
       v.addEventListener("play", function () { state(i); }); v.addEventListener("pause", function () { state(i); });
       v.addEventListener("volumechange", function () { state(i); });
-      v.addEventListener("timeupdate", function () { if (v.duration) $(".film-bar i", films[i]).style.transform = "scaleX(" + (v.currentTime / v.duration).toFixed(3) + ")"; });
+      v.addEventListener("timeupdate", function () {
+        if (!v.duration) return;
+        var s = "scaleX(" + (v.currentTime / v.duration).toFixed(3) + ")";
+        $(".film-bar i", films[i]).style.transform = s; $(".film-track i", films[i]).style.transform = s;
+        $(".film-tc", films[i]).textContent = clock(v.currentTime);
+      });
+      v.addEventListener("loadedmetadata", function () { if (v.duration) $(".film-len", films[i]).textContent = clock(v.duration); });
     });
     box.addEventListener("click", function (e) {
       var f = e.target.closest(".film"); if (!f) return;

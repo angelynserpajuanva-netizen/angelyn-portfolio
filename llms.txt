@@ -2,7 +2,7 @@
 
 > I create cinematic AI videos, product commercials, and scroll-stopping ad creatives using AI-powered production workflows.
 
-Portfolio of 30 AI video projects. Every project below links to its direct video file. Structured version: https://angelyn-portfolio.vercel.app/portfolio.json
+Portfolio of 28 AI video projects. Every project below links to its direct video file. Structured version: https://angelyn-portfolio.vercel.app/portfolio.json
 
 ## Contact
 
@@ -317,23 +317,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:09
 - Video URL: https://angelyn-portfolio.vercel.app/shiesty-zip-hoodie.mp4
 
-### 18. NineOne Car Rental: Snow & Winter (AI Video + Motion Graphics)
-
-- Brand: NineOne Car Rental Services
-- Creative style: Client Work
-- Concept: A fake live news broadcast. A tita and a kid react to snow on a hot Laguna street, a field reporter goes live, and the reveal lands: “Snow at Winter, nasa Biñan na!” (Snow and Winter are now in Biñan!). The pun is on the cars’ plate names.
-- Description: An AI video with full motion graphics for NineOne Car Rental Services, styled as a Taglish breaking-news report: snow falls in Biñan, Laguna, and the “Snow” and “Winter” turn out to be the two rental cars. It launches the new units and their Christmas rates.
-- Hook: BREAKING: “Nag-snow sa Laguna?!” (It snowed in Laguna?!), followed by the sticker “Teka… snow?!” (Wait… snow?!)
-- Audience: Families and travelers in Laguna and Luzon planning holiday road trips
-- Objective: Introduce two rental units, the Xpander GLS 2026 (plate “SNOW”, 7–8 seats) and the Kia Sonet LX AT (plate “WINTER”, 5–6 seats), show rates by destination, and drive bookings before Christmas.
-- AI generation and production tools: Claude (motion graphics)
-- Production: AI-generated scenes: a sunny Filipino street turning snowy, a field reporter in a red jacket, a lolo interview (“Aabot ba ’yan hanggang Baguio?”, Can that make it to Baguio?), and both cars driving through Laguna, beach, rice-field, mountain and pine-road locations.
-- Editing: Motion graphics carry the whole ad: a news-broadcast package (BREAKING and LIVE lower thirds, a scrolling ticker, a REC timecode), pop-in stickers, car callout labels, an animated Luzon route map with a kilometer counter and an “Unlimited Mileage” stamp, a destination progress bar (Laguna → Nearby → North → Tarlac+ → Baguio+), animated rate cards for each region, a “25 days or more” best-deal burst (₱1,950/day Xpander, ₱1,650/day Kia Sonet), falling snow particles, glitch transitions, and a branded end card with the booking number and mascot.
-- Deliverables: 60-second vertical (9:16) Taglish ad for Facebook, TikTok and Reels. CTA: “Limited units ngayong Pasko! Book na!” (Limited units this Christmas, book now!)
-- Format: 9:16, 1:00
-- Video URL: https://angelyn-portfolio.vercel.app/nineone-snow-winter.mp4
-
-### 19. NineOne Car Rental: Christmas Homecoming
+### 18. NineOne Car Rental: Christmas Homecoming
 
 - Brand: NineOne Car Rental Services
 - Creative style: Client Work
@@ -345,7 +329,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:53
 - Video URL: https://angelyn-portfolio.vercel.app/nineone.mp4
 
-### 20. NineOne Car Rental: OFW Airport Pickup
+### 19. NineOne Car Rental: OFW Airport Pickup
 
 - Brand: NineOne Car Rental Services
 - Creative style: Client Work
@@ -356,7 +340,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:28
 - Video URL: https://angelyn-portfolio.vercel.app/nineone-ofw.mp4
 
-### 21. Your Brain at 11:47 PM
+### 20. Your Brain at 11:47 PM
 
 - Brand: Not named
 - Creative style: Product & DTC Ads
@@ -368,7 +352,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:36
 - Video URL: https://angelyn-portfolio.vercel.app/dtc-supplement-vsl.mp4
 
-### 22. Christmas T-Shirt Ad
+### 21. Christmas T-Shirt Ad
 
 - Brand: Not named
 - Creative style: Product & DTC Ads
@@ -380,7 +364,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:29
 - Video URL: https://angelyn-portfolio.vercel.app/dtc-ad.mp4
 
-### 23. Destination Wedding Ad (Multilingual)
+### 22. Destination Wedding Ad (Multilingual)
 
 - Brand: Not named
 - Creative style: Product & DTC Ads
@@ -391,7 +375,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:29
 - Video URL: https://angelyn-portfolio.vercel.app/wedding-multilanguage.mp4
 
-### 24. Skincare UGC Ad
+### 23. Skincare UGC Ad
 
 - Brand: Not named
 - Creative style: UGC-Style Ads
@@ -403,7 +387,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:40
 - Video URL: https://angelyn-portfolio.vercel.app/ugc-skincare.mp4
 
-### 25. Centrum Advance: Healthy Breakfast, Zero Complications
+### 24. Centrum Advance: Healthy Breakfast, Zero Complications
 
 - Brand: Centrum
 - Creative style: UGC-Style Ads
@@ -419,7 +403,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 1:06
 - Video URL: https://angelyn-portfolio.vercel.app/centrum-advance.mp4
 
-### 26. Viva Blend UGC Ad
+### 25. Viva Blend UGC Ad
 
 - Brand: Viva Blend
 - Creative style: UGC-Style Ads
@@ -430,7 +414,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:30
 - Video URL: https://angelyn-portfolio.vercel.app/viva-blend.mp4
 
-### 27. Real Estate Ad
+### 26. Real Estate Ad
 
 - Brand: Not named
 - Creative style: Real Estate
@@ -442,7 +426,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:20
 - Video URL: https://angelyn-portfolio.vercel.app/real-estate.mp4
 
-### 28. Talking Babies
+### 27. Talking Babies
 
 - Brand: Not named
 - Creative style: AI Animation & Characters
@@ -452,17 +436,7 @@ Portfolio of 30 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:45
 - Video URL: https://angelyn-portfolio.vercel.app/talking-babies.mp4
 
-### 29. The Light You Left On: AI Music Performance
-
-- Brand: Not named
-- Creative style: AI Animation & Characters
-- Description: An AI-generated acoustic performance of “The Light You Left On,” credited on screen to Noah Reed.
-- Hook: I leave the porch light on…
-- AI generation and production tools: Not listed
-- Format: 9:16, 0:25
-- Video URL: https://angelyn-portfolio.vercel.app/acoustic-singing.mp4
-
-### 30. Oopsie, Episode 2: Nursery Rhymes
+### 28. Oopsie, Episode 2: Nursery Rhymes
 
 - Brand: Not named
 - Creative style: AI Animation & Characters
