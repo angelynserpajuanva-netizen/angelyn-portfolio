@@ -2,7 +2,7 @@
 
 > I create cinematic AI videos, product commercials, and scroll-stopping ad creatives using AI-powered production workflows.
 
-Portfolio of 28 AI video projects. Every project below links to its direct video file. Structured version: https://angelyn-portfolio.vercel.app/portfolio.json
+Portfolio of 29 AI video projects. Every project below links to its direct video file. Structured version: https://angelyn-portfolio.vercel.app/portfolio.json
 
 ## Contact
 
@@ -245,7 +245,23 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:29
 - Video URL: https://angelyn-portfolio.vercel.app/facelove-photo-quiz.mp4
 
-### 13. Clay-Style Pet Supplement VSL
+### 13. Revela: Overheard in the Elevator (Trial Ad)
+
+- Brand: Revela
+- Creative style: UGC-Style Ads
+- Concept: Overheard gossip that turns into an honest conversation: the strangers' embarrassment flips to empathy once she speaks up.
+- Description: A 35-second story-led trial ad for Revela. In a Seoul office elevator, two women whisper in Korean about a foreigner's red cheeks, not knowing she understands every word. She turns around, explains it's rosacea, and admits she has just bought another cream.
+- Hook: “Look at her face. Is she sunburnt?” whispered behind her back in a crowded elevator
+- Audience: Women living with facial redness and rosacea
+- Objective: Hold attention with an awkward, relatable moment so the viewer feels the frustration before the product is introduced.
+- AI generation and production tools: Not listed
+- Production: Consistent AI characters across every shot of the elevator: the over-the-shoulder gossip, her close-ups and the reaction shots of the two women.
+- Editing: Subtitled dialogue throughout, with cuts between her face and the women's reactions as the conversation turns.
+- Deliverables: 35-second vertical (9:16) trial ad.
+- Format: 9:16, 0:35
+- Video URL: https://angelyn-portfolio.vercel.app/revela-rosacea-elevator.mp4
+
+### 14. Clay-Style Pet Supplement VSL
 
 - Brand: Not named
 - Creative style: Product & DTC Ads
@@ -261,7 +277,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:59
 - Video URL: https://angelyn-portfolio.vercel.app/clay-cartoon.mp4
 
-### 14. Cozy Cloud: A Little Cup of Comfort
+### 15. Cozy Cloud: A Little Cup of Comfort
 
 - Brand: Not named
 - Creative style: AI Animation & Characters
@@ -274,7 +290,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 1:00
 - Video URL: https://angelyn-portfolio.vercel.app/cozy-clouds.mp4
 
-### 15. UHP Wellness AI Video Sample
+### 16. UHP Wellness AI Video Sample
 
 - Brand: UHP Wellness
 - Creative style: Product & DTC Ads
@@ -287,7 +303,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:32
 - Video URL: https://angelyn-portfolio.vercel.app/uhp-sample.mp4
 
-### 16. Creatine Animation: Your Muscles Have a Secret Battery
+### 17. Creatine Animation: Your Muscles Have a Secret Battery
 
 - Brand: Not named
 - Creative style: Product & DTC Ads
@@ -301,7 +317,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:42
 - Video URL: https://angelyn-portfolio.vercel.app/creatine-explainer.mp4
 
-### 17. Shiesty Zip: The Anti-Social Hoodie (UGC POV Ad)
+### 18. Shiesty Zip: The Anti-Social Hoodie (UGC POV Ad)
 
 - Brand: Shiesty Zip
 - Creative style: UGC-Style Ads
@@ -317,7 +333,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:09
 - Video URL: https://angelyn-portfolio.vercel.app/shiesty-zip-hoodie.mp4
 
-### 18. NineOne Car Rental: Christmas Homecoming
+### 19. NineOne Car Rental: Christmas Homecoming
 
 - Brand: NineOne Car Rental Services
 - Creative style: Client Work
@@ -329,7 +345,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:53
 - Video URL: https://angelyn-portfolio.vercel.app/nineone.mp4
 
-### 19. NineOne Car Rental: OFW Airport Pickup
+### 20. NineOne Car Rental: OFW Airport Pickup
 
 - Brand: NineOne Car Rental Services
 - Creative style: Client Work
@@ -340,7 +356,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:28
 - Video URL: https://angelyn-portfolio.vercel.app/nineone-ofw.mp4
 
-### 20. Your Brain at 11:47 PM
+### 21. Your Brain at 11:47 PM
 
 - Brand: Not named
 - Creative style: Product & DTC Ads
@@ -352,7 +368,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:36
 - Video URL: https://angelyn-portfolio.vercel.app/dtc-supplement-vsl.mp4
 
-### 21. Christmas T-Shirt Ad
+### 22. Christmas T-Shirt Ad
 
 - Brand: Not named
 - Creative style: Product & DTC Ads
@@ -364,7 +380,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:29
 - Video URL: https://angelyn-portfolio.vercel.app/dtc-ad.mp4
 
-### 22. Destination Wedding Ad (Multilingual)
+### 23. Destination Wedding Ad (Multilingual)
 
 - Brand: Not named
 - Creative style: Product & DTC Ads
@@ -375,7 +391,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:29
 - Video URL: https://angelyn-portfolio.vercel.app/wedding-multilanguage.mp4
 
-### 23. Skincare UGC Ad
+### 24. Skincare UGC Ad
 
 - Brand: Not named
 - Creative style: UGC-Style Ads
@@ -387,7 +403,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:40
 - Video URL: https://angelyn-portfolio.vercel.app/ugc-skincare.mp4
 
-### 24. Centrum Advance: Healthy Breakfast, Zero Complications
+### 25. Centrum Advance: Healthy Breakfast, Zero Complications
 
 - Brand: Centrum
 - Creative style: UGC-Style Ads
@@ -403,7 +419,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 1:06
 - Video URL: https://angelyn-portfolio.vercel.app/centrum-advance.mp4
 
-### 25. Viva Blend UGC Ad
+### 26. Viva Blend UGC Ad
 
 - Brand: Viva Blend
 - Creative style: UGC-Style Ads
@@ -414,7 +430,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:30
 - Video URL: https://angelyn-portfolio.vercel.app/viva-blend.mp4
 
-### 26. Real Estate Ad
+### 27. Real Estate Ad
 
 - Brand: Not named
 - Creative style: Real Estate
@@ -426,7 +442,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:20
 - Video URL: https://angelyn-portfolio.vercel.app/real-estate.mp4
 
-### 27. Talking Babies
+### 28. Talking Babies
 
 - Brand: Not named
 - Creative style: AI Animation & Characters
@@ -436,7 +452,7 @@ Portfolio of 28 AI video projects. Every project below links to its direct video
 - Format: 9:16, 0:45
 - Video URL: https://angelyn-portfolio.vercel.app/talking-babies.mp4
 
-### 28. Oopsie, Episode 2: Nursery Rhymes
+### 29. Oopsie, Episode 2: Nursery Rhymes
 
 - Brand: Not named
 - Creative style: AI Animation & Characters

@@ -538,6 +538,32 @@ window.PORTFOLIO = {
       "duration": "0:29"
     },
     {
+      "id": "revela-rosacea-elevator",
+      "brand": "Revela",
+      "title": "Revela: Overheard in the Elevator (Trial Ad)",
+      "shortTitle": "Revela: The Elevator",
+      "category": "UGC-Style Ads",
+      "aspect": "9:16",
+      "featured": false,
+      "video": {
+        "type": "file",
+        "src": "revela-rosacea-elevator.mp4"
+      },
+      "thumbnail": "revela-rosacea-elevator.webp",
+      "preview": "revela-rosacea-elevator-p.mp4",
+      "summary": "A 35-second story-led trial ad for Revela. In a Seoul office elevator, two women whisper in Korean about a foreigner's red cheeks, not knowing she understands every word. She turns around, explains it's rosacea, and admits she has just bought another cream.",
+      "audience": "Women living with facial redness and rosacea",
+      "objective": "Hold attention with an awkward, relatable moment so the viewer feels the frustration before the product is introduced.",
+      "concept": "Overheard gossip that turns into an honest conversation: the strangers' embarrassment flips to empathy once she speaks up.",
+      "hook": "“Look at her face. Is she sunburnt?” whispered behind her back in a crowded elevator",
+      "production": "Consistent AI characters across every shot of the elevator: the over-the-shoulder gossip, her close-ups and the reaction shots of the two women.",
+      "tools": [],
+      "editing": "Subtitled dialogue throughout, with cuts between her face and the women's reactions as the conversation turns.",
+      "deliverables": "35-second vertical (9:16) trial ad.",
+      "cardHook": "Look at her face. Is she sunburnt?",
+      "duration": "0:35"
+    },
+    {
       "id": "clay-cartoon",
       "brand": "",
       "title": "Clay-Style Pet Supplement VSL",
